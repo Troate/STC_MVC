@@ -17,12 +17,12 @@ class Teacher {
     private $age;
     private $contact;
     private $course;
-//    function __construct($name, $age, $contact, $course) {
-//        $this->name = $name;
-//        $this->age = $age;
-//        $this->contact = $contact;
-//        $this->course = $course;
-//    }
+    function __construct($name, $age, $contact, $course) {
+        $this->name = $name;
+        $this->age = $age;
+        $this->contact = $contact;
+        $this->course = $course;
+    }
     function getName() {
         return $this->name;
     }
@@ -57,3 +57,4 @@ class Teacher {
 
 
 }
+

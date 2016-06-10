@@ -15,10 +15,10 @@ class Course {
     //put your code here
     private $name;
     private $code;
-//    function __construct($name, $code) {
-//        $this->name = $name;
-//        $this->code = $code;
-//    }
+    function __construct($name, $code) {
+        $this->name = $name;
+        $this->code = $code;
+    }
     function getName() {
         return $this->name;
     }
@@ -37,3 +37,4 @@ class Course {
 
 
 }
+

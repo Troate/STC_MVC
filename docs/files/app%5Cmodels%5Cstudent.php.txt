@@ -11,12 +11,12 @@ class Student{
     private $age;
     private $contact;
     private $degree;
-//    function __construct($name, $age, $contact, $degree) {
-//        $this->name = $name;
-//        $this->age = $age;
-//        $this->contact = $contact;
-//        $this->degree = $degree;
-//    }
+    function __construct($name, $age, $contact, $degree) {
+        $this->name = $name;
+        $this->age = $age;
+        $this->contact = $contact;
+        $this->degree = $degree;
+    }
     function getName() {
         return $this->name;
     }
