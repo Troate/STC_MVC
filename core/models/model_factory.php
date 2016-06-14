@@ -24,7 +24,7 @@ class model_factory {
             return new Teacher();
         }else if($model=="Student"){
             return new Student();
-        }else{
+        }else if($model=="Course"){
             return new Course();
         }
     }

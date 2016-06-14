@@ -38,7 +38,7 @@ class Student{
     }
 
     function setAge($age) {
-        $this->age = $age;
+        $this->age = (int)$age;
     }
 
     function setContact($contact) {

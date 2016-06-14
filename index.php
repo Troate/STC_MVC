@@ -13,17 +13,15 @@ and open the template in the editor.
         <?php
         define('ROOTPATH', 'C:\xampp\htdocs\STC_MVC');
         // put your code here
+        $field=null;
+        $operation=null;
         require_once ROOTPATH.'/core/controllers/controller_factory.php';
         require_once ROOTPATH.'/app/views/layouts/default.php';
-        echo $field;
-        
+        if(isset($field)&&isset($operation)){
         $obj=new controller_factory();
         $controller=$obj->getController($field);
-        require_once ROOTPATH.'/core/views/operations.php';
-        echo $operation;
-//        $controller->$operation();
-//        $controller->setName("Taha");
-//        echo $controller->getName();
+        $controller->callOp($operation);
+        }
         ?>
     </body>
 </html>
