@@ -7,9 +7,9 @@
  * Includes Models
  */
 include_once 'C:\xampp\htdocs\STC_MVC\index.php';
-require ROOTPATH.'\app/models/course.php';
-require ROOTPATH.'\app/models/teacher.php';
-require ROOTPATH.'\app/models/student.php';
+require_once ROOTPATH.'\app/models/course.php';
+require_once ROOTPATH.'\app/models/teacher.php';
+require_once ROOTPATH.'\app/models/student.php';
 
 /**
  * Model_factory gives the object of Appropriacte Model

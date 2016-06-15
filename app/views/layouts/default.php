@@ -25,7 +25,6 @@ and open the template in the editor.
         /**
         * This provides the the basic selection of Professions and Operations
         */
-        
         //$field is used for setting field like student, teacher or course
         $field = (isset($_POST['field']) ? $_POST['field'] : null);
         $operation= (isset($_POST['operation']) ? $_POST['operation'] : null);

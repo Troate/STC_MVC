@@ -13,7 +13,7 @@ and open the template in the editor.
         <h1>An Error Occurred</h1>
         <br>
         <br>
-        <a href="C:/xampp/htdocs/STC_MVC/index.php">Click Here</a> to go back to main page<br>
+        <a href="/STC_MVC/index.php">Click Here</a> to go back to main page<br>
         <?php
         // put your code here
         

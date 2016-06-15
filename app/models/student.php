@@ -7,9 +7,9 @@
  */
 
 class Student{
+    private $id;
     private $name;
     private $age;
-    private $contact;
     private $degree;
 //    function __construct($name, $age, $contact, $degree) {
 //        $this->name = $name;
@@ -25,8 +25,8 @@ class Student{
         return $this->age;
     }
 
-    function getContact() {
-        return $this->contact;
+    function getId() {
+        return $this->id;
     }
 
     function getDegree() {
@@ -41,8 +41,8 @@ class Student{
         $this->age = (int)$age;
     }
 
-    function setContact($contact) {
-        $this->contact = $contact;
+    function setId($id) {
+        $this->id = $id;
     }
 
     function setDegree($degree) {

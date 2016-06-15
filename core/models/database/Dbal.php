@@ -36,4 +36,53 @@ class Dbal {
         $stmt=  $this->pdo->prepare($string);
         $stmt->execute($cell_values);
     }
+    
+    function selectQuery($tableName)
+    {
+        $string="select * from  $tableName ";
+        $res= $this->pdo->query($string);
+        return $res;
+    }
+    
+    function deleteQuery($tableName, $cell_name, $cell_values) {
+        $count=count($cell_values);
+        $string="delete from $tableName where ";
+        for ($i=0;$i<$count;$i++)
+        {
+            $string=$string.$cell_name[$i]."=? and ";
+        }
+        $string=  rtrim($string," and ");
+        echo $string."<br>";
+        print_r($cell_values);
+        $stmt=  $this->pdo->prepare($string);
+        $stmt->execute($cell_values);
+        if($stmt->rowCount()<=0)
+        {    
+            throw new Exception;
+        }
+    }
+    
+    function updateQuery($tableName,$cell_name,$cell_values) {
+        $count=count($cell_name);
+        $string="update $tableName set ";
+        for ($i=0;$i<$count;$i++)
+        {
+            $string=$string.$cell_name[$i]."=?, ";
+        }
+        $string=  rtrim($string,", ");
+        $string=$string." where ";
+        for ($i=0;$i<$count;$i++)
+        {
+            $string=$string.$cell_name[$i]."=? and ";
+        }
+        $string=  rtrim($string," and ");
+        echo $string."<br>";
+        print_r($cell_values);
+        $stmt=  $this->pdo->prepare($string);
+        $stmt->execute($cell_values);
+        if($stmt->rowCount()<=0)
+        {    
+            throw new Exception;
+        }
+    }
 }
