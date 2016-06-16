@@ -22,7 +22,8 @@ and open the template in the editor.
          */
         if(session_status()!=PHP_SESSION_ACTIVE)
                 { session_start();}
-        define("ROOTPATH", __DIR__);
+        define("ROOT", __DIR__);
+        define("ROOTPATH",rtrim(ROOT,'\public'));
         $_SESSION['Root']=ROOTPATH;
         require_once $_SESSION['Root'].'/core/controllers/controller_factory.php';
         require_once $_SESSION['Root'].'/app/views/layouts/default.php';

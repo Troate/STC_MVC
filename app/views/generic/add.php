@@ -19,10 +19,6 @@ and open the template in the editor.
             <input name="field" type="radio" value="Student">Student
             <input name="field" type="radio" value="Teacher">Teacher
             <input name="field" type="radio" value="Course">Course<br><br>
-<!--            Age:<br>
-            <input type="number" name="age" min="0" placeholder="Age of Student" /><br>
-            Degree:<br>
-            <input type="text" name="degree" placeholder="Degree of Student" /><br><br>-->
             <button name="add" type="submit" value="create">Create</button>
             </form>
             <?php
