@@ -34,7 +34,8 @@ and open the template in the editor.
             /**
              * Includes
              */
-            include_once 'C:\xampp\htdocs\STC_MVC\app\controllers\teacher_controller.php';
+            require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
+            include_once ROOTPATH.'\app\controllers\teacher_controller.php';
             $oname= (string)(isset($_POST['oname']) ? $_POST['oname'] : null);
             $oage= (string)(isset($_POST['oage']) ? $_POST['oage'] : null);
             $ocourse= (string)(isset($_POST['ocourse']) ? $_POST['ocourse'] : null);

@@ -17,7 +17,8 @@ and open the template in the editor.
        /**
         * Includes
         */
-        include_once 'C:xampp\htdocs\STC_MVC\app\controllers\course_controller.php';
+        require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
+        include_once ROOTPATH.'\app\controllers\course_controller.php';
         $s=new course_controller("Course");
         $model_array=$s->read();
         echo '<h3>Course</h3><table><tr><th style="min-width:100px ">Course Name</th><th style="min-width:100px ">Course Id</th></tr>';

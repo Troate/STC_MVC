@@ -6,7 +6,7 @@
 /**
  * Include Models
  */
-include_once 'C:\xampp\htdocs\STC_MVC\index.php';
+require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
 require_once ROOTPATH.'\app/controllers/student_controller.php';
 require_once ROOTPATH.'\app/controllers/teacher_controller.php';
 require_once ROOTPATH.'\app/controllers/course_controller.php';

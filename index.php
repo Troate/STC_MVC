@@ -14,15 +14,13 @@ and open the template in the editor.
         /**
          * It is the Single Entry point, It gets the Field and Operation from default.php and according to that make field_controller object through controller factory and gives its function operation as parameter
          */
-        /**
-         * Definition of the Rootpath of Project
-         */
-        define('ROOTPATH', 'C:\xampp\htdocs\STC_MVC');
+        
         $field=null;
         $operation=null;
         /**
          * Includes
          */
+        require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
         require_once ROOTPATH.'/core/controllers/controller_factory.php';
         require_once ROOTPATH.'/app/views/layouts/default.php';
         /**

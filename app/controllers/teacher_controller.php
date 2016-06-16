@@ -6,7 +6,7 @@
 /**
  * Includes other classes
  */
-require_once 'C:\xampp\htdocs\STC_MVC\index.php';
+require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
 require_once ROOTPATH.'\core/models/model_factory.php';
 require_once ROOTPATH.'\core/models/database/Dbal.php';
 

@@ -5,8 +5,9 @@
 /**
 * Includes
 */
-require_once 'C:\xampp\htdocs\STC_MVC\core/models/model_factory.php';
-require_once 'C:\xampp\htdocs\STC_MVC\core/models/database/Dbal.php';
+require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
+require_once ROOTPATH.'\core/models/model_factory.php';
+require_once ROOTPATH.'\core/models/database/Dbal.php';
 
 /**
  * addUser is made to call the create funtion

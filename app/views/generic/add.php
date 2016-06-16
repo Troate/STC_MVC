@@ -32,7 +32,8 @@ and open the template in the editor.
             /**
              * Includes
              */
-            include_once 'C:\xampp\htdocs\STC_MVC\app\views\generic\addUser.php';
+            require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
+            include_once ROOTPATH.'\app\views\generic\addUser.php';
             $name= (string)(isset($_POST['name']) ? $_POST['name'] : null);
             $field = (isset($_POST['field']) ? $_POST['field'] : null);
             if(isset($_POST['add'])&& $_SERVER['REQUEST_METHOD'] == "POST"){

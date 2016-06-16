@@ -25,7 +25,8 @@ and open the template in the editor.
             /**
              * Includes
              */
-            include_once 'C:\xampp\htdocs\STC_MVC\app\controllers\course_controller.php';
+            require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
+            include_once ROOTPATH.'\app\controllers\course_controller.php';
             $name= (string)(isset($_POST['name']) ? $_POST['name'] : null);
             $course= (string)(isset($_POST['course']) ? $_POST['course'] : null);
             if(isset($_POST['delete'])&& $_SERVER['REQUEST_METHOD'] == "POST"){
