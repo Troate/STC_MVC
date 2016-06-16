@@ -6,8 +6,7 @@
 /**
  * Includes
  */
-require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
-require_once ROOTPATH.'/core/models/database/DbConnection.php';
+require_once $_SESSION['Root'].'/core/models/database/DbConnection.php';
 
 /**
  * It is the DBAL to connect to Database, and get the values from and into the Database

@@ -27,8 +27,9 @@ and open the template in the editor.
             /**
              * Includes
              */
-            require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
-            include_once ROOTPATH.'\app\controllers\student_controller.php';
+            if(session_status()!=PHP_SESSION_ACTIVE)
+                { session_start();}
+            include_once $_SESSION['Root'].'\app\controllers\student_controller.php';
             $name= (string)(isset($_POST['name']) ? $_POST['name'] : null);
             $age= (string)(isset($_POST['age']) ? $_POST['age'] : null);
             $degree= (string)(isset($_POST['degree']) ? $_POST['degree'] : null);

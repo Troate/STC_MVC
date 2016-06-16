@@ -30,8 +30,9 @@ and open the template in the editor.
             /**
              * Includes
              */
-            require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
-            include_once ROOTPATH.'\app\controllers\course_controller.php';
+            if(session_status()!=PHP_SESSION_ACTIVE)
+                { session_start();}
+            include_once $_SESSION['Root'].'\app\controllers\course_controller.php';
             $oname= (string)(isset($_POST['oname']) ? $_POST['oname'] : null);
             $ocourse= (string)(isset($_POST['ocourse']) ? $_POST['ocourse'] : null);
             $name= (string)(isset($_POST['name']) ? $_POST['name'] : null);

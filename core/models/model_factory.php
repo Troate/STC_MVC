@@ -6,10 +6,9 @@
 /**
  * Includes Models
  */
-require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
-require_once ROOTPATH.'\app/models/course.php';
-require_once ROOTPATH.'\app/models/teacher.php';
-require_once ROOTPATH.'\app/models/student.php';
+require_once $_SESSION['Root'].'\app/models/course.php';
+require_once $_SESSION['Root'].'\app/models/teacher.php';
+require_once $_SESSION['Root'].'\app/models/student.php';
 
 /**
  * Model_factory gives the object of Appropriacte Model

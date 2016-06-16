@@ -6,10 +6,9 @@
 /**
  * Include Models
  */
-require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
-require_once ROOTPATH.'\app/controllers/student_controller.php';
-require_once ROOTPATH.'\app/controllers/teacher_controller.php';
-require_once ROOTPATH.'\app/controllers/course_controller.php';
+require_once $_SESSION['Root'].'\app/controllers/student_controller.php';
+require_once $_SESSION['Root'].'\app/controllers/teacher_controller.php';
+require_once $_SESSION['Root'].'\app/controllers/course_controller.php';
 
 
 /**

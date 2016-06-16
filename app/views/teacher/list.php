@@ -17,8 +17,9 @@ and open the template in the editor.
        /**
         * Includes
         */
-        require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
-        include_once ROOTPATH.'\app\controllers\teacher_controller.php';
+        if(session_status()!=PHP_SESSION_ACTIVE)
+                { session_start();}
+        include_once $_SESSION['Root'].'\app\controllers\teacher_controller.php';
         $s=new teacher_controller("Teacher");
         $model_array=$s->read();
         echo '<h3>Teacher</h3><table><tr><th style="min-width:100px ">Name</th><th style="min-width:100px ">Age</th><th style="min-width:100px ">Course</th></tr>';

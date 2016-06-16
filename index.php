@@ -20,9 +20,12 @@ and open the template in the editor.
         /**
          * Includes
          */
-        require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
-        require_once ROOTPATH.'/core/controllers/controller_factory.php';
-        require_once ROOTPATH.'/app/views/layouts/default.php';
+        if(session_status()!=PHP_SESSION_ACTIVE)
+                { session_start();}
+        define("ROOTPATH", __DIR__);
+        $_SESSION['Root']=ROOTPATH;
+        require_once $_SESSION['Root'].'/core/controllers/controller_factory.php';
+        require_once $_SESSION['Root'].'/app/views/layouts/default.php';
         /**
          * If the field and operatio are set, then it makes appropriate object from controller factory and passes $opeartion as parameter to the function callOp()
          */

@@ -34,8 +34,9 @@ and open the template in the editor.
             /**
              * Includes
              */
-            require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
-            include_once ROOTPATH.'\app\controllers\student_controller.php';
+            if(session_status()!=PHP_SESSION_ACTIVE)
+                { session_start();}
+            include_once $_SESSION['Root'].'\app\controllers\student_controller.php';
             $oname= (string)(isset($_POST['oname']) ? $_POST['oname'] : null);
             $oage= (string)(isset($_POST['oage']) ? $_POST['oage'] : null);
             $odegree= (string)(isset($_POST['odegree']) ? $_POST['odegree'] : null);

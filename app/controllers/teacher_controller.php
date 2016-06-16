@@ -6,9 +6,8 @@
 /**
  * Includes other classes
  */
-require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
-require_once ROOTPATH.'\core/models/model_factory.php';
-require_once ROOTPATH.'\core/models/database/Dbal.php';
+require_once $_SESSION['Root'].'\core/models/model_factory.php';
+require_once $_SESSION['Root'].'\core/models/database/Dbal.php';
 
 /**
  * Object of course_controller will made to access its functions. These functions make the Object of Model for ORM

@@ -7,9 +7,8 @@
 /**
  * Includes Student Model Class
  */
-require_once 'C:\xampp\htdocs\STC_MVC\rootdirectory.php';
-require_once ROOTPATH.'\core/models/model_factory.php';
-require_once ROOTPATH.'\core/models/database/Dbal.php';
+require_once $_SESSION['Root'].'\core/models/model_factory.php';
+require_once $_SESSION['Root'].'\core/models/database/Dbal.php';
 
 /**
  * Student_controller this creates Student Model
