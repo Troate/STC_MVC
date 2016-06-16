@@ -28,6 +28,9 @@ class controller_factory {
         }else if($field=="Course"){
             return new course_controller($field);
         }
+        else{
+            return false;
+        }
         
     }
 }

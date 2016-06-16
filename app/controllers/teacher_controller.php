@@ -94,10 +94,12 @@ class teacher_controller {
                 $d->deleteQuery($tableName,$names,$values);
                 header('Location: \STC_MVC\index.php');
                 die();
+                return true;
             }
             catch (Exception $e){
                 header('Location: \STC_MVC\core\views\error.php');
                 die();
+                return false;
             }
     }
     /**
@@ -131,10 +133,12 @@ class teacher_controller {
                 $d->updateQuery($tableName,$names,$values);
                 header('Location: \STC_MVC\index.php');
                 die();
+                return true;
             }
             catch (Exception $e){
                 header('Location: \STC_MVC\core\views\error.php');
                 die();
+                return false;
             }
     }
 }

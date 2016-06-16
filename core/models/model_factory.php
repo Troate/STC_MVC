@@ -26,5 +26,8 @@ class model_factory {
         }else if($model=="Course"){
             return new Course();
         }
+        else{
+            return false;
+        }
     }
 }
