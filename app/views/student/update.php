@@ -28,6 +28,12 @@ and open the template in the editor.
             <button name="update" type="submit" value="update">Update</button>
             </form>
             <?php
+            /**
+             * View of the Student Update Functionality
+             */
+            /**
+             * Includes
+             */
             include_once 'C:\xampp\htdocs\STC_MVC\app\controllers\student_controller.php';
             $oname= (string)(isset($_POST['oname']) ? $_POST['oname'] : null);
             $oage= (string)(isset($_POST['oage']) ? $_POST['oage'] : null);

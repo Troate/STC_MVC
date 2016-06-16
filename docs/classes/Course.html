@@ -106,12 +106,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">58</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">36</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,17 +136,25 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-424553864"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2005316758"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-424553864" class="accordion-body collapse in">
+            <div id="namespace-2005316758" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/Course.html">Course</a></li>
+                                                                                                    <li class="class"><a href="../classes/addUser.html">addUser</a></li>
+                                                    <li class="class"><a href="../classes/controller_factory.html">controller_factory</a></li>
+                                                    <li class="class"><a href="../classes/Course.html">Course</a></li>
+                                                    <li class="class"><a href="../classes/course_controller.html">course_controller</a></li>
+                                                    <li class="class"><a href="../classes/Dbal.html">Dbal</a></li>
+                                                    <li class="class"><a href="../classes/DbConnection.html">DbConnection</a></li>
+                                                    <li class="class"><a href="../classes/model_factory.html">model_factory</a></li>
                                                     <li class="class"><a href="../classes/Student.html">Student</a></li>
+                                                    <li class="class"><a href="../classes/student_controller.html">student_controller</a></li>
                                                     <li class="class"><a href="../classes/Teacher.html">Teacher</a></li>
+                                                    <li class="class"><a href="../classes/teacher_controller.html">teacher_controller</a></li>
                                             </ul>
                 </div>
             </div>
@@ -165,7 +173,7 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\</small>Course</h1>
-                    <p><em>Description of course</em></p>
+                    <p><em>Course has Name and CourseId</em></p>
                     
                     
                                         
@@ -184,11 +192,12 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/Course.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/Course.html#method_getId" class="">getId()</a><br />
+                                                                    <a href="../classes/Course.html#method_setId" class="">setId()</a><br />
                                                                     <a href="../classes/Course.html#method_getName" class="">getName()</a><br />
-                                                                    <a href="../classes/Course.html#method_getCode" class="">getCode()</a><br />
+                                                                    <a href="../classes/Course.html#method_getCourseId" class="">getCourseId()</a><br />
                                                                     <a href="../classes/Course.html#method_setName" class="">setName()</a><br />
-                                                                    <a href="../classes/Course.html#method_setCode" class="">setCode()</a><br />
+                                                                    <a href="../classes/Course.html#method_setCourseId" class="">setCourseId()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -214,7 +223,8 @@
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/Course.html#property_name" class="">$name</a><br />
-                                                                    <a href="../classes/Course.html#property_code" class="">$code</a><br />
+                                                                    <a href="../classes/Course.html#property_courseid" class="">$courseid</a><br />
+                                                                    <a href="../classes/Course.html#property_id" class="">$id</a><br />
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -242,14 +252,7 @@
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr>
-                            <th>
-                                author
-                            </th>
-                            <td>
-                                                                    <p>Troate</p>
-                                                            </td>
-                        </tr>
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
                                         </table>
                 </aside>
             </div>
@@ -268,13 +271,13 @@
             <a id="property_name" name="property_name" class="anchor"></a>
             <article class="property">
                 <h3 class="private ">$name</h3>
-                <pre class="signature">$name : </pre>
+                <pre class="signature">$name : string</pre>
                 <p><em></em></p>
                 
 
                                 <h4>Type</h4>
-                
-                                            </article>
+                string
+                &mdash; Name of the Course                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -289,16 +292,40 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property_code" name="property_code" class="anchor"></a>
+            <a id="property_courseid" name="property_courseid" class="anchor"></a>
             <article class="property">
-                <h3 class="private ">$code</h3>
-                <pre class="signature">$code : </pre>
+                <h3 class="private ">$courseid</h3>
+                <pre class="signature">$courseid : string</pre>
                 <p><em></em></p>
                 
 
                                 <h4>Type</h4>
+                string
+                &mdash; CourseId of the Course                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_id" name="property_id" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$id</h3>
+                <pre class="signature">$id : integer</pre>
+                <p><em></em></p>
                 
-                                            </article>
+
+                                <h4>Type</h4>
+                integer
+                &mdash; This id is assigned value according the id of course in database                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -320,25 +347,49 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <a id="method_getId" name="method_getId" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">__construct()</h3>
+                <h3 class="public ">getId()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__construct(  <span class="argument">$name</span>,   <span class="argument">$code</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">getId() : integer</pre>
+                <p><em>Getter of $id</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>Id as in Database</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setId" name="method_setId" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setId()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setId(integer  <span class="argument">$id</span>) </pre>
+                <p><em>Setter of $id</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
-                                <td>$name </td>
-                                <td></td>
-                            </tr>
-                                                    <tr>
-                                <td></td>
-                                <td>$code </td>
-                                <td></td>
+                                <td>integer</td>
+                                <td>$id </td>
+                                <td><p>Id as in Database</p></td>
                             </tr>
                                             </table>
                 
@@ -363,13 +414,16 @@
             <article class="method">
                 <h3 class="public ">getName()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getName() </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">getName() : string</pre>
+                <p><em>Getter of the Course</em></p>
                 
 
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Name of Course</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -385,17 +439,20 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_getCode" name="method_getCode" class="anchor"></a>
+            <a id="method_getCourseId" name="method_getCourseId" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">getCode()</h3>
+                <h3 class="public ">getCourseId()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getCode() </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">getCourseId() : string</pre>
+                <p><em>Getter of the courseId</em></p>
                 
 
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>CourseId</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -415,16 +472,16 @@
             <article class="method">
                 <h3 class="public ">setName()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setName(  <span class="argument">$name</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">setName(string  <span class="argument">$name</span>) </pre>
+                <p><em>Setter of Course Name</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$name </td>
-                                <td></td>
+                                <td><p>Course Name</p></td>
                             </tr>
                                             </table>
                 
@@ -445,20 +502,20 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_setCode" name="method_setCode" class="anchor"></a>
+            <a id="method_setCourseId" name="method_setCourseId" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">setCode()</h3>
+                <h3 class="public ">setCourseId()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setCode(  <span class="argument">$code</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">setCourseId(string  <span class="argument">$courseid</span>) </pre>
+                <p><em>Setter of the Course Id</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
-                                <td>$code </td>
-                                <td></td>
+                                <td>string</td>
+                                <td>$courseid </td>
+                                <td><p>Course id</p></td>
                             </tr>
                                             </table>
                 
@@ -526,7 +583,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 10th, 2016 at 06:44.
+                    on June 16th, 2016 at 10:27.
                 </section>
             </section>
         </section>

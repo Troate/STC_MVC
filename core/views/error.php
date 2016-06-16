@@ -15,7 +15,9 @@ and open the template in the editor.
         <br>
         <a href="/STC_MVC/index.php">Click Here</a> to go back to main page<br>
         <?php
-        // put your code here
+        /**
+         * Contains Simple Message Error and a Link to the Main page
+         */
         
         ?>
     </body>

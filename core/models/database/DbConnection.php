@@ -1,18 +1,12 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Connects to the Database
  */
 
 /**
- * Description of DbConnection
- *
- * @author Troate
+ * It has static variable to connect only once to Database
  */
 class DbConnection {
-    //put your code here
     /**
      * @var PHPPlatform Private Static, so no one can access it, and its available through out the project once initialized
      */

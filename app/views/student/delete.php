@@ -21,6 +21,12 @@ and open the template in the editor.
             <button name="delete" type="submit" value="delete">Delete</button>
             </form>
             <?php
+            /**
+             * View of the Student Delete Functionality
+             */
+            /**
+             * Includes
+             */
             include_once 'C:\xampp\htdocs\STC_MVC\app\controllers\student_controller.php';
             $name= (string)(isset($_POST['name']) ? $_POST['name'] : null);
             $age= (string)(isset($_POST['age']) ? $_POST['age'] : null);

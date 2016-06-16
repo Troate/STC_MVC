@@ -6,10 +6,10 @@
 /**
  * Includes Models
  */
-include_once 'C:\xampp\htdocs\STC_MVC\index.php';
-require_once ROOTPATH.'\app/models/course.php';
-require_once ROOTPATH.'\app/models/teacher.php';
-require_once ROOTPATH.'\app/models/student.php';
+//include_once 'C:\xampp\htdocs\STC_MVC\index.php';
+require_once 'C:\xampp\htdocs\STC_MVC\app/models/course.php';
+require_once 'C:\xampp\htdocs\STC_MVC\app/models/teacher.php';
+require_once 'C:\xampp\htdocs\STC_MVC\app/models/student.php';
 
 /**
  * Model_factory gives the object of Appropriacte Model

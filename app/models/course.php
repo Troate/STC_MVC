@@ -1,38 +1,66 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Contains the Model Course
  */
 
 /**
- * Description of course
- *
- * @author Troate
+ * Course has Name and CourseId
  */
 class Course {
-    //put your code here
+    /**
+     * @var string $name Name of the Course 
+     */
     private $name;
-    private $code;
-//    function __construct($name, $code) {
-//        $this->name = $name;
-//        $this->code = $code;
-//    }
+    /**
+     * @var string $code CourseId of the Course
+     */
+    private $courseid;
+    /**
+     *
+     * @var int $id This id is assigned value according the id of course in database 
+     */
+    private $id;
+    /**
+     * Getter of $id
+     * @return int Id as in Database
+     */
+    function getId() {
+        return $this->id;
+    }
+    /**
+     * Setter of $id
+     * @param int $id Id as in Database
+     */
+    function setId($id) {
+        $this->id = $id;
+    }
+    /**
+     * Getter of the Course
+     * @return string Name of Course
+     */
     function getName() {
         return $this->name;
     }
-
-    function getCode() {
-        return $this->code;
+    /**
+     * Getter of the courseId
+     * @return string CourseId
+     */
+    function getCourseId() {
+        return $this->courseid;
     }
-
+    /**
+     * Setter of Course Name
+     * @param string $name Course Name
+     */
     function setName($name) {
         $this->name = $name;
     }
-
-    function setCode($code) {
-        $this->code = $code;
+    /**
+     * Setter of the Course Id
+     * @param string $courseid Course id
+     */
+    function setCourseId($courseid) {
+        $this->courseid = $courseid;
     }
 
 

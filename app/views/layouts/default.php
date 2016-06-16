@@ -11,12 +11,14 @@ and open the template in the editor.
     </head>
     <body>
         <div style="margin: auto;">
-            <h3>Select One Field</h3>
+            <h3>Select One Field or Press Add Button to Add a User</h3>
             <form action="#" method="POST">
             <input name="field" type="radio" value="Student">Student
             <input name="field" type="radio" value="Teacher">Teacher
-            <input name="field" type="radio" value="Course">Course<br><br>
-            <button name="operation" type="submit" value="create">Create</button>
+            <input name="field" type="radio" value="Course">Course
+            <a href="/STC_MVC/app/views/generic/add.php"><button type="button">Add</button></a>
+            <br><br>
+            <!--<button name="operation" type="submit" value="create">Create</button>-->
             <button name="operation" type="submit" value="read">Read</button>
             <button name="operation" type="submit" value="update">Update</button>
             <button name="operation" type="submit" value="delete">Delete</button><br>

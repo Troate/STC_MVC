@@ -11,10 +11,16 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+        /**
+        * View of the Student List Functionality
+        */
+       /**
+        * Includes
+        */
         include_once 'C:xampp\htdocs\STC_MVC\app\controllers\student_controller.php';
         $s=new student_controller("Student");
         $model_array=$s->read();
-        echo '<br><br><table><tr><th style="min-width:100px ">Name</th><th style="min-width:100px ">Age</th><th style="min-width:100px ">Degree</th></tr>';
+        echo '<h3>Student</h3><table><tr><th style="min-width:100px ">Name</th><th style="min-width:100px ">Age</th><th style="min-width:100px ">Degree</th></tr>';
         foreach($model_array as $m)
         {
             echo '<tr><td style="text-align:center">'.$m->getName().'</td><td style="text-align:center">'.$m->getAge().'</td><td style="text-align:center">'.$m->getDegree().'</td></tr>';

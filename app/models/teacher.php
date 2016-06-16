@@ -1,56 +1,82 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Contains the Model Teacher
  */
 
 /**
- * Description of teacher
- *
- * @author Troate
+ * Teacher has Name, Age and Course
  */
 class Teacher {
-    //put your code here
+    /**
+     * @var int $id Id as in Database
+     */
+    private $id;
+    /**
+     * @var string $name Name of the Teacher
+     */
     private $name;
+    /**
+     * @var int $age Age of the Teacher
+     */
     private $age;
-    private $contact;
+    /**
+     *
+     * @var string $course Course of the Teacher
+     */
     private $course;
-//    function __construct($name, $age, $contact, $course) {
-//        $this->name = $name;
-//        $this->age = $age;
-//        $this->contact = $contact;
-//        $this->course = $course;
-//    }
+    /**
+     * Getter of $name
+     * @return string Name of the Teacher
+     */
     function getName() {
         return $this->name;
     }
-
+    /**
+     * Getter of the $age
+     * @return int Age of the Teacher
+     */
     function getAge() {
         return $this->age;
     }
-
-    function getContact() {
-        return $this->contact;
+    /**
+     * Getter of $id
+     * @return int Id as in Database
+     */
+    function getId() {
+        return $this->id;
     }
-
+    /**
+     * Getter of $course
+     * @return string Course of the Teacher
+     */
     function getCourse() {
         return $this->course;
     }
-
+    /**
+     * Setter of $name
+     * @param string $name Name of the Teacher
+     */
     function setName($name) {
         $this->name = $name;
     }
-
+    /**
+     * Setter of $age
+     * @param int $age Age of the Teacher
+     */
     function setAge($age) {
-        $this->age = $age;
+        $this->age = (int)$age;
     }
-
-    function setContact($contact) {
-        $this->contact = $contact;
+    /**
+     * Setter of $id
+     * @param int $id Id of the Teacher
+     */
+    function setId($id) {
+        $this->id = $id;
     }
-
+    /**
+     * Setter of $course
+     * @param string $course Course of the Teacher
+     */
     function setCourse($course) {
         $this->course = $course;
     }
