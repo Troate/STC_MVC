@@ -4,17 +4,18 @@
  */
 
 /**
+ * Includes
+ */
+require_once $_SESSION['Root'].'\core\models\User.php';
+
+/**
  * Student has Name, Age and Degree
  */
-class Student{
+class Student extends User{
     /**
      * @var int $id Id as in Database
      */
     private $id;
-    /**
-     * @var string $name Name of the Student
-     */
-    private $name;
     /**
      * @var int $age Age of the Student
      */
@@ -28,7 +29,7 @@ class Student{
      * @return string Name of the Student
      */
     function getName() {
-        return $this->name;
+        return parent::getName();
     }
     /**
      * Getter of the $age
@@ -56,7 +57,7 @@ class Student{
      * @param string $name Name of the Student
      */
     function setName($name) {
-        $this->name = $name;
+        parent::setName($name);
     }
     /**
      * Setter of $age

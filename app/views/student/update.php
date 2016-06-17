@@ -45,7 +45,17 @@ and open the template in the editor.
             $degree= (string)(isset($_POST['degree']) ? $_POST['degree'] : null);
             if(isset($_POST['update'])&& $_SERVER['REQUEST_METHOD'] == "POST"){
                 $s=new student_controller("Student");
-                $s->update("student",$name, $age, $degree, $oname, $oage, $odegree);
+                $bool=$s->update("student",$name, $age, $degree, $oname, $oage, $odegree);
+                if($bool==true)
+                {
+                    header('Location: \STC_MVC\public\index.php');
+                    die();
+                }
+                else if($bool==false)
+                {
+                    header('Location: \STC_MVC\core\views\error.php');
+                    die();
+                }
             }
             ?>
     </body>

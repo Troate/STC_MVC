@@ -11,7 +11,7 @@ require_once $_SESSION['Root'].'\app/models/teacher.php';
 require_once $_SESSION['Root'].'\app/models/student.php';
 
 /**
- * Model_factory gives the object of Appropriacte Model
+ * Model_factory gives the object of Appropriate Model
  */
 class model_factory {
     /**

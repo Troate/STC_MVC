@@ -37,9 +37,15 @@ class Dbal {
         $string=$string." )";
         echo $string."<br>";
         print_r($cell_values);
-        
+        try{
         $stmt=  $this->pdo->prepare($string);
         $stmt->execute($cell_values);
+        return true;
+        }
+        catch(PDOException $e)
+        {
+            return false;
+        }
     }
     
     /**
@@ -50,8 +56,14 @@ class Dbal {
     function selectQuery($tableName)
     {
         $string="select * from  $tableName ";
+        try{
         $res= $this->pdo->query($string);
         return $res;
+        }
+        catch(PDOException $e)
+        {
+            return false;
+        }
     }
     
     /**
@@ -71,11 +83,17 @@ class Dbal {
         $string=  rtrim($string," and ");
         echo $string."<br>";
         print_r($cell_values);
+        try{
         $stmt=  $this->pdo->prepare($string);
         $stmt->execute($cell_values);
         if($stmt->rowCount()<=0)
         {    
             throw new Exception;
+        }
+        }
+        catch(PDOException $e)
+        {
+            return false;
         }
     }
     /**
@@ -101,11 +119,17 @@ class Dbal {
         $string=  rtrim($string," and ");
         echo $string."<br>";
         print_r($cell_values);
+        try{
         $stmt=  $this->pdo->prepare($string);
         $stmt->execute($cell_values);
         if($stmt->rowCount()<=0)
         {    
             throw new Exception;
+        }
+        }
+        catch(PDOException $e)
+        {
+            return false;
         }
     }
 }

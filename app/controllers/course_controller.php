@@ -6,6 +6,7 @@
 /**
  * Includes other classes
  */
+
 require_once $_SESSION['Root'].'\core/models/model_factory.php';
 require_once $_SESSION['Root'].'\core/models/database/Dbal.php';
 
@@ -41,11 +42,14 @@ class course_controller {
         if($op=="read"){
             require_once ROOTPATH.'/app/views/course/list.php';
         }
-        if($op=="delete"){
+        else if($op=="delete"){
             require_once ROOTPATH.'/app/views/course/delete.php';
         }
-        if($op=="update"){
+        else if($op=="update"){
             require_once ROOTPATH.'/app/views/course/update.php';
+        }
+        else{
+            return false;
         }
     }
     /**
@@ -87,13 +91,9 @@ class course_controller {
                 $values[1]=self::$model->getCourseId();
                 $d=new Dbal();
                 $d->deleteQuery($tableName,$names,$values);
-                header('Location: \STC_MVC\index.php');
-                die();
                 return true;
             }
             catch (Exception $e){
-                header('Location: \STC_MVC\core\views\error.php');
-                die();
                 return false;
             }
     }
@@ -121,13 +121,9 @@ class course_controller {
                 $values[3]=$ocourseid;
                 $d=new Dbal();
                 $d->updateQuery($tableName,$names,$values);
-                header('Location: \STC_MVC\index.php');
-                die();
                 return true;
             }
             catch (Exception $e){
-                header('Location: \STC_MVC\core\views\error.php');
-                die();
                 return false;
             }
     }

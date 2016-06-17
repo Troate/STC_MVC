@@ -30,11 +30,6 @@ class DbConnection {
 }
     /**
      * Connects to Database, if connection already doesnot exist otherwise returns same connection and also connects to database
-     * @param string $dbType Type of the Database
-     * @param string $server Name of Server
-     * @param string $dbName Name of Database
-     * @param string $userName Username
-     * @param string $pass Password
      * @return PDO_object Resource
      */
     public static function getConnection() {

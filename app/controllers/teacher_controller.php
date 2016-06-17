@@ -10,7 +10,7 @@ require_once $_SESSION['Root'].'\core/models/model_factory.php';
 require_once $_SESSION['Root'].'\core/models/database/Dbal.php';
 
 /**
- * Object of course_controller will made to access its functions. These functions make the Object of Model for ORM
+ * Object of teacher_controller will made to access its functions. These functions make the Object of Model for ORM
  */
 class teacher_controller {
     /**
@@ -41,11 +41,14 @@ class teacher_controller {
         if($op=="read"){
             require_once ROOTPATH.'/app/views/teacher/list.php';
         }
-        if($op=="delete"){
+        else if($op=="delete"){
             require_once ROOTPATH.'/app/views/teacher/delete.php';
         }
-        if($op=="update"){
+        else if($op=="update"){
             require_once ROOTPATH.'/app/views/teacher/update.php';
+        }
+        else{
+            return false;
         }
     }
     /**
@@ -92,13 +95,9 @@ class teacher_controller {
                 $values[2]=self::$model->getCourse();
                 $d=new Dbal();
                 $d->deleteQuery($tableName,$names,$values);
-                header('Location: \STC_MVC\index.php');
-                die();
                 return true;
             }
             catch (Exception $e){
-                header('Location: \STC_MVC\core\views\error.php');
-                die();
                 return false;
             }
     }
@@ -131,13 +130,9 @@ class teacher_controller {
                 $values[5]=$ocourse;
                 $d=new Dbal();
                 $d->updateQuery($tableName,$names,$values);
-                header('Location: \STC_MVC\index.php');
-                die();
                 return true;
             }
             catch (Exception $e){
-                header('Location: \STC_MVC\core\views\error.php');
-                die();
                 return false;
             }
     }

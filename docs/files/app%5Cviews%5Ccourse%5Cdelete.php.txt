@@ -25,12 +25,24 @@ and open the template in the editor.
             /**
              * Includes
              */
-            include_once 'C:\xampp\htdocs\STC_MVC\app\controllers\course_controller.php';
+            if(session_status()!=PHP_SESSION_ACTIVE)
+                { session_start();}
+            include_once $_SESSION['Root'].'\app\controllers\course_controller.php';
             $name= (string)(isset($_POST['name']) ? $_POST['name'] : null);
             $course= (string)(isset($_POST['course']) ? $_POST['course'] : null);
             if(isset($_POST['delete'])&& $_SERVER['REQUEST_METHOD'] == "POST"){
                 $s=new course_controller("Course");
-                $s->delete("course",$name, $course);
+                $bool=$s->delete("course",$name, $course);
+                if($bool==true)
+                {
+                    header('Location: \STC_MVC\public\index.php');
+                    die();
+                }
+                else if($bool==false)
+                {
+                    header('Location: \STC_MVC\core\views\error.php');
+                    die();
+                }
             }
             ?>
     </body>

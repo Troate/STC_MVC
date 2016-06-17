@@ -32,7 +32,17 @@ and open the template in the editor.
             $course= (string)(isset($_POST['course']) ? $_POST['course'] : null);
             if(isset($_POST['delete'])&& $_SERVER['REQUEST_METHOD'] == "POST"){
                 $s=new course_controller("Course");
-                $s->delete("course",$name, $course);
+                $bool=$s->delete("course",$name, $course);
+                if($bool==true)
+                {
+                    header('Location: \STC_MVC\public\index.php');
+                    die();
+                }
+                else if($bool==false)
+                {
+                    header('Location: \STC_MVC\core\views\error.php');
+                    die();
+                }
             }
             ?>
     </body>

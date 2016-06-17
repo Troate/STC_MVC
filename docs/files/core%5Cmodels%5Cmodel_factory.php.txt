@@ -6,13 +6,12 @@
 /**
  * Includes Models
  */
-//include_once 'C:\xampp\htdocs\STC_MVC\index.php';
-require_once 'C:\xampp\htdocs\STC_MVC\app/models/course.php';
-require_once 'C:\xampp\htdocs\STC_MVC\app/models/teacher.php';
-require_once 'C:\xampp\htdocs\STC_MVC\app/models/student.php';
+require_once $_SESSION['Root'].'\app/models/course.php';
+require_once $_SESSION['Root'].'\app/models/teacher.php';
+require_once $_SESSION['Root'].'\app/models/student.php';
 
 /**
- * Model_factory gives the object of Appropriacte Model
+ * Model_factory gives the object of Appropriate Model
  */
 class model_factory {
     /**
@@ -26,6 +25,9 @@ class model_factory {
             return new Student();
         }else if($model=="Course"){
             return new Course();
+        }
+        else{
+            return false;
         }
     }
 }

@@ -35,7 +35,17 @@ and open the template in the editor.
             $field = (isset($_POST['field']) ? $_POST['field'] : null);
             if(isset($_POST['add'])&& $_SERVER['REQUEST_METHOD'] == "POST"){
                 $s=new addUser($field);
-                $s->create($field,$name);
+                $bool=$s->create($field,$name);
+                if($bool==true)
+                {
+                    header('Location: \STC_MVC\public\index.php');
+                    die();
+                }
+                else if($bool==false)
+                {
+                    header('Location: \STC_MVC\core\views\error.php');
+                    die();
+                }
             }
             ?>
     </body>

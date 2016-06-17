@@ -42,11 +42,14 @@ class student_controller{
         if($op=="read"){
             require_once ROOTPATH.'/app/views/student/list.php';
         }
-        if($op=="delete"){
+        else if($op=="delete"){
             require_once ROOTPATH.'/app/views/student/delete.php';
         }
-        if($op=="update"){
+        else if($op=="update"){
             require_once ROOTPATH.'/app/views/student/update.php';
+        }
+        else {
+            return false;
         }
     }
     /**
@@ -93,13 +96,9 @@ class student_controller{
                 $values[2]=self::$model->getDegree();
                 $d=new Dbal();
                 $d->deleteQuery($tableName,$names,$values);
-                header('Location: \STC_MVC\index.php');
-                die();
                 return true;
             }
             catch (Exception $e){
-                header('Location: \STC_MVC\core\views\error.php');
-                die();
                 return false;
             }
     }
@@ -132,13 +131,9 @@ class student_controller{
                 $values[5]=$odegree;
                 $d=new Dbal();
                 $d->updateQuery($tableName,$names,$values);
-                header('Location: \STC_MVC\index.php');
-                die();
                 return true;
             }
             catch (Exception $e){
-                header('Location: \STC_MVC\core\views\error.php');
-                die();
                 return false;
             }
     } 

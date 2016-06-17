@@ -39,7 +39,17 @@ and open the template in the editor.
             $course= (string)(isset($_POST['course']) ? $_POST['course'] : null);
             if(isset($_POST['update'])&& $_SERVER['REQUEST_METHOD'] == "POST"){
                 $s=new course_controller("Course");
-                $s->update("course",$name, $course, $oname, $ocourse);
+                $bool=$s->update("course",$name, $course, $oname, $ocourse);
+                if($bool==true)
+                {
+                    header('Location: \STC_MVC\public\index.php');
+                    die();
+                }
+                else if($bool==false)
+                {
+                    header('Location: \STC_MVC\core\views\error.php');
+                    die();
+                }
             }
             ?>
     </body>

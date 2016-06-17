@@ -4,13 +4,14 @@
  */
 
 /**
+ * Includes
+ */
+require_once $_SESSION['Root'].'\core\models\User.php';
+
+/**
  * Course has Name and CourseId
  */
-class Course {
-    /**
-     * @var string $name Name of the Course 
-     */
-    private $name;
+class Course extends User {
     /**
      * @var string $code CourseId of the Course
      */
@@ -39,7 +40,7 @@ class Course {
      * @return string Name of Course
      */
     function getName() {
-        return $this->name;
+        return parent::getName();
     }
     /**
      * Getter of the courseId
@@ -53,7 +54,7 @@ class Course {
      * @param string $name Course Name
      */
     function setName($name) {
-        $this->name = $name;
+        parent::setName($name);
     }
     /**
      * Setter of the Course Id

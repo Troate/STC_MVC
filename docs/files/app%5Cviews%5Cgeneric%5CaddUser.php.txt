@@ -5,8 +5,8 @@
 /**
 * Includes
 */
-require_once 'C:\xampp\htdocs\STC_MVC\core/models/model_factory.php';
-require_once 'C:\xampp\htdocs\STC_MVC\core/models/database/Dbal.php';
+require_once $_SESSION['Root'].'\core/models/model_factory.php';
+require_once $_SESSION['Root'].'\core/models/database/Dbal.php';
 
 /**
  * addUser is made to call the create funtion
@@ -47,14 +47,11 @@ class addUser {
             $values[1]=self::$model->getName();
             $d=new Dbal();
             $d->insertQuery($tableName,$values);
-            header('Location: \STC_MVC\index.php');
-            die();
-        }
-        catch (Exception $e)
-        {
-            header('Location: \STC_MVC\core\views\error.php');
-            die();
-        }
+            return true;
+            }
+            catch (Exception $e){
+                return false;
+            }
     }
 }
 
