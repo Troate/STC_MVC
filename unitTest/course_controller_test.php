@@ -7,7 +7,7 @@
  * Includes
  */
 require_once 'C:\xampp\htdocs\STC_MVC\public\index.php';
-require_once $_SESSION['Root'].'\app/controllers/course_controller.php';
+require_once $_SESSION['Root'].'\core/controllers/controller_factory.php';
 
 
 /**
@@ -22,8 +22,9 @@ class cct extends PHPUnit_Framework_TestCase
      */
     function test_callOp($op)
     {
-        $obj=new course_controller("Course");
-        $this->assertNotFalse($obj->callOp($op));
+        $obj=new controller_factory();
+        $s=$obj->getController("Course");
+        $this->assertNotFalse($s->callOp($op,"course"));
     }
     
     /**
@@ -35,7 +36,25 @@ class cct extends PHPUnit_Framework_TestCase
                      array("delete"),
                      array("update"));
     }
+    /**
+     * Tests the function create for every user
+     * @dataProvider test_create_DP
+     * @param string $tableName Name of the Table to insert value in
+     * @param string $name Name of the Course, Student and Teacher
+     */
+    function test_create($tableName,$name,$result) {
+        $obj=new controller_factory();
+        $s=$obj->getController("Course");
+        $this->assertEquals($s->create($tableName, $name),$result);
+    }
     
+    /**
+     * Data Provider of the function test_create()
+     */
+    function test_create_DP() {
+        return array(array("Course","",false),
+                     array("Course","OOAD",true));
+    }
     /**
      * Tests the delete funciton of course_controller
      * @dataProvider test_delete_DP
@@ -45,8 +64,9 @@ class cct extends PHPUnit_Framework_TestCase
      * @param boolean $result True or False
      */
     function test_delete($tableName,$name,$courseid,$result) {
-        $obj=new course_controller("Course");
-        $this->assertEquals($obj->delete($tableName, $name, $courseid),$result);
+        $obj=new controller_factory();
+        $s=$obj->getController("Course");
+        $this->assertEquals($s->delete($tableName, $name, $courseid),$result);
     }
     
     /**
@@ -71,8 +91,9 @@ class cct extends PHPUnit_Framework_TestCase
      */
     function test_update($tableName,$name,$courseid,$oname,$ocourseid,$result)
     {
-        $obj=new course_controller("Course");
-        $this->assertEquals($obj->update($tableName, $name, $courseid, $oname, $ocourseid),$result);
+        $obj=new controller_factory();
+        $s=$obj->getController("Course");
+        $this->assertEquals($s->update($tableName, $name, $courseid, $oname, $ocourseid),$result);
     }
     
     /**

@@ -8,15 +8,12 @@
  */
 require_once $_SESSION['Root'].'\core/models/model_factory.php';
 require_once $_SESSION['Root'].'\core/models/database/Dbal.php';
+require_once $_SESSION['Root'].'\core/controllers/base_controller.php';
 
 /**
  * Object of teacher_controller will made to access its functions. These functions make the Object of Model for ORM
  */
-class teacher_controller {
-    /**
-     * @var Object $model Static model, it will be initialized in constructor when object will be made 
-     */
-    public static $model;
+class teacher_controller extends baseController{
     /**
      * Magic function is defined as empty, so if someone calls non-declared function they will not see errors
      * @param string $name Default parameter, does nothing
@@ -30,26 +27,24 @@ class teacher_controller {
      * @param string $field It is passed to modelfactory, which gives appropriate object of Model i.e.(Course, Teacher, Student)
      */
     public function __construct($field) {
-        $modelFactory=new model_factory();
-        self::$model=$modelFactory->getModel($field);
+        parent::__construct($field);
     }
     /**
      * According to the value of $op, and according to the controller, it will require its view
      * @param string $op It contains operation type; read, delete or update
+     * @param string $field This field will call the $op of specific $field
      */
-    public function callOp($op) {
-        if($op=="read"){
-            require_once ROOTPATH.'/app/views/teacher/list.php';
-        }
-        else if($op=="delete"){
-            require_once ROOTPATH.'/app/views/teacher/delete.php';
-        }
-        else if($op=="update"){
-            require_once ROOTPATH.'/app/views/teacher/update.php';
-        }
-        else{
-            return false;
-        }
+    public function callOp($op,$field) {
+        $field="teacher";
+        return  parent::CallOp($op, $field);
+    }
+    /**
+     * It is provided with tableName and the name of the Object, It creates Object send it DBAL
+     * @param string $tableName Name of the table which is the type of the Model(Course, Teacher or Student)
+     * @param string $name Name of the Course, Teacher or Student
+     */
+    public function create($tableName,$name) {
+        return parent::create($tableName, $name);
     }
     /**
      * The result of select query is assigned to a object and the that objest is pushed in array of the same object, whish is returned

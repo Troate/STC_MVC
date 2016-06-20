@@ -33,7 +33,7 @@ and open the template in the editor.
         if(isset($field)&&isset($operation)){
         $obj=new controller_factory();
         $controller=$obj->getController($field);
-        $controller->callOp($operation);
+        $controller->callOp($operation,$field);
         }
         ?>
     </body>

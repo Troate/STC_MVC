@@ -36,6 +36,7 @@ and open the template in the editor.
              */
             if(session_status()!=PHP_SESSION_ACTIVE)
                 { session_start();}
+            include_once $_SESSION['Root'].'\core\controllers\controller_factory.php';
             include_once $_SESSION['Root'].'\app\controllers\teacher_controller.php';
             $oname= (string)(isset($_POST['oname']) ? $_POST['oname'] : null);
             $oage= (string)(isset($_POST['oage']) ? $_POST['oage'] : null);
@@ -44,7 +45,8 @@ and open the template in the editor.
             $age= (string)(isset($_POST['age']) ? $_POST['age'] : null);
             $course= (string)(isset($_POST['course']) ? $_POST['course'] : null);
             if(isset($_POST['update'])&& $_SERVER['REQUEST_METHOD'] == "POST"){
-                $s=new teacher_controller("Teacher");
+                $obj=new controller_factory();
+                $s=$obj->getController("Teacher");
                 $bool=$s->update("teacher",$name, $age, $course, $oname, $oage, $ocourse);
                 if($bool==true)
                 {

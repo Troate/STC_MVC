@@ -32,13 +32,15 @@ and open the template in the editor.
              */
             if(session_status()!=PHP_SESSION_ACTIVE)
                 { session_start();}
+            include_once $_SESSION['Root'].'\core\controllers\controller_factory.php';
             include_once $_SESSION['Root'].'\app\controllers\course_controller.php';
             $oname= (string)(isset($_POST['oname']) ? $_POST['oname'] : null);
             $ocourse= (string)(isset($_POST['ocourse']) ? $_POST['ocourse'] : null);
             $name= (string)(isset($_POST['name']) ? $_POST['name'] : null);
             $course= (string)(isset($_POST['course']) ? $_POST['course'] : null);
             if(isset($_POST['update'])&& $_SERVER['REQUEST_METHOD'] == "POST"){
-                $s=new course_controller("Course");
+                $obj=new controller_factory();
+                $s=$obj->getController("Course");
                 $bool=$s->update("course",$name, $course, $oname, $ocourse);
                 if($bool==true)
                 {

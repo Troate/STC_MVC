@@ -19,8 +19,10 @@ and open the template in the editor.
         */
         if(session_status()!=PHP_SESSION_ACTIVE)
                 { session_start();}
+        include_once $_SESSION['Root'].'\core\controllers\controller_factory.php';
         include_once $_SESSION['Root'].'\app\controllers\course_controller.php';
-        $s=new course_controller("Course");
+        $obj=new controller_factory();
+        $s=$obj->getController("Course");
         $model_array=$s->read();
         echo '<h3>Course</h3><table><tr><th style="min-width:100px ">Course Name</th><th style="min-width:100px ">Course Id</th></tr>';
         foreach($model_array as $m)

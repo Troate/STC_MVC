@@ -7,7 +7,7 @@
  * Includes
  */
 require_once 'C:\xampp\htdocs\STC_MVC\public\index.php';
-require_once $_SESSION['Root'].'\app/controllers/student_controller.php';
+require_once $_SESSION['Root'].'\core/controllers/controller_factory.php';
 
 
 /**
@@ -22,8 +22,9 @@ class sct extends PHPUnit_Framework_TestCase
      */
     function test_callOp($op)
     {
-        $obj=new student_controller("Student");
-        $this->assertNotFalse($obj->callOp($op));
+        $obj=new controller_factory();
+        $s=$obj->getController("Student");
+        $this->assertNotFalse($s->callOp($op,"student"));
     }
     
     /**
@@ -35,7 +36,25 @@ class sct extends PHPUnit_Framework_TestCase
                      array("delete"),
                      array("update"));
     }
+    /**
+     * Tests the function create for every user
+     * @dataProvider test_create_DP
+     * @param string $tableName Name of the Table to insert value in
+     * @param string $name Name of the Course, Student and Teacher
+     */
+    function test_create($tableName,$name,$result) {
+        $obj=new controller_factory();
+        $s=$obj->getController("Student");
+        $this->assertEquals($s->create($tableName, $name),$result);
+    }
     
+    /**
+     * Data Provider of the function test_create()
+     */
+    function test_create_DP() {
+        return array(array("Student","",false),
+                     array("Student","Ahmad",true));
+    }
     /**
      * Tests the delete funciton of student_controller
      * @dataProvider test_delete_DP
@@ -46,8 +65,9 @@ class sct extends PHPUnit_Framework_TestCase
      * @param boolean $result True or False
      */
     function test_delete($tableName,$name,$age,$degree,$result) {
-        $obj=new student_controller("Student");
-        $this->assertEquals($obj->delete($tableName,$name,$age,$degree),$result);
+        $obj=new controller_factory();
+        $s=$obj->getController("Student");
+        $this->assertEquals($s->delete($tableName,$name,$age,$degree),$result);
     }
     
     /**
@@ -72,8 +92,9 @@ class sct extends PHPUnit_Framework_TestCase
      */
     function test_update($tableName,$name,$age,$degree,$oname,$oage,$odegree,$result)
     {
-        $obj=new student_controller("Student");
-        $this->assertEquals($obj->update($tableName,$name,$age,$degree,$oname,$oage,$odegree),$result);
+        $obj=new controller_factory();
+        $s=$obj->getController("Student");
+        $this->assertEquals($s->update($tableName,$name,$age,$degree,$oname,$oage,$odegree),$result);
     }
     
     /**

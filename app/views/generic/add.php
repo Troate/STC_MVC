@@ -10,7 +10,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <a href="/STC_MVC/index.php">Click Here</a> to go back to main page<br>
+        <a href="/STC_MVC/public/index.php">Click Here</a> to go back to main page<br>
         <h3>Enter Data</h3>
         <form action='/STC_MVC/app/views/generic/add.php' method="POST">
             Name:<br>
@@ -30,11 +30,15 @@ and open the template in the editor.
              */
             if(session_status()!=PHP_SESSION_ACTIVE)
                 { session_start();}
-            include_once $_SESSION['Root'].'\app\views\generic\addUser.php';
+            include_once $_SESSION['Root'].'\core\controllers\controller_factory.php';
+            include_once $_SESSION['Root'].'\app\controllers\course_controller.php';
+            include_once $_SESSION['Root'].'\app\controllers\teacher_controller.php';
+            include_once $_SESSION['Root'].'\app\controllers\student_controller.php';
             $name= (string)(isset($_POST['name']) ? $_POST['name'] : null);
             $field = (isset($_POST['field']) ? $_POST['field'] : null);
             if(isset($_POST['add'])&& $_SERVER['REQUEST_METHOD'] == "POST"){
-                $s=new addUser($field);
+                $obj=new controller_factory();
+                $s=$obj->getController($field);
                 $bool=$s->create($field,$name);
                 if($bool==true)
                 {

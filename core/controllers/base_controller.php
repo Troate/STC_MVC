@@ -1,29 +1,24 @@
 <?php
 /**
-* Contains code to add user
-*/
+ * Base Controller of the different_controllers
+ */
+
 /**
-* Includes
-*/
+ * Includes
+ */
+require_once $_SESSION['Root'].'\core/controllers/controller_interface.php';
 require_once $_SESSION['Root'].'\core/models/model_factory.php';
 require_once $_SESSION['Root'].'\core/models/database/Dbal.php';
 
 /**
- * addUser is made to call the create funtion
+ * Parent Class of the Student, Teacher and Course Controller
  */
-class addUser {
+class baseController implements controllerInterface
+{
     /**
      * @var Object $model Static model, it will be initialized in constructor when object will be made 
      */
     public static $model;
-    /**
-     * Magic function is defined as empty, so if someone calls non-declared function they will not see errors
-     * @param string $name Default parameter, does nothing
-     * @param string $arguments Default parameter, does nothing
-     */
-    public function __call($name, $arguments) {
-        
-    }
     /**
      * Its a construtor, which initialases $model with appropriate object
      * @param string $field It is passed to modelfactory, which gives appropriate object of Model i.e.(Course, Teacher, Student)
@@ -33,12 +28,31 @@ class addUser {
         self::$model=$modelFactory->getModel($field);
     }
     /**
+     * According to the value of $op, and according to the controller, it will require its view
+     * @param string $op It contains operation type; read, delete or update
+     * @param string $field This field will call the $op of specific $field
+     */
+    public function CallOp($op, $field) {
+        if($op=="read"){
+            require_once ROOTPATH.'/app/views/'.$field.'/list.php';
+        }
+        else if($op=="delete"){
+            require_once ROOTPATH.'/app/views/'.$field.'/delete.php';
+        }
+        else if($op=="update"){
+            require_once ROOTPATH.'/app/views/'.$field.'/update.php';
+        }
+        else {
+            return false;
+        }
+    }
+    /**
      * It is provided with tableName and the name of the Object, It creates Object send it DBAL
      * @param string $tableName Name of the table which is the type of the Model(Course, Teacher or Student)
      * @param string $name Name of the Course, Teacher or Student
      * @throws Exception Exception takes to Error page error.php
      */
-    public function create($tableName,$name) {
+    public function create($tableName, $name) {
         try{
             if($name==''||$tableName=='')
             {throw new Exception;}
@@ -54,3 +68,4 @@ class addUser {
             }
     }
 }
+

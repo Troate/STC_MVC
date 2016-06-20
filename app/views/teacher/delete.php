@@ -29,12 +29,14 @@ and open the template in the editor.
              */
             if(session_status()!=PHP_SESSION_ACTIVE)
                 { session_start();}
+            include_once $_SESSION['Root'].'\core\controllers\controller_factory.php';
             include_once $_SESSION['Root'].'\app\controllers\teacher_controller.php';
             $name= (string)(isset($_POST['name']) ? $_POST['name'] : null);
             $age= (string)(isset($_POST['age']) ? $_POST['age'] : null);
             $course= (string)(isset($_POST['course']) ? $_POST['course'] : null);
             if(isset($_POST['delete'])&& $_SERVER['REQUEST_METHOD'] == "POST"){
-                $s=new teacher_controller("Teacher");
+                $obj=new controller_factory();
+                $s=$obj->getController("Teacher");
                 $bool=$s->delete("teacher",$name, $age, $course);
                 if($bool==true)
                 {
