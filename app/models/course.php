@@ -4,11 +4,6 @@
  */
 
 /**
- * Includes
- */
-require_once $_SESSION['Root'].'\core\models\User.php';
-
-/**
  * Course has Name and CourseId
  */
 class Course extends User {

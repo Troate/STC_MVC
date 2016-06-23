@@ -2,11 +2,6 @@
 /**
  * Contains User Class
  */
-
-/**
- * Includes
- */
-require_once $_SESSION['Root'].'\core\models\modelInterface.php';
  
 /**
  * Parent Class of Student, Teacher and Course

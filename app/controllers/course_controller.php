@@ -2,15 +2,7 @@
 /**
  * Course Controller
  */
-
-/**
- * Includes other classes
- */
-
-require_once $_SESSION['Root'].'\core/models/model_factory.php';
-require_once $_SESSION['Root'].'\core/models/database/Dbal.php';
-require_once $_SESSION['Root'].'\core/controllers/base_controller.php';
-
+require_once ROOT.DS.'core'.DS.'controllers'.DS.'base_controller.php';
 /**
  * Object of course_controller will made to access its functions. These functions make the Object of Model for ORM
  */
@@ -44,8 +36,8 @@ class course_controller extends baseController{
      * @param string $tableName Name of the table which is the type of the Model(Course, Teacher or Student)
      * @param string $name Name of the Course, Teacher or Student
      */
-    public function create($tableName,$name) {
-        return parent::create($tableName, $name);
+    public function create($parameter) {
+        return parent::create($parameter);
     }
     /**
      * The result of select query is assigned to a object and the that objest is pushed in array of the same object, whish is returned
@@ -56,7 +48,7 @@ class course_controller extends baseController{
         $model_array= $mod->getModel("Course");
         $model_array=array();
         $d=new Dbal();
-        $res=$d->selectQuery("course");
+        $res=$d->selectQuery(get_class(self::$model));
         while($row= $res->fetch())
         {
             $m=$mod->getModel("Course");
@@ -65,6 +57,7 @@ class course_controller extends baseController{
             $m->setCourseId($row['CourseId']);
             array_push($model_array, $m);
         }
+        require_once ROOT.DS.'app'.DS.'views'.DS.get_class(self::$model).DS.'list.php';
         return $model_array;
     }
     /**
@@ -74,7 +67,9 @@ class course_controller extends baseController{
      * @param string $courseid Id of the Course
      * @throws Exception Exception takes to Error page error.php
      */
-    public function delete($tableName,$name,$courseid) {
+    public function delete($parameter) {
+        $name=$parameter[0];
+        $courseid=$parameter[1];
         try{
                 if(strlen($name)==0||strlen($courseid)==0)
                 {throw new Exception;}
@@ -85,7 +80,7 @@ class course_controller extends baseController{
                 $values[0]=self::$model->getName();
                 $values[1]=self::$model->getCourseId();
                 $d=new Dbal();
-                $d->deleteQuery($tableName,$names,$values);
+                $d->deleteQuery(get_class(self::$model),$names,$values);
                 return true;
             }
             catch (Exception $e){
@@ -102,7 +97,11 @@ class course_controller extends baseController{
      * @param string $ocourseid Old CourseId
      * @throws Exception Exception takes to Error page error.php
      */
-    public function update($tableName,$name,$courseid,$oname,$ocourseid) {
+    public function update($parameters) {
+        $name=$parameters[0];
+        $courseid=$parameters[1];
+        $oname=$parameters[2];
+        $ocourseid=$parameters[3];
         try{
                 if(strlen($name)==0||strlen($courseid)==0||strlen($oname)==0||strlen($ocourseid)==0)
                 {throw new Exception;}
@@ -115,7 +114,7 @@ class course_controller extends baseController{
                 $values[2]=$oname;
                 $values[3]=$ocourseid;
                 $d=new Dbal();
-                $d->updateQuery($tableName,$names,$values);
+                $d->updateQuery(get_class(self::$model),$names,$values);
                 return true;
             }
             catch (Exception $e){

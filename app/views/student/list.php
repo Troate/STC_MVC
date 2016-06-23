@@ -14,16 +14,6 @@ and open the template in the editor.
         /**
         * View of the Student List Functionality
         */
-       /**
-        * Includes
-        */
-        if(session_status()!=PHP_SESSION_ACTIVE)
-                { session_start();}
-        include_once $_SESSION['Root'].'\core\controllers\controller_factory.php';
-        include_once $_SESSION['Root'].'\app\controllers\student_controller.php';
-        $obj=new controller_factory();
-        $s=$obj->getController("Student");
-        $model_array=$s->read();
         echo '<h3>Student</h3><table><tr><th style="min-width:100px ">Name</th><th style="min-width:100px ">Age</th><th style="min-width:100px ">Degree</th></tr>';
         foreach($model_array as $m)
         {

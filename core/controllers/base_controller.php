@@ -2,17 +2,13 @@
 /**
  * Base Controller of the different_controllers
  */
-
-/**
- * Includes
- */
-require_once $_SESSION['Root'].'\core/controllers/controller_interface.php';
-require_once $_SESSION['Root'].'\core/models/model_factory.php';
-require_once $_SESSION['Root'].'\core/models/database/Dbal.php';
+require_once ROOT.DS.'core'.DS.'models'.DS.'database'.DS.'Dbal.php';
+require_once ROOT.DS.'core'.DS.'controllers'.DS.'controller_interface.php';
 
 /**
  * Parent Class of the Student, Teacher and Course Controller
  */
+
 class baseController implements controllerInterface
 {
     /**
@@ -33,17 +29,12 @@ class baseController implements controllerInterface
      * @param string $field This field will call the $op of specific $field
      */
     public function CallOp($op, $field) {
-        if($op=="read"){
-            require_once ROOTPATH.'/app/views/'.$field.'/list.php';
+        if($op=="add"){
+            require_once ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.$op.'.php';
+            
         }
-        else if($op=="delete"){
-            require_once ROOTPATH.'/app/views/'.$field.'/delete.php';
-        }
-        else if($op=="update"){
-            require_once ROOTPATH.'/app/views/'.$field.'/update.php';
-        }
-        else {
-            return false;
+        else{
+            require_once ROOT.DS.'app'.DS.'views'.DS.$field.DS.$op.'.php';
         }
     }
     /**
@@ -52,7 +43,9 @@ class baseController implements controllerInterface
      * @param string $name Name of the Course, Teacher or Student
      * @throws Exception Exception takes to Error page error.php
      */
-    public function create($tableName, $name) {
+    public function create($parameter) {
+        $tableName=$parameter[0];
+        $name=$parameter[1];
         try{
             if($name==''||$tableName=='')
             {throw new Exception;}
@@ -60,7 +53,7 @@ class baseController implements controllerInterface
             $values[0]="";
             $values[1]=self::$model->getName();
             $d=new Dbal();
-            $d->insertQuery($tableName,$values);
+            $d->insertQuery(get_class(self::$model),$values);
             return true;
             }
             catch (Exception $e){

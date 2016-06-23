@@ -4,11 +4,6 @@
  */
 
 /**
- * Includes
- */
-require_once $_SESSION['Root'].'\core\models\User.php';
-
-/**
  * Student has Name, Age and Degree
  */
 class Student extends User{

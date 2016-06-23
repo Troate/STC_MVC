@@ -20,21 +20,51 @@ and open the template in the editor.
         /**
          * Includes
          */
-        if(session_status()!=PHP_SESSION_ACTIVE)
-                { session_start();}
-        define("ROOT", __DIR__);
-        define("ROOTPATH",rtrim(ROOT,'\public'));
-        $_SESSION['Root']=ROOTPATH;
-        require_once $_SESSION['Root'].'/core/controllers/controller_factory.php';
-        require_once $_SESSION['Root'].'/app/views/layouts/default.php';
+        define("ROOT", dirname(__DIR__));
+        define('DS', DIRECTORY_SEPARATOR);
+        require_once ROOT.DS.'core'.DS.'models'.DS.'modelInterface.php';
+        require_once ROOT.DS.'core'.DS.'controllers'.DS.'base_controller.php';
+        
+        require_once ROOT.DS.'core'.DS.'models'.DS.'User.php';
+        require_once ROOT.DS.'core'.DS.'controllers'.DS.'controller_factory.php';
+        require_once ROOT.DS.'core'.DS.'models'.DS.'model_factory.php';
+        require_once ROOT.DS.'app'.DS.'models'.DS.'course.php';
+        require_once ROOT.DS.'app'.DS.'models'.DS.'teacher.php';
+        require_once ROOT.DS.'app'.DS.'models'.DS.'student.php';
+        require_once ROOT.DS.'app'.DS.'controllers'.DS.'student_controller.php';
+        require_once ROOT.DS.'app'.DS.'controllers'.DS.'teacher_controller.php';
+        require_once ROOT.DS.'app'.DS.'controllers'.DS.'course_controller.php';
+        require_once ROOT.DS.'app'.DS.'views'.DS.'layouts'.DS.'default.php';
+        
+        require_once ROOT.DS.'core'.DS.'models'.DS.'database'.DS.'DbConnection.php';
+        require_once ROOT.DS.'core'.DS.'utils'.DS.'req.php';
+        session_start();
+        if(isset($_POST['func'])&&isset($_POST['class']))
+        {
+            $parameter=$_POST['parameter'];
+            print_r($parameter);
+            $func=$_POST['func'];
+            $class=$_POST['class'];
+            $obj=new controller_factory();
+            $s=$obj->getController($class);
+            $bool=$s->$func($parameter);
+        }
+            
+        $request = new req($field, $operation);
         /**
          * If the field and operatio are set, then it makes appropriate object from controller factory and passes $opeartion as parameter to the function callOp()
          */
-        if(isset($field)&&isset($operation)){
-        $obj=new controller_factory();
-        $controller=$obj->getController($field);
-        $controller->callOp($operation,$field);
+        if(isset($field) && isset($operation)){
+            $obj=new controller_factory();
+            $controller=$obj->getController($field);
+            if($operation=="list"){
+                $controller->read();
+            }
+            else{
+                $controller->callOp($operation,$field);
+            }
         }
+        
         ?>
     </body>
 </html>

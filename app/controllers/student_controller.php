@@ -2,14 +2,7 @@
 /**
  * This code contains Student Controller
  */
-
-
-/**
- * Includes Student Model Class
- */
-require_once $_SESSION['Root'].'\core/models/model_factory.php';
-require_once $_SESSION['Root'].'\core/models/database/Dbal.php';
-require_once $_SESSION['Root'].'\core/controllers/base_controller.php';
+require_once ROOT.DS.'core'.DS.'controllers'.DS.'base_controller.php';
 
 /**
  * Student_controller this creates Student Model
@@ -45,8 +38,8 @@ class student_controller extends baseController{
      * @param string $tableName Name of the table which is the type of the Model(Course, Teacher or Student)
      * @param string $name Name of the Course, Teacher or Student
      */
-    public function create($tableName,$name) {
-        return parent::create($tableName, $name);
+    public function create($parameter) {
+        return parent::create($parameter);
     }
     /**
      * The result of select query is assigned to a object and the that objest is pushed in array of the same object, whish is returned
@@ -57,7 +50,7 @@ class student_controller extends baseController{
         $model_array= $mod->getModel("Student");
         $model_array=array();
         $d=new Dbal();
-        $res=$d->selectQuery("student");
+        $res=$d->selectQuery(get_class(self::$model));
         while($row= $res->fetch())
         {
             $m=$mod->getModel("Student");
@@ -67,6 +60,7 @@ class student_controller extends baseController{
             $m->setDegree($row['Degree']);
             array_push($model_array, $m);
         }
+        require_once ROOT.DS.'app'.DS.'views'.DS.get_class(self::$model).DS.'list.php';
         return $model_array;
     }
     /**
@@ -77,7 +71,10 @@ class student_controller extends baseController{
      * @param string $degree Name of the Degree
      * @throws Exception Exception takes to Error page error.php
      */
-    public function delete($tableName,$name,$age,$degree) {
+    public function delete($parameter) {
+        $name=$parameter[0];
+        $age=$parameter[1];
+        $degree=$parameter[2];
         try{
                 if(strlen($name)==0||strlen($degree)==0)
                 {throw new Exception;}
@@ -91,7 +88,7 @@ class student_controller extends baseController{
                 $values[1]=self::$model->getAge();
                 $values[2]=self::$model->getDegree();
                 $d=new Dbal();
-                $d->deleteQuery($tableName,$names,$values);
+                $d->deleteQuery(get_class(self::$model),$names,$values);
                 return true;
             }
             catch (Exception $e){
@@ -126,7 +123,7 @@ class student_controller extends baseController{
                 $values[4]=$oage;
                 $values[5]=$odegree;
                 $d=new Dbal();
-                $d->updateQuery($tableName,$names,$values);
+                $d->updateQuery(get_class(self::$model),$names,$values);
                 return true;
             }
             catch (Exception $e){

@@ -11,41 +11,19 @@ and open the template in the editor.
     </head>
     <body>
         <h3>Enter Data</h3>
-        <form action='/STC_MVC/app/views/course/delete.php' method="POST">
+        <form action='index.php' method="POST">
             Name:<br>
-            <input type="text" name="name" placeholder="Name of Course" /><br>
+            <input type="text" name="parameter[0]" placeholder="Name of Course" /><br>
             Course Id:<br>
-            <input type="text" name="course" placeholder="Id of Course" /><br><br>
+            <input type="text" name="parameter[1]" placeholder="Id of Course" /><br><br>
+            <input type="text" name="func" value="<?php echo $field;?>" style="display: none;"/>
+            <input type="text" name="class" value="<?php echo $operation;?>" style="display: none;"/>
             <button name="delete" type="submit" value="delete">Delete</button>
             </form>
             <?php
             /**
              * View of the Course Delete Functionality
              */
-            /**
-             * Includes
-             */
-            if(session_status()!=PHP_SESSION_ACTIVE)
-                { session_start();}
-            include_once $_SESSION['Root'].'\core\controllers\controller_factory.php';
-            include_once $_SESSION['Root'].'\app\controllers\course_controller.php';
-            $name= (string)(isset($_POST['name']) ? $_POST['name'] : null);
-            $course= (string)(isset($_POST['course']) ? $_POST['course'] : null);
-            if(isset($_POST['delete'])&& $_SERVER['REQUEST_METHOD'] == "POST"){
-                $obj=new controller_factory();
-                $s=$obj->getController("Course");
-                $bool=$s->delete("course",$name, $course);
-                if($bool==true)
-                {
-                    header('Location: \STC_MVC\public\index.php');
-                    die();
-                }
-                else if($bool==false)
-                {
-                    header('Location: \STC_MVC\core\views\error.php');
-                    die();
-                }
-            }
             ?>
     </body>
 </html>
