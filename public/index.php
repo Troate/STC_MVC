@@ -38,11 +38,9 @@ and open the template in the editor.
         
         require_once ROOT.DS.'core'.DS.'models'.DS.'database'.DS.'DbConnection.php';
         require_once ROOT.DS.'core'.DS.'utils'.DS.'req.php';
-        session_start();
         if(isset($_POST['func'])&&isset($_POST['class']))
         {
             $parameter=$_POST['parameter'];
-            print_r($parameter);
             $func=$_POST['func'];
             $class=$_POST['class'];
             $obj=new controller_factory();

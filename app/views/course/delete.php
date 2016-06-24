@@ -16,8 +16,8 @@ and open the template in the editor.
             <input type="text" name="parameter[0]" placeholder="Name of Course" /><br>
             Course Id:<br>
             <input type="text" name="parameter[1]" placeholder="Id of Course" /><br><br>
-            <input type="text" name="func" value="<?php echo $field;?>" style="display: none;"/>
-            <input type="text" name="class" value="<?php echo $operation;?>" style="display: none;"/>
+            <input type="text" name="func" value="<?php echo  $op;?>" style="display: none;"/>
+            <input type="text" name="class" value="<?php echo $field;?>" style="display: none;"/>
             <button name="delete" type="submit" value="delete">Delete</button>
             </form>
             <?php

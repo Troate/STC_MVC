@@ -32,7 +32,8 @@ class teacher_controller extends baseController{
         return  parent::CallOp($op, $field);
     }
     /**
-     * It is provided with tableName and the name of the Object, It creates Object send it DBAL
+     * Calls Parent Function
+     * @param string_array $parameter It Contains following parameters
      * @param string $tableName Name of the table which is the type of the Model(Course, Teacher or Student)
      * @param string $name Name of the Course, Teacher or Student
      */
@@ -40,92 +41,33 @@ class teacher_controller extends baseController{
         return parent::create($parameter);
     }
     /**
-     * The result of select query is assigned to a object and the that objest is pushed in array of the same object, whish is returned
+     * Calls Parent Function
      * @return Object_array Populated with the result of select query
      */
     public function read() {
-        $mod= new model_factory();
-        $model_array= $mod->getModel("Teacher");
-        $model_array=array();
-        $d=new Dbal();
-        $res=$d->selectQuery(get_class(self::$model));
-        while($row= $res->fetch())
-        {
-            $m=$mod->getModel("Teacher");
-            $m->setId($row['Id']);
-            $m->setName($row['Name']);
-            $m->setAge($row['Age']);
-            $m->setCourse($row['Course']);
-            array_push($model_array, $m);
-        }
-        require_once ROOT.DS.'app'.DS.'views'.DS.get_class(self::$model).DS.'list.php';
-        return $model_array;
+        return parent::read();
     }
     /**
-     * Makes object and initalise it with values and sends it to the database layer
-     * @param string $tableName Name of the table which is the type of the Model(Course, Teacher or Student)
-     * @param string $name Name of the Teacher
-     * @param string $age Age of the Teacher
-     * @param string $course Name of the Course
+     * Calls Parent Function
+     * @param string_array $parameter It Contains following parameters
+     * @param string $name Name of the Course
+     * @param string $courseid Id of the Course
      * @throws Exception Exception takes to Error page error.php
      */
     public function delete($parameter) {
-        $name=$parameter[0];
-        $age=$parameter[1];
-        $course=$parameter[2];
-        try{
-                if(strlen($name)==0||strlen($course)==0)
-                {throw new Exception;}
-                self::$model->setName($name);
-                self::$model->setAge($age);
-                self::$model->setCourse($course);
-                $names[0]="name";
-                $names[1]="age";
-                $names[2]="course";
-                $values[0]=self::$model->getName();
-                $values[1]=self::$model->getAge();
-                $values[2]=self::$model->getCourse();
-                $d=new Dbal();
-                $d->deleteQuery(get_class(self::$model),$names,$values);
-                return true;
-            }
-            catch (Exception $e){
-                return false;
-            }
+        parent::delete($parameter);
     }
+    
     /**
-     * Creates object, initialize with old values and then set new Values
-     * @param string $tableName Name of the table which is the type of the Model(Course, Teacher or Student)
-     * @param string $name New Name of Teacher
-     * @param string $age New age of Teacher
-     * @param string $course New Course
-     * @param string $oname Old name of Teacher
-     * @param string $oage Old agee of Teacher
-     * @param string $ocourse Old Course
+     * Calls Parent Function
+     * @param string_array $parameter It Contains following parameters
+     * @param string $name New Name of Course
+     * @param string $courseid New CourseId
+     * @param string $oname Old name of Course
+     * @param string $ocourseid Old CourseId
      * @throws Exception Exception takes to Error page error.php
      */
-    public function update($tableName,$name,$age,$course,$oname,$oage,$ocourse) {
-        try{
-                if(strlen($name)==0||strlen($course)==0||strlen($oname)==0||strlen($ocourse)==0)
-                {throw new Exception;}
-                $names[0]="name";
-                $names[1]="age";
-                $names[2]="course";
-                self::$model->setName($name);
-                self::$model->setAge($age);
-                self::$model->setCourse($course);
-                $values[0]=self::$model->getName();
-                $values[1]=self::$model->getAge();
-                $values[2]=self::$model->getCourse();
-                $values[3]=$oname;
-                $values[4]=$oage;
-                $values[5]=$ocourse;
-                $d=new Dbal();
-                $d->updateQuery(get_class(self::$model),$names,$values);
-                return true;
-            }
-            catch (Exception $e){
-                return false;
-            }
+    public function update($parameter) {
+        return parent::update($parameter);
     }
 }

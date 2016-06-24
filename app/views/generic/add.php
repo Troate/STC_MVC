@@ -10,14 +10,13 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <a href="/STC_MVC/public/index.php">Click Here</a> to go back to main page<br>
         <h3>Enter Data</h3>
         <form action="index.php" method="post">
             Name:<br>
             <input type="text" name="parameter[1]" placeholder="Name" /><br><br>
             <input type="text" name="class" value="<?php echo $field; ?>" style="display: none;"/>
             <input type="text" name="parameter[0]" value="<?php echo $field; ?>" style="display: none;"/>
-            <input type="text" name="func" value="create" style="display: none;"/>
+            <input type="text" name="func" value="<?php echo $op; ?>" style="display: none;"/>
             <button name="add" type="submit" value="create">Create</button>
         </form>
             <?php

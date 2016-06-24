@@ -25,8 +25,8 @@ and open the template in the editor.
             <input type="number" name="parameter[1]" min="0" placeholder="New Age of Teacher" /><br>
             Course:<br>
             <input type="text" name="parameter[2]" placeholder="New Course of Teacher" /><br><br>
-            <input type="text" name="func" value="<?php echo $field;?>" style="display: none;"/>
-            <input type="text" name="class" value="<?php echo $operation;?>" style="display: none;"/>
+            <input type="text" name="func" value="<?php echo  $op;?>" style="display: none;"/>
+            <input type="text" name="class" value="<?php echo $field;?>" style="display: none;"/>
             <button name="update" type="submit" value="update">Update</button>
             </form>
             <?php

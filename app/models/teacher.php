@@ -21,6 +21,31 @@ class Teacher extends User {
      */
     private $course;
     /**
+     * Getter of Name of Columns
+     * @return string_array
+     */
+    function getCols() {
+        return parent::getCols();
+    }
+    /**
+     * Setter of name columns in database
+     * @param string_array $cols Array containing name of columns
+     */
+    function setCols($cols) {
+        parent::setCols($cols);
+    }
+    /**
+     * Constructor
+     * Sets the Name of the Columns and call setCols function
+     */
+    function __construct() {
+        $name[0]='Id';
+        $name[1]='Name';
+        $name[2]='Age';
+        $name[3]='Course';
+        $this->setCols($name);
+    }
+    /**
      * Getter of $name
      * @return string Name of the Teacher
      */

@@ -31,8 +31,6 @@ class Dbal {
         }
         $string=rtrim($string,",");
         $string=$string." )";
-        echo $string."<br>";
-        print_r($cell_values);
         try{
         $stmt=  $this->pdo->prepare($string);
         $stmt->execute($cell_values);
@@ -77,8 +75,6 @@ class Dbal {
             $string=$string.$cell_name[$i]."=? and ";
         }
         $string=  rtrim($string," and ");
-        echo $string."<br>";
-        print_r($cell_values);
         try{
         $stmt=  $this->pdo->prepare($string);
         $stmt->execute($cell_values);
@@ -113,8 +109,6 @@ class Dbal {
             $string=$string.$cell_name[$i]."=? and ";
         }
         $string=  rtrim($string," and ");
-        echo $string."<br>";
-        print_r($cell_values);
         try{
         $stmt=  $this->pdo->prepare($string);
         $stmt->execute($cell_values);

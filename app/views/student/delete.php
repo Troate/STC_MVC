@@ -18,8 +18,8 @@ and open the template in the editor.
             <input type="number" name="parameter[1]" min="0" placeholder="Age of Student" /><br>
             Degree:<br>
             <input type="text" name="parameter[2]" placeholder="Degree of Student" /><br><br>
-            <input type="text" name="func" value="<?php echo $field;?>" style="display: none;"/>
-            <input type="text" name="class" value="<?php echo $operation;?>" style="display: none;"/>
+            <input type="text" name="func" value="<?php echo  $op;?>" style="display: none;"/>
+            <input type="text" name="class" value="<?php echo $field;?>" style="display: none;"/>
             <button name="delete" type="submit" value="delete">Delete</button>
             </form>
             <?php

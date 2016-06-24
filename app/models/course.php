@@ -7,28 +7,19 @@
  * Course has Name and CourseId
  */
 class Course extends User {
+    
     /**
      * @var string $code CourseId of the Course
      */
     private $courseid;
+    
+    
     /**
-     *
-     * @var int $id This id is assigned value according the id of course in database 
+     * Setter of the Course Id
+     * @param string $courseid Course id
      */
-    private $id;
-    /**
-     * Getter of $id
-     * @return int Id as in Database
-     */
-    function getId() {
-        return $this->id;
-    }
-    /**
-     * Setter of $id
-     * @param int $id Id as in Database
-     */
-    function setId($id) {
-        $this->id = $id;
+    function setCourseId($courseid) {
+        $this->courseid = $courseid;
     }
     /**
      * Getter of the Course
@@ -51,13 +42,32 @@ class Course extends User {
     function setName($name) {
         parent::setName($name);
     }
+    
     /**
-     * Setter of the Course Id
-     * @param string $courseid Course id
+     * Getter of Name of Columns
+     * @return string_array
      */
-    function setCourseId($courseid) {
-        $this->courseid = $courseid;
+    function getCols() {
+        return parent::getCols();
     }
+    /**
+     * Setter of name columns in database
+     * @param string_array $cols Array containing name of columns
+     */
+    function setCols($cols) {
+        parent::setCols($cols);
+    }
+    /**
+     * Constructor
+     * Sets the Name of the Columns and call setCols function
+     */
+    function __construct() {
+        $name[0]='Id';
+        $name[1]='Name';
+        $name[2]='CourseId';
+        $this->setCols($name);
+    }
+
 
 
 }
