@@ -14,12 +14,10 @@ and open the template in the editor.
         /**
         * View of the Course List Functionality
         */
-        echo '<h3>Course</h3><table><tr><th style="min-width:100px ">Course Name</th><th style="min-width:100px ">Course Id</th></tr>';
-        foreach($model_array as $m)
-        {
-            echo '<tr><td style="text-align:center">'.$m->getName().'</td><td style="text-align:center">'.$m->getCourseId().'</td></tr>';
-        }
-        echo '</table>';
+        echo '<h3>Course</h3>';
+        $i=1; 
+        require_once ROOT.DS.'core'.DS.'views'.DS.'list.php';
+        
         ?>
     </body>
 </html>

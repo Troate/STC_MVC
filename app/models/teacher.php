@@ -59,7 +59,7 @@ class Teacher extends User {
      * @return int Age of the Teacher
      */
     function getAge() {
-        return $this->age;
+        return (int)$this->age;
     }
     /**
      * Getter of $id

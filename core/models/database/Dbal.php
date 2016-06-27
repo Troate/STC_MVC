@@ -24,9 +24,14 @@ class Dbal {
      * @param string $tableName Name of the Table to send or recieve data from
      * @param string/int_array $cell_values Contains the values that are to be inserted in Table
      */
-    function insertQuery($tableName, $cell_values) {
+    function insertQuery($tableName, $cell_names, $cell_values) {
         $count=count($cell_values);
-        $string="insert into $tableName (Id,Name) values (";
+        $string="insert into $tableName (";
+        for ($i=0;$i<$count;$i++) {
+            $string= $string. "$cell_names[$i],";
+        }
+        $string=rtrim($string,",");
+        $string=$string." ) values (";
         for ($i=0;$i<$count;$i++) {
             $string= $string. "?,";
         }
@@ -37,7 +42,7 @@ class Dbal {
         $stmt->execute($cell_values);
         return true;
         }
-        catch(PDOException $e)
+        catch(\PDOException $e)
         {
             return false;
         }
@@ -55,7 +60,7 @@ class Dbal {
         $res= $this->pdo->query($string);
         return $res;
         }
-        catch(PDOException $e)
+        catch(\PDOException $e)
         {
             return false;
         }
@@ -81,10 +86,10 @@ class Dbal {
         $stmt->execute($cell_values);
         if($stmt->rowCount()<=0)
         {    
-            throw new Exception;
+            throw new \Exception;
         }
         }
-        catch(PDOException $e)
+        catch(\PDOException $e)
         {
             return false;
         }
@@ -115,10 +120,10 @@ class Dbal {
         $stmt->execute($cell_values);
         if($stmt->rowCount()<=0)
         {    
-            throw new Exception;
+            throw new \Exception;
         }
         }
-        catch(PDOException $e)
+        catch(\PDOException $e)
         {
             return false;
         }

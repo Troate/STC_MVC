@@ -56,7 +56,7 @@ class Student extends User{
      * @return int Age of the Student
      */
     function getAge() {
-        return $this->age;
+        return (int)$this->age;
     }
     
     /**

@@ -31,6 +31,7 @@ class baseController implements controllerInterface
      * @param string $field This field will call the $op of specific $field
      */
     public function CallOp($op, $field) {
+        $model=  self::$model;
         if($op=="create"){
             require_once ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.$op.'.php';
         }
@@ -45,20 +46,32 @@ class baseController implements controllerInterface
      * @throws Exception Exception takes to Error page error.php
      */
     public function create($parameter) {
-        $tableName=$parameter[0];
-        $name=$parameter[1];
         try{
-            if($name==''||$tableName=='')
-            {throw new \Exception();}
+            foreach($parameter as $param)
+                {
+                    if(gettype($param)=='string'&&strlen($param)==0)
+                    {
+                        throw new \Exception();
+                    }
+                }
             $class=get_class(self::$model);
             $class=  str_replace('\\', '', $class);
             $class=  str_replace('app', '', $class);
             $class=  str_replace('models', '', $class);
-            self::$model->setName($name);
-            $values[0]="";
-            $values[1]=self::$model->getName();
+            $name=self::$model->getCols();
+            $count=  count($name);
+            $names=array();
+            $values=array();
+            for($i=0;$i<$count-1;$i++)
+            {
+                $setFunc='set'.$name[$i+1];
+                $getFunc='get'.$name[$i+1];
+                self::$model->$setFunc($parameter[$i]);
+                $names[$i]=$name[$i+1];
+                $values[$i]=  self::$model->$getFunc();
+            }
             $d=new Dbal();
-            $d->insertQuery($class,$values);
+            $d->insertQuery($class,$names,$values);
             return true;
             }
             catch (\Exception $e){
@@ -90,6 +103,7 @@ class baseController implements controllerInterface
             }
             array_push($model_array, $m);
         }
+        $model=  self::$model;
         require_once ROOT.DS.'app'.DS.'views'.DS.$class.DS.'list.php';
         return $model_array;
     }

@@ -14,8 +14,7 @@ class modelFactory {
      */
     public function getModel($model) {
         if(isset($model)){
-            $DS=DIRECTORY_SEPARATOR;
-            $class='app'.$DS.'models'.$DS.$model;
+            $class='app'.DS.'models'.DS.$model;
             return new $class();
         }
         else{

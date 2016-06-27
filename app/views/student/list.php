@@ -14,12 +14,9 @@ and open the template in the editor.
         /**
         * View of the Student List Functionality
         */
-        echo '<h3>Student</h3><table><tr><th style="min-width:100px ">Name</th><th style="min-width:100px ">Age</th><th style="min-width:100px ">Degree</th></tr>';
-        foreach($model_array as $m)
-        {
-            echo '<tr><td style="text-align:center">'.$m->getName().'</td><td style="text-align:center">'.$m->getAge().'</td><td style="text-align:center">'.$m->getDegree().'</td></tr>';
-        }
-        echo '</table>';
+        echo '<h3>Student</h3>';
+        $i=1; 
+        require_once ROOT.DS.'core'.DS.'views'.DS.'list.php';
         ?>
     </body>
 </html>
