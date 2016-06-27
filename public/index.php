@@ -22,24 +22,9 @@ and open the template in the editor.
          */
         define("ROOT", dirname(__DIR__));
         define('DS', DIRECTORY_SEPARATOR);
-//        require_once ROOT.DS.'core'.DS.'models'.DS.'modelInterface.php';
-//        require_once ROOT.DS.'core'.DS.'controllers'.DS.'baseController.php';
-//        
-//        require_once ROOT.DS.'core'.DS.'models'.DS.'User.php';
-//        require_once ROOT.DS.'core'.DS.'controllers'.DS.'controllerFactory.php';
-//        require_once ROOT.DS.'core'.DS.'models'.DS.'modelFactory.php';
-//        require_once ROOT.DS.'app'.DS.'models'.DS.'course.php';
-//        require_once ROOT.DS.'app'.DS.'models'.DS.'teacher.php';
-//        require_once ROOT.DS.'app'.DS.'models'.DS.'student.php';
-//        require_once ROOT.DS.'app'.DS.'controllers'.DS.'studentController.php';
-//        require_once ROOT.DS.'app'.DS.'controllers'.DS.'teacherController.php';
-//        require_once ROOT.DS.'app'.DS.'controllers'.DS.'courseController.php';
         
         require_once ROOT.DS.'app'.DS.'views'.DS.'layouts'.DS.'default.php';
-//        
-//        require_once ROOT.DS.'core'.DS.'models'.DS.'database'.DS.'DbConnection.php';
-//        require_once ROOT.DS.'core'.DS.'utils'.DS.'req.php';
-        
+
         function __autoload($class){
             $class=$class.'.php';
             $fileName=  ROOT.DS.str_replace('\\', DS, $class);
