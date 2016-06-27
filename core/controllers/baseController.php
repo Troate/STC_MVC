@@ -2,13 +2,15 @@
 /**
  * Base Controller of the different_controllers
  */
-require_once ROOT.DS.'core'.DS.'models'.DS.'database'.DS.'Dbal.php';
-require_once ROOT.DS.'core'.DS.'controllers'.DS.'controller_interface.php';
+namespace core\controllers;
+use core\controllers\controllerInterface;
+use core\models\modelFactory;
+use core\models\database\Dbal;
 
 /**
  * Parent Class of the Student, Teacher and Course Controller
  */
-
+//
 class baseController implements controllerInterface
 {
     /**
@@ -20,7 +22,7 @@ class baseController implements controllerInterface
      * @param string $field It is passed to modelfactory, which gives appropriate object of Model i.e.(Course, Teacher, Student)
      */
     public function __construct($field) {
-        $modelFactory=new model_factory();
+        $modelFactory=new modelFactory();
         self::$model=$modelFactory->getModel($field);
     }
     /**
@@ -29,7 +31,7 @@ class baseController implements controllerInterface
      * @param string $field This field will call the $op of specific $field
      */
     public function CallOp($op, $field) {
-        if($op=="add"){
+        if($op=="create"){
             require_once ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.$op.'.php';
         }
         else{
@@ -46,17 +48,21 @@ class baseController implements controllerInterface
         $tableName=$parameter[0];
         $name=$parameter[1];
         try{
-            if(strlen($name)==0||strlen($tableName)==0)
-            {throw new Exception;}
+            if($name==''||$tableName=='')
+            {throw new \Exception();}
+            $class=get_class(self::$model);
+            $class=  str_replace('\\', '', $class);
+            $class=  str_replace('app', '', $class);
+            $class=  str_replace('models', '', $class);
             self::$model->setName($name);
             $values[0]="";
             $values[1]=self::$model->getName();
             $d=new Dbal();
-            $d->insertQuery(get_class(self::$model),$values);
+            $d->insertQuery($class,$values);
             return true;
             }
-            catch (Exception $e){
-                header('Location: /STC_MVC/core/views/error.php');
+            catch (\Exception $e){
+                header('Location: '.DS.'STC_MVC'.DS.'core'.DS.'views'.DS.'error.php');
                 return false;
             }
     }
@@ -65,22 +71,26 @@ class baseController implements controllerInterface
      * @return Object_array Populated with the result of select query
      */
     public function read() {
-        $mod= new model_factory();
-        $model_array= $mod->getModel(ucfirst(get_class(self::$model)));
+        $mod= new modelFactory();
+        $class=get_class(self::$model);
+        $class=  str_replace('\\', '', $class);
+        $class=  str_replace('app', '', $class);
+        $class=  str_replace('models', '', $class);
+        $model_array= $mod->getModel(ucfirst($class));
         $model_array=array();
         $d=new Dbal();
-        $res=$d->selectQuery(get_class(self::$model));
+        $res=$d->selectQuery($class);
         $name=  self::$model->getCols();
         while($row= $res->fetch())
         {
-            $m=$mod->getModel(ucfirst(get_class(self::$model)));
+            $m=$mod->getModel(ucfirst($class));
             foreach($name as $nam){
                 $funcName='set'.$nam;
                 $m->$funcName($row[$nam]);
             }
             array_push($model_array, $m);
         }
-        require_once ROOT.DS.'app'.DS.'views'.DS.get_class(self::$model).DS.'list.php';
+        require_once ROOT.DS.'app'.DS.'views'.DS.$class.DS.'list.php';
         return $model_array;
     }
     /**
@@ -96,9 +106,13 @@ class baseController implements controllerInterface
                 {
                     if(gettype($param)=='string'&&strlen($param)==0)
                     {
-                        throw new Exception;
+                        throw new \Exception();
                     }
                 }
+                $class=get_class(self::$model);
+                $class=  str_replace('\\', '', $class);
+                $class=  str_replace('app', '', $class);
+                $class=  str_replace('models', '', $class);
                 $name=self::$model->getCols();
                 $count=  count($name);
                 $names=array();
@@ -112,11 +126,11 @@ class baseController implements controllerInterface
                     $values[$i-1]=  self::$model->$getFunc();
                 }
                 $d=new Dbal();
-                $d->deleteQuery(get_class(self::$model),$names,$values);
+                $d->deleteQuery($class,$names,$values);
                 return true;
             }
-            catch (Exception $e){
-                header('Location: /STC_MVC/core/views/error.php');
+            catch (\Exception $e){
+                header('Location: '.DS.'STC_MVC'.DS.'core'.DS.'views'.DS.'error.php');
                 return false;
             }
     }
@@ -135,11 +149,15 @@ class baseController implements controllerInterface
                 {
                     if(gettype($param)=='string'&&strlen($param)==0)
                     {
-                        throw new Exception;
+                        throw new \Exception();
                     }
                 }
+                $class=get_class(self::$model);
+                $class=  str_replace('\\', '', $class);
+                $class=  str_replace('app', '', $class);
+                $class=  str_replace('models', '', $class);
                 $name=self::$model->getCols();
-                $count=  count($name);
+                $count=count($name);
                 $names=array();
                 $values=array();
                 $i=1;
@@ -156,11 +174,11 @@ class baseController implements controllerInterface
                     $values[$i-1]=$parameter[$i-1];
                 }
                 $d=new Dbal();
-                $d->updateQuery(get_class(self::$model),$names,$values);
+                $d->updateQuery($class,$names,$values);
                 return true;
             }
-            catch (Exception $e){
-                header('Location: /STC_MVC/core/views/error.php');
+            catch (\Exception $e){
+                header('Location: '.DS.'STC_MVC'.DS.'core'.DS.'views'.DS.'error.php');
                 return false;
             }
     }

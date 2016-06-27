@@ -7,6 +7,7 @@
 /**
  * It is the DBAL to connect to Database, and get the values from and into the Database
  */
+namespace core\models\database;
 class Dbal {
     /**
      * @var PDO_object $pdo It is the object of PDO

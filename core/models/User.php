@@ -6,6 +6,7 @@
 /**
  * Parent Class of Student, Teacher and Course
  */
+namespace core\models;
 class User implements modelInterface
 {
     /**

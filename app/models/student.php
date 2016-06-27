@@ -6,6 +6,8 @@
 /**
  * Student has Name, Age and Degree
  */
+namespace app\models;
+use core\models\User;
 class Student extends User{
     
     /**

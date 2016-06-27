@@ -17,7 +17,7 @@ and open the template in the editor.
             <input name="field" type="radio" value="Teacher">Teacher
             <input name="field" type="radio" value="Course">Course
             <br><br>
-            <button name="operation" type="submit" value="add">Add</button>
+            <button name="operation" type="submit" value="create">Add</button>
             <button name="operation" type="submit" value="list">Read</button>
             <button name="operation" type="submit" value="update">Update</button>
             <button name="operation" type="submit" value="delete">Delete</button><br>

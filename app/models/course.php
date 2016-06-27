@@ -6,6 +6,8 @@
 /**
  * Course has Name and CourseId
  */
+namespace app\models;
+use core\models\User;
 class Course extends User {
     
     /**

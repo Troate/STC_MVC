@@ -1,14 +1,13 @@
 <?php
 /**
- * This code contains Student Controller
+ * Course Controller
  */
-require_once ROOT.DS.'core'.DS.'controllers'.DS.'base_controller.php';
-
+namespace app\controllers;
+use core\controllers\baseController;
 /**
- * Student_controller this creates Student Model
+ * Object of course_controller will made to access its functions. These functions make the Object of Model for ORM
  */
-class student_controller extends baseController{
-    
+class courseController extends baseController{
     /**
      * Magic function is defined as empty, so if someone calls non-declared function they will not see errors
      * @param string $name Default parameter, does nothing
@@ -30,7 +29,7 @@ class student_controller extends baseController{
      * @param string $field This field will call the $op of specific $field
      */
     public function callOp($op,$field) {
-        $field="student";
+        $field="course";
         return  parent::CallOp($op, $field);
     }
     /**

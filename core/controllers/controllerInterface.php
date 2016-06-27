@@ -6,6 +6,7 @@
 /**
  * Interface of Controllers
  */
+namespace core\controllers;
 interface controllerInterface
 {
 

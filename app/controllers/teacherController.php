@@ -1,12 +1,13 @@
 <?php
 /**
- * Course Controller
+ * Teacher Controller
  */
-require_once ROOT.DS.'core'.DS.'controllers'.DS.'base_controller.php';
+namespace app\controllers;
+use core\controllers\baseController;
 /**
- * Object of course_controller will made to access its functions. These functions make the Object of Model for ORM
+ * Object of teacher_controller will made to access its functions. These functions make the Object of Model for ORM
  */
-class course_controller extends baseController{
+class teacherController extends baseController{
     /**
      * Magic function is defined as empty, so if someone calls non-declared function they will not see errors
      * @param string $name Default parameter, does nothing
@@ -28,11 +29,11 @@ class course_controller extends baseController{
      * @param string $field This field will call the $op of specific $field
      */
     public function callOp($op,$field) {
-        $field="course";
+        $field="teacher";
         return  parent::CallOp($op, $field);
     }
     /**
-     * It is provided with tableName and the name of the Object, It creates Object send it DBAL
+     * Calls Parent Function
      * @param string_array $parameter It Contains following parameters
      * @param string $tableName Name of the table which is the type of the Model(Course, Teacher or Student)
      * @param string $name Name of the Course, Teacher or Student
@@ -41,14 +42,14 @@ class course_controller extends baseController{
         return parent::create($parameter);
     }
     /**
-     * The result of select query is assigned to a object and the that objest is pushed in array of the same object, whish is returned
+     * Calls Parent Function
      * @return Object_array Populated with the result of select query
      */
     public function read() {
         return parent::read();
     }
     /**
-     * Makes object and initalise it with values and sends it to the database layer
+     * Calls Parent Function
      * @param string_array $parameter It Contains following parameters
      * @param string $name Name of the Course
      * @param string $courseid Id of the Course
@@ -59,7 +60,7 @@ class course_controller extends baseController{
     }
     
     /**
-     * Creates object, initialize with old values and then set new Values
+     * Calls Parent Function
      * @param string_array $parameter It Contains following parameters
      * @param string $name New Name of Course
      * @param string $courseid New CourseId

@@ -24,21 +24,6 @@ and open the template in the editor.
              * View of the Course, Teacher and Student Add Functionality
              */
             $name= (string)(isset($_POST['nam']) ? $_POST['nam'] : null);
-//            if(isset($_POST['add'])&& $_SERVER['REQUEST_METHOD'] == "POST"){
-//                $obj=new controller_factory();
-//                $s=$obj->getController($field);
-//                $bool=$s->create($field,$name);
-//                if($bool==true)
-//                {
-//                    header('Location: \STC_MVC\public\index.php');
-//                    die();
-//                }
-//                else if($bool==false)
-//                {
-//                    header('Location: \STC_MVC\core\views\error.php');
-//                    die();
-//                }
-//            }
             ?>
     </body>
 </html>

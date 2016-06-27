@@ -7,7 +7,8 @@
 /**
  * Controller_factory is a class which will give appropriate controller object
  */
-class controller_factory {
+namespace core\controllers;
+class controllerFactory {
     /**
      * Takes the parameter and according to it gives the appropriate object
      * @param string $field Name of the field like Teacher, Student or Teacher
@@ -16,7 +17,7 @@ class controller_factory {
     {
         if(isset($field)){
         $className=  lcfirst($field);
-        $className=$className.'_controller';
+        $className='app'.DS.'controllers'.DS.$className.'Controller';
         return new $className($field);
         }
         else{

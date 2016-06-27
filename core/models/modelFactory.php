@@ -6,14 +6,17 @@
 /**
  * Model_factory gives the object of Appropriate Model
  */
-class model_factory {
+namespace core\models;
+class modelFactory {
     /**
      * Gives the objest of Appropriate Model
      * @param string $model Name of the Model
      */
     public function getModel($model) {
         if(isset($model)){
-            return new $model();
+            $DS=DIRECTORY_SEPARATOR;
+            $class='app'.$DS.'models'.$DS.$model;
+            return new $class();
         }
         else{
             return false;

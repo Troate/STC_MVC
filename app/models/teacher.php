@@ -6,6 +6,8 @@
 /**
  * Teacher has Name, Age and Course
  */
+namespace app\models;
+use core\models\User;
 class Teacher extends User {
     /**
      * @var int $id Id as in Database
