@@ -1,6 +1,6 @@
 <?php
 /**
- * Generic Update View
+ * General Update View
  */
 $attr=$model->getCols();
 echo '<h3>Enter Old Data</h3>';

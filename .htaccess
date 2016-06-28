@@ -1,7 +1,5 @@
-#Options FollowSymLinks
-#RewriteEngine on
-#RewriteCond %{REQUEST_URI} .*\STC_MVC/app/views/generic/add.php [OR]
-#RewriteCond %{REQUEST_URI} .*\STC_MVC/app/views/course/* [OR]
-#RewriteCond %{REQUEST_URI} .*\STC_MVC/app/views/teacher/* [OR]
-#RewriteCond %{REQUEST_URI} .*\STC_MVC/app/views/student/*
-#RewriteRule . /STC_MVC/public/index.php [L,QSA]
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteRule    ^$    public/    [L]
+    RewriteRule    (.*) public/$1    [L]
+ </IfModule>

@@ -4,10 +4,14 @@
  */
 
 /**
- * Student has Name, Age and Degree
+ * Namespaces
  */
 namespace app\models;
 use core\models\User;
+
+/**
+ * Student has Name, Age and Degree
+ */
 class Student extends User{
     
     /**

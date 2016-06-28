@@ -1,6 +1,6 @@
 <?php
 /**
- * Generic List View
+ * General List View
  */
 
 $attr=$model->getCols();

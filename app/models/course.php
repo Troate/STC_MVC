@@ -4,10 +4,14 @@
  */
 
 /**
- * Course has Name and CourseId
+ * Namespaces
  */
 namespace app\models;
 use core\models\User;
+
+/**
+ * Course has Name and CourseId
+ */
 class Course extends User {
     
     /**

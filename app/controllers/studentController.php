@@ -2,6 +2,10 @@
 /**
  * This code contains Student Controller
  */
+
+/**
+ * Namespaces
+ */
 namespace app\controllers;
 use core\controllers\baseController;
 
@@ -37,8 +41,9 @@ class studentController extends baseController{
     /**
      * It is provided with tableName and the name of the Object, It creates Object send it DBAL
      * @param string_array $parameter It Contains following parameters
-     * @param string $tableName Name of the table which is the type of the Model(Course, Teacher or Student)
-     * @param string $name Name of the Course, Teacher or Student
+     * Name of Student
+     * Age of Student
+     * Course of Student
      */
     public function create($parameter) {
         return parent::create($parameter);
@@ -53,9 +58,9 @@ class studentController extends baseController{
     /**
      * Makes object and initalise it with values and sends it to the database layer
      * @param string_array $parameter It Contains following parameters
-     * @param string $name Name of the Course
-     * @param string $courseid Id of the Course
-     * @throws Exception Exception takes to Error page error.php
+     * Name of Student
+     * Age of Student
+     * Course of Student
      */
     public function delete($parameter) {
         parent::delete($parameter);
@@ -64,11 +69,12 @@ class studentController extends baseController{
     /**
      * Creates object, initialize with old values and then set new Values
      * @param string_array $parameter It Contains following parameters
-     * @param string $name New Name of Course
-     * @param string $courseid New CourseId
-     * @param string $oname Old name of Course
-     * @param string $ocourseid Old CourseId
-     * @throws Exception Exception takes to Error page error.php
+     * Old Name of Student
+     * Old Age of Student
+     * Old Course of Student
+     * New Name of Student
+     * New Age of Student
+     * New Course of Student
      */
     public function update($parameter) {
         return parent::update($parameter);

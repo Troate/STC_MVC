@@ -10,7 +10,12 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <h3><?php echo ucfirst($field)?></h3>
+        <h3><?php
+        /**
+         * General Create View
+         */
+        echo ucfirst($field);
+        ?></h3>
         <form action="index.php" method="post">
             <?php
             echo '<h3>Enter Data</h3>';

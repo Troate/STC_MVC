@@ -4,10 +4,14 @@
  */
 
 /**
- * Teacher has Name, Age and Course
+ * Namespaces
  */
 namespace app\models;
 use core\models\User;
+
+/**
+ * Teacher has Name, Age and Course
+ */
 class Teacher extends User {
     /**
      * @var int $id Id as in Database

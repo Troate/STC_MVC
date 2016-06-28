@@ -2,8 +2,13 @@
 /**
  * Teacher Controller
  */
+
+/**
+ * Namespaces
+ */
 namespace app\controllers;
 use core\controllers\baseController;
+
 /**
  * Object of teacher_controller will made to access its functions. These functions make the Object of Model for ORM
  */
@@ -35,8 +40,9 @@ class teacherController extends baseController{
     /**
      * Calls Parent Function
      * @param string_array $parameter It Contains following parameters
-     * @param string $tableName Name of the table which is the type of the Model(Course, Teacher or Student)
-     * @param string $name Name of the Course, Teacher or Student
+     * Name of Teacher
+     * Age of Teacher
+     * Course of Teacher
      */
     public function create($parameter) {
         return parent::create($parameter);
@@ -51,9 +57,9 @@ class teacherController extends baseController{
     /**
      * Calls Parent Function
      * @param string_array $parameter It Contains following parameters
-     * @param string $name Name of the Course
-     * @param string $courseid Id of the Course
-     * @throws Exception Exception takes to Error page error.php
+     * Name of Teacher
+     * Age of Teacher
+     * Course of Teacher
      */
     public function delete($parameter) {
         parent::delete($parameter);
@@ -62,11 +68,12 @@ class teacherController extends baseController{
     /**
      * Calls Parent Function
      * @param string_array $parameter It Contains following parameters
-     * @param string $name New Name of Course
-     * @param string $courseid New CourseId
-     * @param string $oname Old name of Course
-     * @param string $ocourseid Old CourseId
-     * @throws Exception Exception takes to Error page error.php
+     * Old Name of Teacher
+     * Old Age of Teacher
+     * Old Course of Teacher
+     * New Name of Teacher
+     * New Age of Teacher
+     * New Course of Teacher
      */
     public function update($parameter) {
         return parent::update($parameter);

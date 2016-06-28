@@ -14,17 +14,30 @@ and open the template in the editor.
         /**
          * It is the Single Entry point, It gets the Field and Operation from default.php and according to that make field_controller object through controller factory and gives its function operation as parameter
          */
+        // Namespace
         use core\utils\req;
         $field=null;
         $operation=null;
+        // Constants
+        /**
+         * ROOT has Root directory of Project
+         */
+        define("ROOT", dirname(__DIR__));
+        /**
+         * DS is Directoy Separator of Operating System
+         */
+        define('DS', DIRECTORY_SEPARATOR);
+        
         /**
          * Includes
          */
-        define("ROOT", dirname(__DIR__));
-        define('DS', DIRECTORY_SEPARATOR);
-        
+        require_once ROOT.DS.'app'.DS.'config.php';
         require_once ROOT.DS.'app'.DS.'views'.DS.'layouts'.DS.'default.php';
 
+        /**
+         * Autoloader function
+         * @param string $class Name of Class
+         */
         function __autoload($class){
             $class=$class.'.php';
             $fileName=  ROOT.DS.str_replace('\\', DS, $class);
@@ -38,7 +51,11 @@ and open the template in the editor.
             }
         }
         
-        $request = new req($field, $operation);
+        $request = new req($field, $operation);     // Makes object of wrapper class
+        
+        /**
+         * These values are set when index.php is post of views
+         */
         if(isset($_POST['func'])&&isset($_POST['class']))
         {
             $request->setParameter($_POST['parameter']);

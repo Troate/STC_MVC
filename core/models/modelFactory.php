@@ -4,9 +4,13 @@
  */
 
 /**
- * Model_factory gives the object of Appropriate Model
+ * Namespaces
  */
 namespace core\models;
+
+/**
+ * Model_factory gives the object of Appropriate Model
+ */
 class modelFactory {
     /**
      * Gives the objest of Appropriate Model

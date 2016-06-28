@@ -4,9 +4,9 @@
  */
 
 /**
- * Includes
+ * Namespcaes
  */
-require_once $_SESSION['Root'].'/core/models/database/DbConnection.php';
+namespace core\models\database;
 
 /**
  * It is the DBAL to connect to Database, and get the values from and into the Database
@@ -27,22 +27,26 @@ class Dbal {
      * @param string $tableName Name of the Table to send or recieve data from
      * @param string/int_array $cell_values Contains the values that are to be inserted in Table
      */
-    function insertQuery($tableName, $cell_values) {
-        $count=count($cell_values);
-        $string="insert into $tableName (Id,Name) values (";
-        for ($i=0;$i<$count;$i++) {
+    function insertQuery($tableName, $cell_names, $cell_values) {
+        $count=count($cell_values);                     // $count has count of columns
+        $string="insert into $tableName (";             // query is being constructed and tablename is given to it
+        for ($i=0;$i<$count;$i++) {                     // This loop is iterated to append column names in which 
+                                                        //  values will be inserted
+            $string= $string. "$cell_names[$i],";
+        }
+        $string=rtrim($string,",");                     // Trim the last comma from loop
+        $string=$string." ) values (";                  // Now values is concatenated
+        for ($i=0;$i<$count;$i++) {                     // This loop is iterated to put ? according to the count of columns
             $string= $string. "?,";
         }
-        $string=rtrim($string,",");
-        $string=$string." )";
-        echo $string."<br>";
-        print_r($cell_values);
+        $string=rtrim($string,",");                     // Trim the last comma from loop
+        $string=$string." )";                           // query is now ready
         try{
-        $stmt=  $this->pdo->prepare($string);
-        $stmt->execute($cell_values);
+        $stmt=  $this->pdo->prepare($string);           // query is prepared
+        $stmt->execute($cell_values);                   // prepared query is now executed
         return true;
         }
-        catch(PDOException $e)
+        catch(\PDOException $e)                         // returns false if there is any error
         {
             return false;
         }
@@ -55,12 +59,12 @@ class Dbal {
      */
     function selectQuery($tableName)
     {
-        $string="select * from  $tableName ";
+        $string="select * from  $tableName ";           // select query is given tableName
         try{
-        $res= $this->pdo->query($string);
-        return $res;
+        $res= $this->pdo->query($string);               // query is executed
+        return $res;                                    // The result is returned
         }
-        catch(PDOException $e)
+        catch(\PDOException $e)                         // returns false if there is any error
         {
             return false;
         }
@@ -74,24 +78,22 @@ class Dbal {
      * @throws Exception If there are no resultant rows
      */
     function deleteQuery($tableName, $cell_name, $cell_values) {
-        $count=count($cell_values);
-        $string="delete from $tableName where ";
+        $count=count($cell_values);                     // $count has count of columns
+        $string="delete from $tableName where ";        // query is being constructed and tablename is given to it
         for ($i=0;$i<$count;$i++)
         {
-            $string=$string.$cell_name[$i]."=? and ";
+            $string=$string.$cell_name[$i]."=? and ";   // appends cell name and ?
         }
-        $string=  rtrim($string," and ");
-        echo $string."<br>";
-        print_r($cell_values);
+        $string=  rtrim($string," and ");               // Trim the last 'and' from the loop 
         try{
-        $stmt=  $this->pdo->prepare($string);
-        $stmt->execute($cell_values);
-        if($stmt->rowCount()<=0)
+        $stmt=  $this->pdo->prepare($string);           // prepare query
+        $stmt->execute($cell_values);                   // execute prepared query
+        if($stmt->rowCount()<=0)                        // If no column is deleted throws exception
         {    
-            throw new Exception;
+            throw new \Exception;
         }
         }
-        catch(PDOException $e)
+        catch(\PDOException $e)                         // returns false
         {
             return false;
         }
@@ -104,30 +106,28 @@ class Dbal {
      * @throws Exception If there are no resultant rows
      */
     function updateQuery($tableName,$cell_name,$cell_values) {
-        $count=count($cell_name);
-        $string="update $tableName set ";
+        $count=count($cell_name);                       // $count has count of columns
+        $string="update $tableName set ";               // query is being constructed and tablename is given to it
         for ($i=0;$i<$count;$i++)
         {
-            $string=$string.$cell_name[$i]."=?, ";
+            $string=$string.$cell_name[$i]."=?, ";      // appends cell name and ?
         }
-        $string=  rtrim($string,", ");
-        $string=$string." where ";
+        $string=  rtrim($string,", ");                  // Trim the last comma from the query
+        $string=$string." where ";                      // concatenate where in the string to match with old values
         for ($i=0;$i<$count;$i++)
         {
-            $string=$string.$cell_name[$i]."=? and ";
+            $string=$string.$cell_name[$i]."=? and ";   // appends cell name and ?
         }
-        $string=  rtrim($string," and ");
-        echo $string."<br>";
-        print_r($cell_values);
+        $string=  rtrim($string," and ");               // Trim the last 'and' from the query
         try{
-        $stmt=  $this->pdo->prepare($string);
-        $stmt->execute($cell_values);
-        if($stmt->rowCount()<=0)
+        $stmt=  $this->pdo->prepare($string);           // prepare query
+        $stmt->execute($cell_values);                   // execute prepared query
+        if($stmt->rowCount()<=0)                        // If no column is updated throws exception
         {    
-            throw new Exception;
+            throw new \Exception;
         }
         }
-        catch(PDOException $e)
+        catch(\PDOException $e)                         // return false
         {
             return false;
         }

@@ -3,11 +3,14 @@
  * This file contais code for Controllers
  */
 
+/**
+ * Namespaces
+ */
+namespace core\controllers;
 
 /**
  * Controller_factory is a class which will give appropriate controller object
  */
-namespace core\controllers;
 class controllerFactory {
     /**
      * Takes the parameter and according to it gives the appropriate object

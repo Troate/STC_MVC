@@ -1,8 +1,9 @@
-Options FollowSymLinks
-RewriteEngine on
-RewriteCond %{REQUEST_URI} !=/STC_MVC/public/index.php [OR]
-RewriteCond %{REQUEST_URI} .*\STC_MVC/app/views/generic/add.php [OR]
-RewriteCond %{REQUEST_URI} .*\STC_MVC/app/views/course/list.php [OR]
-RewriteCond %{REQUEST_URI} .*\STC_MVC/app/views/teacher/list.php [OR]
-RewriteCond %{REQUEST_URI} .*\STC_MVC/app/views/student/list.php
-RewriteRule . /STC_MVC/public/index.php [L,QSA]
+<IfModule mod_rewrite.c>
+RewriteEngine On
+  
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+ 
+RewriteRule ^(.*)$ index.php?url=$1 [PT,L]
+ 
+</IfModule>

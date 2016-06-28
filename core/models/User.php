@@ -4,9 +4,13 @@
  */
  
 /**
- * Parent Class of Student, Teacher and Course
+ * Namespaces
  */
 namespace core\models;
+
+/**
+ * Parent Class of Student, Teacher and Course
+ */
 class User implements modelInterface
 {
     /**

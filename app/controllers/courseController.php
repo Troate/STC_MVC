@@ -2,8 +2,13 @@
 /**
  * Course Controller
  */
+
+/**
+ * Namespaces
+ */
 namespace app\controllers;
 use core\controllers\baseController;
+
 /**
  * Object of course_controller will made to access its functions. These functions make the Object of Model for ORM
  */
@@ -35,8 +40,8 @@ class courseController extends baseController{
     /**
      * It is provided with tableName and the name of the Object, It creates Object send it DBAL
      * @param string_array $parameter It Contains following parameters
-     * @param string $tableName Name of the table which is the type of the Model(Course, Teacher or Student)
-     * @param string $name Name of the Course, Teacher or Student
+     * Name of Course
+     * CourseId of Course
      */
     public function create($parameter) {
         return parent::create($parameter);
@@ -51,9 +56,8 @@ class courseController extends baseController{
     /**
      * Makes object and initalise it with values and sends it to the database layer
      * @param string_array $parameter It Contains following parameters
-     * @param string $name Name of the Course
-     * @param string $courseid Id of the Course
-     * @throws Exception Exception takes to Error page error.php
+     * Name of Course
+     * CourseId of Course
      */
     public function delete($parameter) {
         parent::delete($parameter);
@@ -62,11 +66,10 @@ class courseController extends baseController{
     /**
      * Creates object, initialize with old values and then set new Values
      * @param string_array $parameter It Contains following parameters
-     * @param string $name New Name of Course
-     * @param string $courseid New CourseId
-     * @param string $oname Old name of Course
-     * @param string $ocourseid Old CourseId
-     * @throws Exception Exception takes to Error page error.php
+     * Old Name of Course
+     * Old CourseId of Course
+     * New Name of Course
+     * New CourseId of Course
      */
     public function update($parameter) {
         return parent::update($parameter);
