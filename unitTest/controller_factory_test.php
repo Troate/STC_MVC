@@ -7,7 +7,7 @@
  * Includes
  */
 require_once 'C:\xampp\htdocs\STC_MVC\public\index.php';
-require_once $_SESSION['Root'].'\core/controllers/controller_factory.php';
+use core\controllers\controllerFactory;
 
 
 /**
@@ -22,7 +22,7 @@ class cft extends PHPUnit_Framework_TestCase
      */
     function test_getController($field)
     {
-        $obj=new controller_factory();
+        $obj=new controllerFactory();
         $this->assertNotFalse($obj->getController($field));
     }
     

@@ -7,7 +7,7 @@
  * Includes
  */
 require_once 'C:\xampp\htdocs\STC_MVC\public\index.php';
-require_once $_SESSION['Root'].'\core/controllers/controller_factory.php';
+use core\controllers\controllerFactory;
 
 
 /**
@@ -22,7 +22,7 @@ class cct extends PHPUnit_Framework_TestCase
      */
     function test_callOp($op)
     {
-        $obj=new controller_factory();
+        $obj=new controllerFactory();
         $s=$obj->getController("Course");
         $this->assertNotFalse($s->callOp($op,"course"));
     }
@@ -32,41 +32,68 @@ class cct extends PHPUnit_Framework_TestCase
      * @return PHPUnit Test Results
      */
     function test_callOp_DP() {
-        return array(array("read"),
+        return array(array("list"),
                      array("delete"),
                      array("update"));
     }
     /**
      * Tests the function create for every user
      * @dataProvider test_create_DP
-     * @param string $tableName Name of the Table to insert value in
-     * @param string $name Name of the Course, Student and Teacher
+     * @param string_array $parameter It Contains following parameters
+     * Name of Course
+     * CourseId of Course
+     * * @param bool $result True or False
      */
-    function test_create($tableName,$name,$result) {
-        $obj=new controller_factory();
+    function test_create($parameter,$result) {
+        $obj=new controllerFactory();
         $s=$obj->getController("Course");
-        $this->assertEquals($s->create($tableName, $name),$result);
+        $this->assertEquals($s->create($parameter),$result);
     }
     
     /**
      * Data Provider of the function test_create()
      */
     function test_create_DP() {
-        return array(array("Course","",false),
-                     array("Course","OOAD",true));
+        return array(array(array("","xx000"),false),
+                     array(array("OOAD","xx000"),true));
+    }
+    /**
+     * Tests the update functionality of course_controller
+     * @dataProvider test_update_DP
+     * @param string_array $parameter It Contains following parameters
+     * Old Name of Course
+     * Old CourseId of Course
+     * New Name of Course
+     * New CourseId of Course
+     * @param boolean $result True or False
+     */
+    function test_update($parameter,$result)
+    {
+        $obj=new controllerFactory();
+        $s=$obj->getController("Course");
+        $this->assertEquals($s->update($parameter),$result);
+    }
+    
+    /**
+     * Data Provider of test_update
+     * @return PHPUnit Results
+     */
+    function test_update_DP() {
+        return array(array(array("OOAD","CS101","OOAD","xx000"),true),
+                     array(array("ITC","CS101","ITC","CS103"),false));
     }
     /**
      * Tests the delete funciton of course_controller
      * @dataProvider test_delete_DP
-     * @param string $tableName Name of the table to insert value in
-     * @param string $name Name of Course
-     * @param string $courseid Course Id
+     * @param string_array $parameter It Contains following parameters
+     * Name of Course
+     * CourseId of Course
      * @param boolean $result True or False
      */
-    function test_delete($tableName,$name,$courseid,$result) {
-        $obj=new controller_factory();
+    function test_delete($parameter,$result) {
+        $obj=new controllerFactory();
         $s=$obj->getController("Course");
-        $this->assertEquals($s->delete($tableName, $name, $courseid),$result);
+        $this->assertEquals($s->delete($parameter),$result);
     }
     
     /**
@@ -75,33 +102,9 @@ class cct extends PHPUnit_Framework_TestCase
      */
     function test_delete_DP()
     {
-        return array(array("course","ITC","",false),
-                     array("course","ITC","CS103",true));
+        return array(array(array("ITC",""),false),
+                     array(array("OOAD","CS101"),true));
     }
     
-    /**
-     * Tests the update functionality of course_controller
-     * @dataProvider test_update_DP
-     * @param string $tableName Name of the table to insert value in
-     * @param string $name New Name of Course
-     * @param string $courseid New Course Id
-     * @param string $oname Old Name of Course
-     * @param string $ocourseid Old Course Id
-     * @param boolean $result True or False
-     */
-    function test_update($tableName,$name,$courseid,$oname,$ocourseid,$result)
-    {
-        $obj=new controller_factory();
-        $s=$obj->getController("Course");
-        $this->assertEquals($s->update($tableName, $name, $courseid, $oname, $ocourseid),$result);
-    }
     
-    /**
-     * Data Provider of test_update
-     * @return PHPUnit Results
-     */
-    function test_update_DP() {
-        return array(array("course","ITC","CS101","ITC","xx000",true),
-                     array("course","ITC","CS101","ITC","CS103",false));
-    }
 }

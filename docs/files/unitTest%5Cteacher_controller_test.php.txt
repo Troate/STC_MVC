@@ -7,7 +7,7 @@
  * Includes
  */
 require_once 'C:\xampp\htdocs\STC_MVC\public\index.php';
-require_once $_SESSION['Root'].'\core/controllers/controller_factory.php';
+use core\controllers\controllerFactory;
 
 
 /**
@@ -22,7 +22,7 @@ class tct extends PHPUnit_Framework_TestCase
      */
     function test_callOp($op)
     {
-        $obj=new controller_factory();
+        $obj=new controllerFactory();
         $s=$obj->getController("Teacher");
         $this->assertNotFalse($s->callOp($op,"teacher"));
     }
@@ -32,42 +32,72 @@ class tct extends PHPUnit_Framework_TestCase
      * @return PHPUnit Test Results
      */
     function test_callOp_DP() {
-        return array(array("read"),
+        return array(array("list"),
                      array("delete"),
                      array("update"));
     }
     /**
      * Tests the function create for every user
      * @dataProvider test_create_DP
-     * @param string $tableName Name of the Table to insert value in
-     * @param string $name Name of the Course, Student and Teacher
+     * @param string_array $parameter It Contains following parameters
+     * Name of Teacher
+     * Age of Teacher
+     * Course of Teacher
+     * @param boolean $result True or False
      */
-    function test_create($tableName,$name,$result) {
-        $obj=new controller_factory();
+    function test_create($parameter,$result) {
+        $obj=new controllerFactory();
         $s=$obj->getController("Teacher");
-        $this->assertEquals($s->create($tableName, $name),$result);
+        $this->assertEquals($s->create($parameter),$result);
     }
     
     /**
      * Data Provider of the function test_create()
      */
     function test_create_DP() {
-        return array(array("Teacher","",false),
-                     array("Teacher","Sahfeeq",true));
+        return array(array(array("","",""),false),
+                     array(array("SahfeeqTest","45","DB"),true));
+    }
+    /**
+     * Tests the update functionality of course_controller
+     * @dataProvider test_update_DP
+     * @param string_array $parameter It Contains following parameters
+     * Old Name of Teacher
+     * Old Age of Teacher
+     * Old Course of Teacher
+     * New Name of Teacher
+     * New Age of Teacher
+     * New Course of Teacher
+     * @param boolean $result True or False
+     */
+    function test_update($parameter,$result)
+    {
+        $obj=new controllerFactory();
+        $s=$obj->getController("Teacher");
+        $this->assertEquals($s->update($parameter),$result);
+    }
+    
+    /**
+     * Data Provider of test_update
+     * @return PHPUnit Results
+     */
+    function test_update_DP() {
+        return array(array(array("ShafeeqTest","31","ITC","ShafeeqTest","45","DB"),true),
+                     array(array("Akbar","49","BA","Test Student2","23","BSCS"),false));
     }
     /**
      * Tests the delete funciton of teacher_controller
      * @dataProvider test_delete_DP
-     * @param string $tableName Name of the table which is the type of the Model(Course, Teacher or Student)
-     * @param string $name Name of the Teacher
-     * @param string $age Age of the Teacher
-     * @param string $course Name of the Course
+     * @param string_array $parameter It Contains following parameters
+     * Name of Teacher
+     * Age of Teacher
+     * Course of Teacher
      * @param boolean $result True or False
      */
-    function test_delete($tableName,$name,$age,$course,$result) {
-        $obj=new controller_factory();
+    function test_delete($parameter,$result) {
+        $obj=new controllerFactory();
         $s=$obj->getController("Teacher");
-        $this->assertEquals($s->delete($tableName,$name,$age,$course),$result);
+        $this->assertEquals($s->delete($parameter),$result);
     }
     
     /**
@@ -76,37 +106,11 @@ class tct extends PHPUnit_Framework_TestCase
      */
     function test_delete_DP()
     {
-        return array(array("teacher","Waqar","39" ,"",false),
-                     array("teacher","Test","0","Course Name",true));
+        return array(array(array("Waqar","39" ,""),false),
+                     array(array("ShafeeqTest","31","ITC"),true));
     }
     
-    /**
-     * Tests the update functionality of course_controller
-     * @dataProvider test_update_DP
-     * @param string $tableName Name of the table which is the type of the Model(Course, Teacher or Student)
-     * @param string $name New Name of Teacher
-     * @param string $age New age of Teacher
-     * @param string $course New Course
-     * @param string $oname Old name of Teacher
-     * @param string $oage Old agee of Teacher
-     * @param string $ocourse Old Course
-     * @param boolean $result True or False
-     */
-    function test_update($tableName,$name,$age,$course,$oname,$oage,$ocourse,$result)
-    {
-        $obj=new controller_factory();
-        $s=$obj->getController("Teacher");
-        $this->assertEquals($s->update($tableName,$name,$age,$course,$oname,$oage,$ocourse),$result);
-    }
     
-    /**
-     * Data Provider of test_update
-     * @return PHPUnit Results
-     */
-    function test_update_DP() {
-        return array(array("teacher","Sarim Baig","31","ITC","Test2","0","Course Name",true),
-                     array("teacher","Akbar","49","BA","Test Student2","23","BSCS",false));
-    }
 }
 
 

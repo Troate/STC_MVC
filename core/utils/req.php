@@ -95,5 +95,6 @@ class req
         $s=$obj->getController($this->class);
         $func=$this->func;
         $bool=$s->$func($this->parameter);
+        return $bool;
     }
 }

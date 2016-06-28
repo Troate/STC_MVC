@@ -7,7 +7,7 @@
  * Includes
  */
 require_once 'C:\xampp\htdocs\STC_MVC\public\index.php';
-require_once $_SESSION['Root'].'\core\models\database\Dbal.php';
+use core\models\database\Dbal;
 
 /**
  * Contains test functions for the Dbal
@@ -16,22 +16,21 @@ class DbalTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Tests insertQuery Function of Dbal
-     * @dataProvider test_insertQuery_DP
+     * @dataProvider test_selectQuery_DP
      * @param string $tableName Name of the Table to send or recieve data from
-     * @param string/int_array $cell_values Contains the values that are to be inserted in Table
      */
-    function test_insertQuery($tableName, $values,$result)
+    function test_selectQuery($tableName,$result)
     {
         $obj=new Dbal();
-        $this->assertEquals($obj->insertQuery($tableName,$values),$result);
+        $this->assertEquals($obj->selectQuery($tableName),$result);
     }
     
     /**
      * Data Provider of test_insertQuery()
      */
-    function test_insertQuery_DP()
+    function test_selectQuery_DP()
     {
-        return array(array("student",array("","testInsert"),true),
-                     array("tudent",array("","testInsert"),false));
+        return array(array("student",true),
+                     array("tudent",false));
     }
 }

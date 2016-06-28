@@ -7,7 +7,7 @@
  * Includes
  */
 require_once 'C:\xampp\htdocs\STC_MVC\public\index.php';
-require_once $_SESSION['Root'].'\core/models/model_factory.php';
+use core\models\modelFactory;
 
 
 /**
@@ -22,7 +22,7 @@ class mft extends PHPUnit_Framework_TestCase
      */
     function test_getModel($model)
     {
-        $obj=new model_factory();
+        $obj=new modelFactory();
         $this->assertNotFalse($obj->getModel($model));
     }
     

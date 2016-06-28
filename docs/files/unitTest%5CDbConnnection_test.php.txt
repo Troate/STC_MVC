@@ -7,8 +7,7 @@
  * Includes
  */
 require_once 'C:\xampp\htdocs\STC_MVC\public\index.php';
-require_once $_SESSION['Root'].'\core\models\database\DbConnection.php';
-
+use core\models\database\DbConnection;
 /**
  * Class DbCt(Database Controller Test) contains function for teting the singleton property of DbConnection
  */
