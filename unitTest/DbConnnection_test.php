@@ -6,7 +6,7 @@
 /**
  * Includes
  */
-require_once 'C:\xampp\htdocs\STC_MVC\public\index.php';
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'index.php';
 use core\models\database\DbConnection;
 /**
  * Class DbCt(Database Controller Test) contains function for teting the singleton property of DbConnection

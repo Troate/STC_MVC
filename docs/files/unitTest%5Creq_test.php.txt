@@ -6,7 +6,6 @@
 /**
  * Includes
  */
-require_once 'C:\xampp\htdocs\STC_MVC\public\index.php';
 use core\utils\req;
 
 /**
@@ -31,6 +30,7 @@ class req_test extends PHPUnit_Framework_TestCase{
     }
     /**
      * Data Provider of testcallControllerFunction
+     * It has a tendency to test all the fields and all of their operations
      */
     public function testcallControllerFunction_DP() {
         return array(array(array("Test Student","20","bs"),"create","student",true),

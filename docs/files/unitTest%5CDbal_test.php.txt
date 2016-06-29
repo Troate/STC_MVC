@@ -6,7 +6,6 @@
 /**
  * Includes
  */
-require_once 'C:\xampp\htdocs\STC_MVC\public\index.php';
 use core\models\database\Dbal;
 
 /**
