@@ -6,6 +6,7 @@
 /**
  * Includes
  */
+
 use core\models\database\Dbal;
 
 /**
@@ -15,21 +16,23 @@ class DbalTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Tests insertQuery Function of Dbal
-     * @dataProvider test_selectQuery_DP
+     * @dataProvider test_insertQuery_DP
      * @param string $tableName Name of the Table to send or recieve data from
+     * @param string_array $cell Column Names
+     * @param string_array $value Values to be inserted in given column names
      */
-    function test_selectQuery($tableName,$result)
+    function test_insertQuery($tableName,$cell,$value,$result)
     {
         $obj=new Dbal();
-        $this->assertEquals($obj->selectQuery($tableName),$result);
+        $this->assertEquals($obj->insertQuery($tableName,$cell,$value),$result);
     }
     
     /**
      * Data Provider of test_insertQuery()
      */
-    function test_selectQuery_DP()
+    function test_insertQuery_DP()
     {
-        return array(array("student",true),
-                     array("tudent",false));
+        return array(array("student",array("Name","Age","Degree"),array("TestInsert","22","bs"),true),
+                     array("tudent",array("Name","Age","Degree"),array("TestInsert2","22","bs"),false));
     }
 }

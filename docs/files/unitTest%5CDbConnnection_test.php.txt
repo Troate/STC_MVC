@@ -17,9 +17,8 @@ class DbCt extends PHPUnit_Framework_TestCase
      * Tests getConnection, if its singleton property working properly
      * @dataProvider test_getConnection_DP
      * @param DbConnection_Object $res Expected Result
-     * @param DbConnection_Object &$exp Result produced
      */
-    function test_getConnection(&$exp,$res)
+    function test_getConnection($res)
     {
         $exp=DbConnection::getConnection();
         $this->assertEquals($exp,$res);
@@ -31,9 +30,7 @@ class DbCt extends PHPUnit_Framework_TestCase
      */
     function test_getConnection_DP()
     {
-        $res=null;
-        return array(array(&$res,$res),
-                     array(&$res,DbConnection::getConnection()));
+        return array(array(DbConnection::getConnection()));
     }
 }
 

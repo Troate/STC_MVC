@@ -84,7 +84,7 @@ class baseController implements controllerInterface
             return true;
             }
             catch (\Exception $e){                      // Sends to error.php in case of error
-                header('Location: '.DS.'STC_MVC'.DS.'core'.DS.'views'.DS.'error.php');
+                require_once ROOT.DS.'core'.DS.'views'.DS.'error.php';
                 return false;
             }
     }
@@ -158,7 +158,7 @@ class baseController implements controllerInterface
             return true;
         }
         catch (\Exception $e){                               // Sends to error.php in case of error
-            header('Location: '.DS.'STC_MVC'.DS.'core'.DS.'views'.DS.'error.php');
+            require_once ROOT.DS.'core'.DS.'views'.DS.'error.php';
             return false;
         }
     }
@@ -205,7 +205,7 @@ class baseController implements controllerInterface
             return true;
         }
         catch (\Exception $e){                               // Sends to error.php in case of error
-            header('Location: '.DS.'STC_MVC'.DS.'core'.DS.'views'.DS.'error.php');
+            require_once ROOT.DS.'core'.DS.'views'.DS.'error.php';
             return false;
         }
     }
