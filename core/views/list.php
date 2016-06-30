@@ -2,8 +2,8 @@
 /**
  * General List View
  */
-
-$attr=$model->getCols();
+echo '<h3>'.  ucfirst($model->__get("class")).'</h3>';
+$attr=$model->__get("cols");
 echo '<table><tr>';
 for(;$i<count($attr);$i++)
 {
@@ -15,8 +15,7 @@ foreach($model_array as $m)
     echo '<tr>';
     for($i=1;$i<count($attr);$i++)
     {
-        $get='get'.$attr[$i];
-        echo '<td style="text-align:center">'.$m->$get().'</td>';
+        echo '<td style="text-align:center">'.$m->__get(lcfirst($attr[$i])).'</td>';
     }
     echo '</tr>';
 }

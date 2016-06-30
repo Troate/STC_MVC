@@ -19,20 +19,12 @@ and open the template in the editor.
         <form action="index.php" method="post">
             <?php
             echo '<h3>Enter Data</h3>';
-            $attr=$model->getCols();
+            $attr=$model->__get("cols");
             for($i=0;$i<count($attr)-1;$i++)
             {
                 echo $attr[$i+1];
                 echo '<br><input ';
-                $get='get'.$attr[$i+1];
-                if(gettype($model->$get())=='integer')
-                {
-                    echo 'type="number" min="0" ';
-                }
-                else 
-                {
-                    echo 'type="text" ';
-                }
+                echo 'type="text" ';
                 echo 'name="parameter['.($i).']" placeholder="'.$attr[$i+1].' of '.ucfirst($field).'"/><br>';
             }
             ?>

@@ -2,22 +2,14 @@
 /**
  * General Delete View
  */
-
+echo '<h3>'.  ucfirst($model->__get("class")).'</h3>';
 echo '<h3>Enter Data</h3>';
-$attr=$model->getCols();
+$attr=$model->__get("cols");
 for(;$i<count($attr);$i++)
 {
     echo $attr[$i];
     echo '<br><input ';
-    $get='get'.$attr[$i];
-    if(gettype($model->$get())=='integer')
-    {
-        echo 'type="number" min="0" ';
-    }
-    else 
-    {
-        echo 'type="text" ';
-    }
+    echo 'type="text" ';
     echo 'name="parameter['.($i-1).']" placeholder="'.$attr[$i].' of '.ucfirst($field).'"/><br>';
 }
 ?>
