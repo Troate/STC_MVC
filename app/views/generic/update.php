@@ -1,3 +1,4 @@
+<form action='index.php' method="POST">
 <?php
 /**
  * General Update View
@@ -5,7 +6,7 @@
 echo '<h3>'.  ucfirst($model->__get("class")).'</h3>';
 $attr=$model->__get("cols");
 echo '<h3>Enter Old Data</h3>';
-for($j=count($attr);$i<count($attr);$j++,$i++)
+for($j=count($attr),$i=1;$i<count($attr);$j++,$i++)
 {
     echo $attr[$i];
     echo '<br><input ';
@@ -29,3 +30,5 @@ for($i=1;$i<count($attr);$i++)
 <input type="text" name="func" value="<?php echo  $op;?>" style="display: none;"/>
 <input type="text" name="class" value="<?php echo $field;?>" style="display: none;"/>
 
+<button name="<?php echo  $op;?>" type="submit" value="<?php echo  $op;?>" ><?php echo ucfirst($op);?></button>
+</form>

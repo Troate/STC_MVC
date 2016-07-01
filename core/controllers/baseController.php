@@ -44,16 +44,7 @@ class baseController implements controllerInterface
      */
     public function CallOp($op, $field) {
         $model=  self::$model;
-        if($op=="create"){
-            require_once ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.$op.'.php';
-        }
-        else{
-            if(file_exists(ROOT.DS.'app'.DS.'views'.DS.$field.DS.$op.'.php'))
-            {require_once ROOT.DS.'app'.DS.'views'.DS.$field.DS.$op.'.php';}
-            else{
-                return false;
-            }
-        }
+        require_once ROOT.DS.'core'.DS.'views'.DS.'viewManager.php';
     }
     /**
      * Check for Empty values and throws exception
@@ -98,6 +89,7 @@ class baseController implements controllerInterface
             
             self::$model->insert();
             
+            require_once ROOT.DS.'core'.DS.'views'.DS.'success.php';
             
             return true;
             }
@@ -113,7 +105,9 @@ class baseController implements controllerInterface
     public function read() {
         $model_array=self::$model->select();
         $model=  self::$model;
-        require_once ROOT.DS.'app'.DS.'views'.DS.self::$model->__get("class").DS.'list.php';
+        $op='list';
+        $field=  self::$model->__get("class");
+        require_once ROOT.DS.'core'.DS.'views'.DS.'viewManager.php';
         return $model_array;
     }
     /**
@@ -128,6 +122,8 @@ class baseController implements controllerInterface
             self::$model=$this->setModelValues(self::$model, $parameter);
             
             self::$model->del();
+            
+            require_once ROOT.DS.'core'.DS.'views'.DS.'success.php';
             
             return true;
         }
@@ -154,6 +150,9 @@ class baseController implements controllerInterface
             }
             $m=  $this->setModelValues($m, $values);
             self::$model->update($m);
+            
+            require_once ROOT.DS.'core'.DS.'views'.DS.'success.php';
+            
             return true;
         }
         catch (\Exception $e){                               // Sends to error.php in case of error

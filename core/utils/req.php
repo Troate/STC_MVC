@@ -7,7 +7,7 @@
  * Namespaces
  */
 namespace core\utils;
-use core\controllers\controllerFactory;
+
 
 /**
  * Request Class
@@ -34,33 +34,21 @@ class req
      * @var string $class Class is same as Field
      */
     private $class;
-    
     /**
-     * Setter of $parameter
-     * @param string_array $parameter Values of $parameter are set into $this->parameter
+     * Setter of $name
+     * @param string $name Name of $value are set
+     * @param string $value Value of $name are set
      */
-    function setParameter($parameter) {
-        $this->parameter=array();
-        $count=count($parameter);
-        for ($i=0;$i<$count;$i++){
-            $this->parameter[$i] = $parameter[$i];
-        }
+    function __set($name,$value) {
+        $this->$name = $value;
     }
 
     /**
-     * Setter of $func
-     * @param string $func Value of $func are set into $this->func
+     * Getter of $name
+     * @param string $name Values of $name are get
      */
-    function setFunc($func) {
-        $this->func = $func;
-    }
-
-    /**
-     * Setter of $class
-     * @param string $class Values of $class are set into $this->class
-     */
-    function setClass($class) {
-        $this->class = $class;
+    function __get($name) {
+        return $this->$name;
     }
 
     /**
@@ -68,33 +56,11 @@ class req
      * @param string $field Field like Student, Teacher
      * @param string $op Operation like Create, Read
      */
-    public function __construct($field, $op) {
+    public function __construct($field, $op, $func, $class, $parameter) {
         $this->field=$field;
         $this->op=$op;
-    }
-    /**
-     * Calls the callOp() function of controller or read() function if Operation is to read
-     */
-    public function callController() {
-        $obj=new controllerFactory();
-        $controller=$obj->getController($this->field);
-        if($this->op=="list"){
-            $controller->read();
-        }
-        else{
-            $controller->callOp($this->op,$this->field);
-        }
-    }
-    
-    /**
-     * Calls the Create, Update and Delete functions of controller
-     * It recieves data from views via post
-     */
-    public function callControllerFunction() {
-        $obj=new controllerFactory();
-        $s=$obj->getController($this->class);
-        $func=$this->func;
-        $bool=$s->$func($this->parameter);
-        return $bool;
+        $this->func=$func;
+        $this->class=$class;
+        $this->parameter=$parameter;
     }
 }

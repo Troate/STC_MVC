@@ -10,13 +10,15 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+        <h1>Operation Performed Successfully</h1>
+        <br>
+        <br>
+        <a href="index.php">Click Here</a> to go back to main page<br>
         <?php
         /**
-        * View of the Student List Functionality
-        */
-        echo '<h3>Student</h3>';
-        $i=1; 
-        require_once ROOT.DS.'core'.DS.'views'.DS.'list.php';
+         * Contains Simple Message Error and a Link to the Main page
+         */
+        
         ?>
     </body>
 </html>
