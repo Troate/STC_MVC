@@ -38,9 +38,10 @@ class DbConnection {
      * @return PDO_object Resource
      */
     public static function getConnection() {
+        require_once ROOT.DS.'app'.DS.'config.php';
       if (!isset(self::$connection)) {
         $pdo_options[\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
-        self::$connection = new \PDO(DB_TYPE.":host=".DB_HOST.";dbname=".DB_NAME."", DB_USER, DB_PASSWORD, $pdo_options)or die("PDO object not created");
+        self::$connection = new \PDO($DB['DB_TYPE'].":host=".$DB['DB_HOST'].";dbname=".$DB['DB_NAME']."", $DB['DB_USER'], $DB['DB_PASSWORD'], $pdo_options)or die("PDO object not created");
       }
       return self::$connection;
     }

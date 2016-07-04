@@ -19,7 +19,15 @@ class modelFactory {
     public function getModel($model) {
         if(isset($model)){
             $class='app'.DS.'models'.DS.$model;
-            return new $class();
+            $file=ROOT.DS.'app'.DS.'models'.DS.lcfirst($model).'.php';
+            if(file_exists($file))
+            {
+                return new $class();
+            }
+            else
+            {
+                return false;
+            }
         }
         else{
             return false;

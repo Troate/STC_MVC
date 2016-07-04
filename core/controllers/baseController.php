@@ -34,8 +34,11 @@ class baseController implements controllerInterface
     public function __construct($attribute) {
         $modelFactory=new modelFactory();
         self::$model=$modelFactory->getModel($attribute);
-        $this->name=self::$model->__get("cols");
-        $this->count=  count($this->name);
+        if(self::$model!=false)
+        {
+            $this->name=self::$model->__get("cols");
+            $this->count=  count($this->name);
+        }
     }
     /**
      * According to the value of $op, and according to the controller, it will require its view
@@ -48,7 +51,7 @@ class baseController implements controllerInterface
     }
     /**
      * Check for Empty values and throws exception
-     * @param string_array $parameter It has values from different attributes, which can vary in number according to attributes
+     * @param array $parameter It has values from different attributes, which can vary in number according to attributes
      * @throws Exception Exception takes to Error page error.php
      */
     public function checkEmpty($parameter)
@@ -78,7 +81,7 @@ class baseController implements controllerInterface
     }
     /**
      * It is provided with tableName and the name of the Object, It creates Object send it DBAL
-     * @param string_array $parameter It has values from different attributes, which can vary in number according to attributes
+     * @param array $parameter It has values from different attributes, which can vary in number according to attributes
      * @throws Exception Exception takes to Error page error.php
      */
     public function create($parameter) {
@@ -100,7 +103,7 @@ class baseController implements controllerInterface
     }
     /**
      * The result of select query is assigned to a object and the that objest is pushed in array of the same object, whish is returned
-     * @return Object_array Populated with the result of select query
+     * @return array Populated with the result of select query
      */
     public function read() {
         $model_array=self::$model->select();
@@ -112,7 +115,7 @@ class baseController implements controllerInterface
     }
     /**
      * Makes object and initalise it with values and sends it to the database layer
-     * @param string_array $parameter It has values from different attributes, which can vary in number according to attributes
+     * @param array $parameter It has values from different attributes, which can vary in number according to attributes
      * @throws Exception Exception takes to Error page error.php
      */
     public function delete($parameter) {
@@ -134,7 +137,7 @@ class baseController implements controllerInterface
     }
     /**
      * Creates object, initialize with old values and then set new Values
-     * @param string_array $parameter It has values from different attributes, which can vary in number according to attributes
+     * @param array $parameter It has values from different attributes, which can vary in number according to attributes
      * @throws Exception Exception takes to Error page error.php
      */
     public function update($parameter) {

@@ -73,7 +73,7 @@ class Dbal {
     /**
      * Runs Delete Query
      * @param string $tableName Name of the Table to send or recieve data from
-     * @param string_array $cell_name Name of the Columns
+     * @param array $cell_name Name of the Columns
      * @param string/int_array $cell_values Values of those Columns
      * @throws Exception If there are no resultant rows
      */
@@ -101,7 +101,7 @@ class Dbal {
     /**
      * Run Update Query
      * @param string $tableName Name of the Table to send or recieve data from
-     * @param string_array $cell_name Name of the Columns
+     * @param array $cell_name Name of the Columns
      * @param string/int_array $cell_values Value of the Columns
      * @throws Exception If there are no resultant rows
      */

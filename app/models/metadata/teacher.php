@@ -37,8 +37,7 @@ function metaTeacher()
 
         // The columns that have numeric data types
         array(
-            'Id'   => true,
-            'Age' => true
+            'Id', 'Age'
         ),
 
     );

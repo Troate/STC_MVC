@@ -29,9 +29,13 @@ class baseModel implements modelInterface
      */
     private $name;
     /**
-     * @var string_array $cols Name of columns in database
+     * @var array $cols Name of columns in database
      */
     private $cols;
+    /**
+     * @var array $numeric It has those names of columns which are Numeric 
+     */
+    private $numeric;
     /**
      * @var array $names It has those names of columns in which value is inserted
      */
@@ -47,19 +51,20 @@ class baseModel implements modelInterface
     public function __construct() {
         $this->names=array();
         $this->values=array();
-        $class=get_called_class();
-        $class=  str_replace('\\', '', $class);
+        $class=get_called_class();                                          // getting caller class/Model
+        $class=  str_replace('\\', '', $class);                             // parsing class/Model name
         $class=  str_replace('app', '', $class);
         $class=  str_replace('models', '', $class);
         $class=  lcfirst($class);
         $this->__set("class",$class);
         $class= ROOT.DS.'app'.DS.'models'.DS.'metadata'.DS.$class.'.php';
-        if(file_exists($class)){
+        if(file_exists($class)){                                            // checking if metadata of model exists
             require_once $class;
         }
-        $func='meta'.ucfirst($this->__get("class"));
+        $func='meta'.ucfirst($this->__get("class"));                        // Get Name of Columns from metadata
         $cols=$func();
         $this->__set('cols',$cols[0]);
+        $this->__set('numeric',$cols[3]);
     }
     /**
      * Setter of member

@@ -23,7 +23,7 @@ class req
      */
     private $op;
     /**
-     * @var string_array $parameter Values of different attributes, which can vary in count according to attribute
+     * @var array $parameter Values of different attributes, which can vary in count according to attribute
      */
     private $parameter;
     /**

@@ -4,16 +4,10 @@
  */
 
 namespace app\controllers;
-use core\controllers\controllerInterface;
+use core\controllers\baseController;
 /**
  * homeController calls home.php via viewManager.php
  */
-class homeController implements controllerInterface{
-    /**
-     * callOp calls viewManager.php which calls home.php
-     */
-    public function callOp() {
-        $home=true;
-        require_once ROOT.DS.'core'.DS.'views'.DS.'viewManager.php';
-    }
+class homeController extends baseController{
+    
 }

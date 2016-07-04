@@ -80,7 +80,7 @@ if(isset($_REQUEST['attribute'])||isset($_REQUEST['func'])){
      */
     else if (isset($attribute)) {
         $controller=$obj->getController("default");
-        $controller->callOp($attribute);
+        $controller->callOp("default",$request->__get("attribute"));
     }
 }
 /**
@@ -88,5 +88,5 @@ if(isset($_REQUEST['attribute'])||isset($_REQUEST['func'])){
  */
 else {
      $controller=$obj->getController("home");
-     $controller->callOp();
+     $controller->callOp("home",null);
 }

@@ -5,11 +5,11 @@
 
 
 require_once ROOT.DS.'app'.DS.'views'.DS.'layouts'.DS.'header.php';
-if(isset($home))
+if($op=="home")
 {
     require_once ROOT.DS.'core'.DS.'views'.DS.'home.php';
 }
-else if(isset($default))
+else if($op=="default")
 {
     require_once ROOT.DS.'app'.DS.'views'.DS.'layouts'.DS.'default.php';
 }

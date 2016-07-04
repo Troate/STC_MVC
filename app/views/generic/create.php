@@ -20,11 +20,20 @@ and open the template in the editor.
             <?php
             echo '<h3>Enter Data</h3>';
             $attr=$model->__get("cols");
+            $num=$model->__get("numeric");
             for($i=0;$i<count($attr)-1;$i++)
             {
                 echo $attr[$i+1];
                 echo '<br><input ';
-                echo 'type="text" ';
+                if(array_search($attr[$i+1], $num))
+                {
+                    echo 'type="number" min="0" ';
+                }
+                else
+                {
+                    echo 'type="text" ';
+                }
+                
                 echo 'name="parameter['.($i).']" placeholder="'.$attr[$i+1].' of '.ucfirst($attribute).'"/><br>';
             }
             ?>

@@ -6,11 +6,20 @@
 echo '<h3>'.  ucfirst($model->__get("class")).'</h3>';
 echo '<h3>Enter Data</h3>';
 $attr=$model->__get("cols");
+$num=$model->__get("numeric");
 for($i=1;$i<count($attr);$i++)
 {
     echo $attr[$i];
     echo '<br><input ';
-    echo 'type="text" ';
+    if(array_search($attr[$i], $num))
+    {
+        echo 'type="number" min="0" ';
+    }
+    else
+    {
+        echo 'type="text" ';
+    }
+
     echo 'name="parameter['.($i-1).']" placeholder="'.$attr[$i].' of '.ucfirst($attribute).'"/><br>';
 }
 ?>

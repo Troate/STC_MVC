@@ -485,7 +485,7 @@ $.widget( "ui.iviewer", $.ui.mouse, {
     /**
     * convert coordinates on the container to the coordinates on the image (in original size)
     *
-    * @return object with attributes x,y according to coordinates or false
+    * @return object with fields x,y according to coordinates or false
     * if initial coords are not inside image
     **/
     containerToImage : function (x,y)
@@ -504,7 +504,7 @@ $.widget( "ui.iviewer", $.ui.mouse, {
     /**
     * convert coordinates on the image (in original size, and zero angle) to the coordinates on the container
     *
-    * @return object with attributes x,y according to coordinates
+    * @return object with fields x,y according to coordinates
     **/
     imageToContainer : function (x,y)
     {
@@ -518,9 +518,9 @@ $.widget( "ui.iviewer", $.ui.mouse, {
 
     /**
     * get mouse coordinates on the image
-    * @param e - object containing pageX and pageY attributes, e.g. mouse event object
+    * @param e - object containing pageX and pageY fields, e.g. mouse event object
     *
-    * @return object with attributes x,y according to coordinates or false
+    * @return object with fields x,y according to coordinates or false
     * if initial coords are not inside image
     **/
     _getMouseCoords : function(e)
