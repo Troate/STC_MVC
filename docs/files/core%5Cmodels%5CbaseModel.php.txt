@@ -92,7 +92,7 @@ class baseModel implements modelInterface
         {
             $this->values[$i]=  $this->__get($n[$i]);
         }
-        $d->insertQuery($this->__get("class"),  $this->names,  $this->values);// insertQuery function of Dbal is called, parameters are tablename,
+        return $d->insertQuery($this->__get("class"),  $this->names,  $this->values);// insertQuery function of Dbal is called, parameters are tablename,
                                                                         //  cellnames and values to be inserted in those cellnames
     }
     /**
@@ -127,7 +127,7 @@ class baseModel implements modelInterface
         {
             $this->values[$i]=  $this->__get($n[$i]);
         }
-        $d->deleteQuery($this->__get("class"),  $this->names,  $this->values);// deleteQuery function of Dbal is called, parameters are tablename,
+        return $d->deleteQuery($this->__get("class"),  $this->names,  $this->values);// deleteQuery function of Dbal is called, parameters are tablename,
                                                                         //  cellnames and values to be inserted in those cellnames
     }
     /**
@@ -147,7 +147,7 @@ class baseModel implements modelInterface
         {
             $this->values[$i]=$m->__get($n[$j]);
         }
-        $d->updateQuery($this->__get("class"),  $this->names,  $this->values);         // updateQuery function of Dbal is called, parameters are tablename,
+        return $d->updateQuery($this->__get("class"),  $this->names,  $this->values);         // updateQuery function of Dbal is called, parameters are tablename,
                                                         //  cellnames and values to be inserted in those cellnames
     }
 }

@@ -32,7 +32,61 @@ class DbalTest extends PHPUnit_Framework_TestCase
      */
     function test_insertQuery_DP()
     {
-        return array(array("student",array("Name","Age","Degree"),array("TestInsert","22","bs"),true),
-                     array("tudent",array("Name","Age","Degree"),array("TestInsert2","22","bs"),false));
+        return array(array("student",array("Name","Age","Degree"),array("TestStudent","22","bs"),true),
+                     array("tudent",array("Name","Age","Degree"),array("TestStudent","22","bs"),false),
+                     array("teacher",array("Name","Age","Course"),array("TestTeacher","22","bs"),true),
+                     array("eacher",array("Name","Age","Course"),array("TestTeacher","22","bs"),false),
+                     array("course",array("Name","CourseId"),array("TestCourse","xx000"),true),
+                     array("ourse",array("Name","CourseId"),array("TestCourse","xx000"),false));
+    }
+    /**
+     * Tests updateQuery Function of Dbal
+     * @dataProvider test_updateQuery_DP
+     * @param string $tableName Name of the Table to send or recieve data from
+     * @param array $cell Column Names
+     * @param array $value Values to be inserted in given column names
+     */
+    function test_updateQuery($tableName,$cell,$value,$result)
+    {
+        $obj=new Dbal();
+        $this->assertEquals($obj->updateQuery($tableName,$cell,$value),$result);
+    }
+    
+    /**
+     * Data Provider of test_updateQuery()
+     */
+    function test_updateQuery_DP()
+    {
+        return array(array("student",array("Name","Age","Degree"),array("TestStudent","20","bs","TestStudent","22","bs"),true),
+                     array("tudent",array("Name","Age","Degree"),array("TestStudent","22","bs","TestStudent","22","bs"),false),
+                     array("teacher",array("Name","Age","Course"),array("TestTeacher","20","bs","TestTeacher","22","bs"),true),
+                     array("eacher",array("Name","Age","Course"),array("TestTeacher","22","bs","TestTeacher","22","bs"),false),
+                     array("course",array("Name","CourseId"),array("TestCourse","xx001","TestCourse","xx000"),true),
+                     array("ourse",array("Name","CourseId"),array("TestCourse","xx000","TestCourse","xx000"),false));
+    }
+    /**
+     * Tests deleteQuery Function of Dbal
+     * @dataProvider test_deleteQuery_DP
+     * @param string $tableName Name of the Table to send or recieve data from
+     * @param array $cell Column Names
+     * @param array $value Values to be inserted in given column names
+     */
+    function test_deleteQuery($tableName,$cell,$value,$result)
+    {
+        $obj=new Dbal();
+        $this->assertEquals($obj->deleteQuery($tableName,$cell,$value),$result);
+    }
+    
+    /**
+     * Data Provider of test_deleteQuery()
+     */
+    function test_deleteQuery_DP()
+    {
+        return array(array("student",array("Name","Age","Degree"),array("TestStudent","20","bs"),true),
+                     array("tudent",array("Name","Age","Degree"),array("TestStudent","22","bs"),false),
+                     array("teacher",array("Name","Age","Course"),array("TestTeacher","20","bs"),true),
+                     array("eacher",array("Name","Age","Course"),array("TestTeacher","22","bs"),false),
+                     array("course",array("Name","CourseId"),array("TestCourse","xx001"),true),
+                     array("ourse",array("Name","CourseId"),array("TestCourse","xx000"),false));
     }
 }

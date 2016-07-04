@@ -92,6 +92,7 @@ class Dbal {
         {    
             throw new \Exception;
         }
+        return true;
         }
         catch(\PDOException $e)                         // returns false
         {
@@ -126,6 +127,7 @@ class Dbal {
         {    
             throw new \Exception;
         }
+        return true;
         }
         catch(\PDOException $e)                         // return false
         {

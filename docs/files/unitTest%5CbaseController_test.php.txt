@@ -10,12 +10,12 @@ use core\controllers\controllerFactory;
 
 
 /**
- * Class bct(Base Controller Test) contains functions for testing course_controller functions and their data_provider functions
+ * Class bct(Base Controller Test) contains functions for testing baseController functions and their data_provider functions
  */
 class bct extends PHPUnit_Framework_TestCase
 {
     /**
-     * Calls the callOp funtion of course_controller and if false is not returned then it passes the test
+     * Calls the callOp funtion of baseController and if false is not returned then it passes the test
      * @dataProvider test_callOp_DP
      * @param string $op Operations such as read, update and delete
      * @param string $tableName Name of the table to insert value in
@@ -71,7 +71,7 @@ class bct extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Tests the update functionality of course_controller
+     * Tests the update functionality of baseController
      * @dataProvider test_update_DP
      * @param string $tableName Name of the table to insert value in
      * @param array $parameters Parameters to be inserted
@@ -98,7 +98,7 @@ class bct extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Tests the delete funciton of course_controller
+     * Tests the delete funciton of baseController
      * @dataProvider test_delete_DP
      * @param string $tableName Name of the table to insert value in
      * @param array $parameters Parameters to be inserted
