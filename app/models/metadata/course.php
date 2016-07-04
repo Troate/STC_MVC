@@ -15,7 +15,7 @@
  *
  * @return array_of_arrays
  */
-function metaData()
+function metaCourse()
 {
     return array(
         // Every column in the mapped table

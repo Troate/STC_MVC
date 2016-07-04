@@ -29,26 +29,26 @@ class baseController implements controllerInterface
     public $count;
     /**
      * Its a construtor, which initialases $model with appropriate object
-     * @param string $field It is passed to modelfactory, which gives appropriate object of Model i.e.(Course, Teacher, Student)
+     * @param string $attribute It is passed to modelfactory, which gives appropriate object of Model i.e.(Course, Teacher, Student)
      */
-    public function __construct($field) {
+    public function __construct($attribute) {
         $modelFactory=new modelFactory();
-        self::$model=$modelFactory->getModel($field);
+        self::$model=$modelFactory->getModel($attribute);
         $this->name=self::$model->__get("cols");
         $this->count=  count($this->name);
     }
     /**
      * According to the value of $op, and according to the controller, it will require its view
      * @param string $op It contains operation type; read, delete or update
-     * @param string $field This field will call the $op of specific $field
+     * @param string $attribute This attribute will call the $op of specific $attribute
      */
-    public function CallOp($op, $field) {
+    public function CallOp($op, $attribute) {
         $model=  self::$model;
         require_once ROOT.DS.'core'.DS.'views'.DS.'viewManager.php';
     }
     /**
      * Check for Empty values and throws exception
-     * @param string_array $parameter It has values from different fields, which can vary in number according to fields
+     * @param string_array $parameter It has values from different attributes, which can vary in number according to attributes
      * @throws Exception Exception takes to Error page error.php
      */
     public function checkEmpty($parameter)
@@ -78,7 +78,7 @@ class baseController implements controllerInterface
     }
     /**
      * It is provided with tableName and the name of the Object, It creates Object send it DBAL
-     * @param string_array $parameter It has values from different fields, which can vary in number according to fields
+     * @param string_array $parameter It has values from different attributes, which can vary in number according to attributes
      * @throws Exception Exception takes to Error page error.php
      */
     public function create($parameter) {
@@ -106,13 +106,13 @@ class baseController implements controllerInterface
         $model_array=self::$model->select();
         $model=  self::$model;
         $op='list';
-        $field=  self::$model->__get("class");
+        $attribute=  self::$model->__get("class");
         require_once ROOT.DS.'core'.DS.'views'.DS.'viewManager.php';
         return $model_array;
     }
     /**
      * Makes object and initalise it with values and sends it to the database layer
-     * @param string_array $parameter It has values from different fields, which can vary in number according to fields
+     * @param string_array $parameter It has values from different attributes, which can vary in number according to attributes
      * @throws Exception Exception takes to Error page error.php
      */
     public function delete($parameter) {
@@ -134,7 +134,7 @@ class baseController implements controllerInterface
     }
     /**
      * Creates object, initialize with old values and then set new Values
-     * @param string_array $parameter It has values from different fields, which can vary in number according to fields
+     * @param string_array $parameter It has values from different attributes, which can vary in number according to attributes
      * @throws Exception Exception takes to Error page error.php
      */
     public function update($parameter) {

@@ -1,11 +1,11 @@
 <?php
 /**
- * It is the Single Entry point, It gets the Field and Operation from default.php and according to that make field_controller object through controller factory and gives its function operation as parameter
+ * It is the Single Entry point, It gets the attribute and Operation from default.php and according to that make attribute_controller object through controller factory and gives its function operation as parameter
  */
 // Namespace
 use core\utils\req;
 
-$field=null;
+$attribute=null;
 $operation=null;
 // Constants
 /**
@@ -40,7 +40,7 @@ function __autoload($class){
     }
 }
 
-$request = new req($field, $operation);     // Makes object of wrapper class
+$request = new req($attribute, $operation);     // Makes object of wrapper class
 
 /**
  * These values are set when index.php is post of views
@@ -54,8 +54,8 @@ if(isset($_POST['func'])&&isset($_POST['class']))
 }
 
 /**
- * If the field and operatio are set, then it makes appropriate object from controller factory and passes $opeartion as parameter to the function callOp()
+ * If the attribute and operatio are set, then it makes appropriate object from controller factory and passes $opeartion as parameter to the function callOp()
  */
-if(isset($field) && isset($operation)){
+if(isset($attribute) && isset($operation)){
     $request->callController();
 }

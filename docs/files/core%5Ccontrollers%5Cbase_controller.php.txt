@@ -21,26 +21,26 @@ class baseController implements controllerInterface
     public static $model;
     /**
      * Its a construtor, which initialases $model with appropriate object
-     * @param string $field It is passed to modelfactory, which gives appropriate object of Model i.e.(Course, Teacher, Student)
+     * @param string $attribute It is passed to modelfactory, which gives appropriate object of Model i.e.(Course, Teacher, Student)
      */
-    public function __construct($field) {
+    public function __construct($attribute) {
         $modelFactory=new model_factory();
-        self::$model=$modelFactory->getModel($field);
+        self::$model=$modelFactory->getModel($attribute);
     }
     /**
      * According to the value of $op, and according to the controller, it will require its view
      * @param string $op It contains operation type; read, delete or update
-     * @param string $field This field will call the $op of specific $field
+     * @param string $attribute This attribute will call the $op of specific $attribute
      */
-    public function CallOp($op, $field) {
+    public function CallOp($op, $attribute) {
         if($op=="read"){
-            require_once ROOTPATH.'/app/views/'.$field.'/list.php';
+            require_once ROOTPATH.'/app/views/'.$attribute.'/list.php';
         }
         else if($op=="delete"){
-            require_once ROOTPATH.'/app/views/'.$field.'/delete.php';
+            require_once ROOTPATH.'/app/views/'.$attribute.'/delete.php';
         }
         else if($op=="update"){
-            require_once ROOTPATH.'/app/views/'.$field.'/update.php';
+            require_once ROOTPATH.'/app/views/'.$attribute.'/update.php';
         }
         else {
             return false;

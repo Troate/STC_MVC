@@ -18,7 +18,7 @@ class req_test extends PHPUnit_Framework_TestCase{
      * @dataProvider testcallControllerFunction_DP
      * @param string $parameter Values to be inserted
      * @param string $func Operation like create or delete
-     * @param string $class Field like Student or Teacher
+     * @param string $class attribute like Student or Teacher
      * @param string $result True or False
      */
     public function testcallControllerFunction($parameter,$func,$class,$result) {
@@ -30,7 +30,7 @@ class req_test extends PHPUnit_Framework_TestCase{
     }
     /**
      * Data Provider of testcallControllerFunction
-     * It has a tendency to test all the fields and all of their operations
+     * It has a tendency to test all the attributes and all of their operations
      */
     public function testcallControllerFunction_DP() {
         return array(array(array("Test Student","20","bs"),"create","student",true),

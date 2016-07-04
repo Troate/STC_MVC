@@ -14,14 +14,14 @@ namespace core\controllers;
 class controllerFactory {
     /**
      * Takes the parameter and according to it gives the appropriate object
-     * @param string $field Name of the field like Teacher, Student or Teacher
+     * @param string $attribute Name of the attribute like Teacher, Student or Teacher
      */
-    public function getController($field)
+    public function getController($attribute)
     {
-        if(isset($field)){
-        $className=  lcfirst($field);
+        if(isset($attribute)){
+        $className=  lcfirst($attribute);
         $className='app'.DS.'controllers'.DS.$className.'Controller';
-        return new $className($field);
+        return new $className($attribute);
         }
         else{
             return false;

@@ -57,7 +57,8 @@ class baseModel implements modelInterface
         if(file_exists($class)){
             require_once $class;
         }
-        $cols=metaData();
+        $func='meta'.ucfirst($this->__get("class"));
+        $cols=$func();
         $this->__set('cols',$cols[0]);
     }
     /**

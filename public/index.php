@@ -1,6 +1,6 @@
 <?php
 /**
- * It is the Single Entry point, It gets the Field and Operation from default.php and according to that make field_controller object through controller factory and gives its function operation as parameter
+ * It is the Single Entry point, It gets the attribute and Operation from default.php and according to that make attribute_controller object through controller factory and gives its function operation as parameter
  */
 // Namespace
 use core\utils\req;
@@ -8,7 +8,7 @@ use core\controllers\controllerFactory;
 use core\controllers\homeController;
 use core\controllers\defaultController;
 
-$field=null;
+$attribute=null;
 $operation=null;
 // Constants
 /**
@@ -37,14 +37,15 @@ function __autoload($class){
         echo $fileName.' Could not be Included in Index.php<br>';
     }
 }
-if(isset($_REQUEST['field'])||isset($_REQUEST['func'])){
-    $request = new req((isset($_REQUEST['field']) ? $_REQUEST['field'] : null), 
+$obj=new controllerFactory();
+if(isset($_REQUEST['attribute'])||isset($_REQUEST['func'])){
+    $request = new req((isset($_REQUEST['attribute']) ? $_REQUEST['attribute'] : null), 
                         (isset($_REQUEST['operation']) ? $_REQUEST['operation'] : null),
                         (isset($_REQUEST['func']) ? $_REQUEST['func'] : null),
                         (isset($_REQUEST['class']) ? $_REQUEST['class'] : null),
                         (isset($_REQUEST['parameter']) ? $_REQUEST['parameter'] : null));     // Makes object of wrapper class
 
-    $field=$request->__get("field");
+    $attribute=$request->__get("attribute");
     $op=$request->__get("op");
     $func=$request->__get("func");
     $class=$request->__get("class");
@@ -55,7 +56,6 @@ if(isset($_REQUEST['field'])||isset($_REQUEST['func'])){
      */
     if(isset($func)&&isset($class))
     {
-        $obj=new controllerFactory();
         $s=$obj->getController($request->__get("class"));
         $func=$request->__get("func");
         $bool=$s->$func($request->__get("parameter"));
@@ -63,24 +63,30 @@ if(isset($_REQUEST['field'])||isset($_REQUEST['func'])){
     }
 
     /**
-     * If the field and operatio are set, then it makes appropriate object from controller factory and passes $opeartion as parameter to the function callOp()
+     * If the attribute and operation are set, then it makes appropriate object from controller factory and passes $opeartion as parameter to the function callOp()
      */
-    if(isset($field) && isset($op)){
-        $obj=new controllerFactory();
-        $controller=$obj->getController($request->__get("field"));
+    if(isset($attribute) && isset($op)){
+        
+        $controller=$obj->getController($request->__get("attribute"));
         if($request->__get("op")=="list"){
             $controller->read();
         }
         else{
-            $controller->callOp($request->__get("op"),$request->__get("field"));
+            $controller->callOp($request->__get("op"),$request->__get("attribute"));
         }
     }
-    else if (isset($field)) {
-        $obj=new defaultController();
-        $obj->callOp($field);
+    /**
+     * If only attribute is set and not operation
+     */
+    else if (isset($attribute)) {
+        $controller=$obj->getController("default");
+        $controller->callOp($attribute);
     }
 }
+/**
+ * If nothing is set
+ */
 else {
-     $obj=new homeController();
-     $obj->callOp();
+     $controller=$obj->getController("home");
+     $controller->callOp();
 }

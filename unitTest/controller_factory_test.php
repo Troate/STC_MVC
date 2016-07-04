@@ -17,12 +17,12 @@ class cft extends PHPUnit_Framework_TestCase
     /**
      * Calls the getController funtion of controller_factory and if false is not returned then it passes the test
      * @dataProvider test_getController_DP
-     * @param string $field Fields such as Teacher, Student and Course
+     * @param string $attribute attributes such as Teacher, Student and Course
      */
-    function test_getController($field)
+    function test_getController($attribute)
     {
         $obj=new controllerFactory();
-        $this->assertNotFalse($obj->getController($field));
+        $this->assertNotFalse($obj->getController($attribute));
     }
     
     /**

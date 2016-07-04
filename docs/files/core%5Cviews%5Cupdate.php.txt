@@ -17,7 +17,7 @@ for($j=count($attr);$i<count($attr);$j++,$i++)
     {
         echo 'type="text" ';
     }
-    echo 'name="parameter['.($j-1).']" placeholder="Old '.$attr[$i].' of '.ucfirst($field).'"/><br>';
+    echo 'name="parameter['.($j-1).']" placeholder="Old '.$attr[$i].' of '.ucfirst($attribute).'"/><br>';
 }
 
 echo '<h3>Enter New Data</h3>';
@@ -34,13 +34,13 @@ for($i=1;$i<count($attr);$i++)
     {
         echo 'type="text" ';
     }
-    echo 'name="parameter['.($i-1).']" placeholder="New '.$attr[$i].' of '.ucfirst($field).'"/><br>';
+    echo 'name="parameter['.($i-1).']" placeholder="New '.$attr[$i].' of '.ucfirst($attribute).'"/><br>';
 }
 
     
 ?>
 <br>
 <input type="text" name="func" value="<?php echo  $op;?>" style="display: none;"/>
-<input type="text" name="class" value="<?php echo $field;?>" style="display: none;"/>
+<input type="text" name="class" value="<?php echo $attribute;?>" style="display: none;"/>
 
 

@@ -24,19 +24,19 @@ class studentController extends baseController{
     }
     /**
      * Its a construtor, which initialases $model with appropriate object
-     * @param string $field It is passed to modelfactory, which gives appropriate object of Model i.e.(Course, Teacher, Student)
+     * @param string $attribute It is passed to modelfactory, which gives appropriate object of Model i.e.(Course, Teacher, Student)
      */
-    public function __construct($field) {
-        parent::__construct($field);
+    public function __construct($attribute) {
+        parent::__construct($attribute);
     }
     /**
      * According to the value of $op, and according to the controller, it will require its view
      * @param string $op It contains operation type; read, delete or update
-     * @param string $field This field will call the $op of specific $field
+     * @param string $attribute This attribute will call the $op of specific $attribute
      */
-    public function callOp($op,$field) {
-        $field="student";
-        return  parent::CallOp($op, $field);
+    public function callOp($op,$attribute) {
+        $attribute="student";
+        return  parent::CallOp($op, $attribute);
     }
     /**
      * It is provided with tableName and the name of the Object, It creates Object send it DBAL

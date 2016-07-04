@@ -15,10 +15,10 @@ and open the template in the editor.
         <form action='/STC_MVC/app/views/generic/add.php' method="POST">
             Name:<br>
             <input type="text" name="name" placeholder="Name" /><br><br>
-            Choose a Field:<br>
-            <input name="field" type="radio" value="Student">Student
-            <input name="field" type="radio" value="Teacher">Teacher
-            <input name="field" type="radio" value="Course">Course<br><br>
+            Choose a attribute:<br>
+            <input name="attribute" type="radio" value="Student">Student
+            <input name="attribute" type="radio" value="Teacher">Teacher
+            <input name="attribute" type="radio" value="Course">Course<br><br>
             <button name="add" type="submit" value="create">Create</button>
             </form>
             <?php
@@ -35,11 +35,11 @@ and open the template in the editor.
             include_once $_SESSION['Root'].'\app\controllers\teacher_controller.php';
             include_once $_SESSION['Root'].'\app\controllers\student_controller.php';
             $name= (string)(isset($_POST['name']) ? $_POST['name'] : null);
-            $field = (isset($_POST['field']) ? $_POST['field'] : null);
+            $attribute = (isset($_POST['attribute']) ? $_POST['attribute'] : null);
             if(isset($_POST['add'])&& $_SERVER['REQUEST_METHOD'] == "POST"){
                 $obj=new controller_factory();
-                $s=$obj->getController($field);
-                $bool=$s->create($field,$name);
+                $s=$obj->getController($attribute);
+                $bool=$s->create($attribute,$name);
                 if($bool==true)
                 {
                     header('Location: \STC_MVC\public\index.php');

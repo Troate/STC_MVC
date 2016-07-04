@@ -15,15 +15,15 @@ namespace core\utils;
 class req
 {
     /**
-     * @var string $field Field is like Student, Teacher and Course etc
+     * @var string $attribute attribute is like Student, Teacher and Course etc
      */
-    private $field;
+    private $attribute;
     /**
      * @var string $op Operation to be performed like Create, Read, Update and Delete
      */
     private $op;
     /**
-     * @var string_array $parameter Values of different fields, which can vary in count according to Field
+     * @var string_array $parameter Values of different attributes, which can vary in count according to attribute
      */
     private $parameter;
     /**
@@ -31,7 +31,7 @@ class req
      */
     private $func;
     /**
-     * @var string $class Class is same as Field
+     * @var string $class Class is same as attribute
      */
     private $class;
     /**
@@ -53,11 +53,11 @@ class req
 
     /**
      * Constructor
-     * @param string $field Field like Student, Teacher
+     * @param string $attribute attribute like Student, Teacher
      * @param string $op Operation like Create, Read
      */
-    public function __construct($field, $op, $func, $class, $parameter) {
-        $this->field=$field;
+    public function __construct($attribute, $op, $func, $class, $parameter) {
+        $this->attribute=$attribute;
         $this->op=$op;
         $this->func=$func;
         $this->class=$class;

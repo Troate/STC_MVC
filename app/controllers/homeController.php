@@ -3,7 +3,7 @@
  * homeController
  */
 
-namespace core\controllers;
+namespace app\controllers;
 use core\controllers\controllerInterface;
 /**
  * homeController calls home.php via viewManager.php

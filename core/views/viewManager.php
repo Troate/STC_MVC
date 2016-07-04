@@ -16,8 +16,8 @@ else if(isset($default))
 else{
     require_once ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.$op.'.php';
 
-    if(file_exists(ROOT.DS.'app'.DS.'views'.DS.$field.DS.$op.'.php')){
-        require_once ROOT.DS.'app'.DS.'views'.DS.$field.DS.$op.'.php';
+    if(file_exists(ROOT.DS.'app'.DS.'views'.DS.$attribute.DS.$op.'.php')){
+        require_once ROOT.DS.'app'.DS.'views'.DS.$attribute.DS.$op.'.php';
     }
     else{
         return false;

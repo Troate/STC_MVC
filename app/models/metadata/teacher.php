@@ -14,7 +14,7 @@
  *
  * @return array_of_arrays
  */
-function metaData()
+function metaTeacher()
 {
     return array(
         // Every column in the mapped table

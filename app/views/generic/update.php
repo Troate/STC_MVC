@@ -11,7 +11,7 @@ for($j=count($attr),$i=1;$i<count($attr);$j++,$i++)
     echo $attr[$i];
     echo '<br><input ';
         echo 'type="text" ';
-    echo 'name="parameter['.($j-1).']" placeholder="Old '.$attr[$i].' of '.ucfirst($field).'"/><br>';
+    echo 'name="parameter['.($j-1).']" placeholder="Old '.$attr[$i].' of '.ucfirst($attribute).'"/><br>';
 }
 
 echo '<h3>Enter New Data</h3>';
@@ -21,14 +21,14 @@ for($i=1;$i<count($attr);$i++)
     echo '<br><input ';
     $get='get'.$attr[$i];
         echo 'type="text" ';
-    echo 'name="parameter['.($i-1).']" placeholder="New '.$attr[$i].' of '.ucfirst($field).'"/><br>';
+    echo 'name="parameter['.($i-1).']" placeholder="New '.$attr[$i].' of '.ucfirst($attribute).'"/><br>';
 }
 
     
 ?>
 <br>
 <input type="text" name="func" value="<?php echo  $op;?>" style="display: none;"/>
-<input type="text" name="class" value="<?php echo $field;?>" style="display: none;"/>
+<input type="text" name="class" value="<?php echo $attribute;?>" style="display: none;"/>
 
 <button name="<?php echo  $op;?>" type="submit" value="<?php echo  $op;?>" ><?php echo ucfirst($op);?></button>
 </form>
