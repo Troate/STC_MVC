@@ -1,11 +1,13 @@
-
-            <h3>Select One Operation</h3>
+            <h3>Welcome to Default Page<br>
+            Select one of the Entity and then Select One Action</h3>
             <form action="index.php" method="POST">
-            <input type="text" name="attribute" value="<?php echo $attribute;?>" style="display: none;"/>
-            <button name="operation" type="submit" value="create">Add</button>
-            <button name="operation" type="submit" value="list">Read</button>
-            <button name="operation" type="submit" value="update">Update</button>
-            <button name="operation" type="submit" value="delete">Delete</button><br>
+            <input name="entity" type="radio" value="Student">Student</input>
+            <input name="entity" type="radio" value="Teacher">Teacher</input>
+            <input name="entity" type="radio" value="Course">Course</input><br><br>
+            <button name="action" type="submit" value="create">Add</button>
+            <button name="action" type="submit" value="list">Read</button>
+            <button name="action" type="submit" value="update">Update</button>
+            <button name="action" type="submit" value="delete">Delete</button><br>
             </form>
         <?php
         /**

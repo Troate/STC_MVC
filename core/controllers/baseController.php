@@ -41,11 +41,32 @@ class baseController implements controllerInterface
         }
     }
     /**
-     * According to the value of $op, and according to the controller, it will require its view
-     * @param string $op It contains operation type; read, delete or update
-     * @param string $attribute This attribute will call the $op of specific $attribute
+     * It calls either view or appropriate action functions of class
+     * @param object $obj Object of request class
      */
-    public function CallOp($op, $attribute) {
+    public function _action($obj){
+        if($obj->__get("parameter")!=null)  // if parameters are set
+        {
+            $func=$obj->__get("action");
+            $bool=$this->$func($obj->__get("parameter"));
+            return $bool;
+        }
+        else                                // if parameters are not set then render views
+        {
+            if($obj->__get("action")=="list"){
+                $this->read();
+            }
+            else{
+                $this->callOp($obj->__get("action"),$obj->__get("entity"));
+            }
+        }
+    }
+    /**
+     * According to the value of $op, and according to the controller, it will require its view
+     * @param string $action It contains operation type; read, delete or update
+     * @param string $entity This attribute will call the $op of specific $attribute
+     */
+    public function CallOp($action, $entity) {
         $model=  self::$model;
         require_once ROOT.DS.'core'.DS.'views'.DS.'viewManager.php';
     }
@@ -108,8 +129,8 @@ class baseController implements controllerInterface
     public function read() {
         $model_array=self::$model->select();
         $model=  self::$model;
-        $op='list';
-        $attribute=  self::$model->__get("class");
+        $action='list';
+        $entity=  self::$model->__get("class");
         require_once ROOT.DS.'core'.DS.'views'.DS.'viewManager.php';
         return $model_array;
     }

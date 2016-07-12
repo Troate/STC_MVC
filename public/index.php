@@ -37,56 +37,11 @@ function __autoload($class){
         echo $fileName.' Could not be Included in Index.php<br>';
     }
 }
-$obj=new controllerFactory();
-if(isset($_REQUEST['attribute'])||isset($_REQUEST['func'])){
-    $request = new req((isset($_REQUEST['attribute']) ? $_REQUEST['attribute'] : null), 
-                        (isset($_REQUEST['operation']) ? $_REQUEST['operation'] : null),
-                        (isset($_REQUEST['func']) ? $_REQUEST['func'] : null),
-                        (isset($_REQUEST['class']) ? $_REQUEST['class'] : null),
-                        (isset($_REQUEST['parameter']) ? $_REQUEST['parameter'] : null));     // Makes object of wrapper class
-
-    $attribute=$request->__get("attribute");
-    $op=$request->__get("op");
-    $func=$request->__get("func");
-    $class=$request->__get("class");
-    $parameter=$request->__get("parameter");
-
+    $request = new req();     // Makes object of wrapper class
     /**
      * These values are set when index.php is post of views
      */
-    if(isset($func)&&isset($class))
-    {
-        $s=$obj->getController($request->__get("class"));
-        $func=$request->__get("func");
-        $bool=$s->$func($request->__get("parameter"));
-        return $bool;
-    }
+        $controller=controllerFactory::getController($request->__get("entity"));
+        $controller->_action($request);
 
-    /**
-     * If the attribute and operation are set, then it makes appropriate object from controller factory and passes $opeartion as parameter to the function callOp()
-     */
-    if(isset($attribute) && isset($op)){
-        
-        $controller=$obj->getController($request->__get("attribute"));
-        if($request->__get("op")=="list"){
-            $controller->read();
-        }
-        else{
-            $controller->callOp($request->__get("op"),$request->__get("attribute"));
-        }
-    }
-    /**
-     * If only attribute is set and not operation
-     */
-    else if (isset($attribute)) {
-        $controller=$obj->getController("default");
-        $controller->callOp("default",$request->__get("attribute"));
-    }
-}
-/**
- * If nothing is set
- */
-else {
-     $controller=$obj->getController("home");
-     $controller->callOp("home",null);
-}
+    

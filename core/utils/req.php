@@ -15,25 +15,17 @@ namespace core\utils;
 class req
 {
     /**
-     * @var string $attribute attribute is like Student, Teacher and Course etc
+     * @var string $entity entity is like Student, Teacher and Course etc
      */
-    private $attribute;
+    private $entity;
     /**
-     * @var string $op Operation to be performed like Create, Read, Update and Delete
+     * @var string $action Action to be performed like Create, Read, Update and Delete
      */
-    private $op;
+    private $action;
     /**
      * @var array $parameter Values of different attributes, which can vary in count according to attribute
      */
     private $parameter;
-    /**
-     * @var string $func Function is same as operation
-     */
-    private $func;
-    /**
-     * @var string $class Class is same as attribute
-     */
-    private $class;
     /**
      * Setter of $name
      * @param string $name Name of $value are set
@@ -56,11 +48,9 @@ class req
      * @param string $attribute attribute like Student, Teacher
      * @param string $op Operation like Create, Read
      */
-    public function __construct($attribute, $op, $func, $class, $parameter) {
-        $this->attribute=$attribute;
-        $this->op=$op;
-        $this->func=$func;
-        $this->class=$class;
-        $this->parameter=$parameter;
+    public function __construct() {
+        $this->entity=(isset($_REQUEST['entity']) ? $_REQUEST['entity'] : 'default'); 
+        $this->action=(isset($_REQUEST['action']) ? $_REQUEST['action'] : null);
+        $this->parameter=(isset($_REQUEST['parameter']) ? $_REQUEST['parameter'] : null);
     }
 }

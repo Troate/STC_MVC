@@ -14,7 +14,7 @@ and open the template in the editor.
         /**
          * General Create View
          */
-        echo ucfirst($attribute);
+        echo ucfirst($entity);
         ?></h3>
         <form action="index.php" method="post">
             <?php
@@ -34,11 +34,11 @@ and open the template in the editor.
                     echo 'type="text" ';
                 }
                 
-                echo 'name="parameter['.($i).']" placeholder="'.$attr[$i+1].' of '.ucfirst($attribute).'"/><br>';
+                echo 'name="parameter['.($i).']" placeholder="'.$attr[$i+1].' of '.ucfirst($entity).'"/><br>';
             }
             ?>
-            <input type="text" name="class" value="<?php echo $attribute; ?>" style="display: none;"/>
-            <input type="text" name="func" value="<?php echo $op; ?>" style="display: none;"/><br>
+            <input type="text" name="entity" value="<?php echo $entity; ?>" style="display: none;"/>
+            <input type="text" name="action" value="<?php echo $action; ?>" style="display: none;"/><br>
             <button name="add" type="submit" value="create">Create</button>
         </form>
             <?php
