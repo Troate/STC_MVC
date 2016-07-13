@@ -16,7 +16,7 @@ class controllerFactory {
      * Takes the parameter and according to it gives the appropriate object
      * @param string $attribute Name of the attribute like Teacher, Student or Teacher
      */
-    public function getController($attribute)
+    static public function getController($attribute)
     {
         if(isset($attribute)){
         $className=  lcfirst($attribute);

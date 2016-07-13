@@ -7,14 +7,18 @@
  * Namespaces
  */
 namespace core\models;
-use core\models\database\Dbal;
 use core\models\modelFactory;
+use app\config;
 
 /**
  * Parent Class of Student, Teacher and Course
  */
 class baseModel implements modelInterface
 {
+    /**
+     * @var object Object of Database type
+     */
+    private $db;
     /**
      * @var string $class Name of the Class
      */
@@ -65,6 +69,8 @@ class baseModel implements modelInterface
         $cols=$func();
         $this->__set('cols',$cols[0]);
         $this->__set('numeric',$cols[3]);
+        $db="core\models\database\\".config::$DB['db'];
+        $this->db=new $db();
     }
     /**
      * Setter of member
@@ -85,14 +91,13 @@ class baseModel implements modelInterface
     /**
      * Calls the Database insert function
      */
-    public function insert() {
-        $d=new Dbal();                                                      // Object of Database Access Layer Model
+    public function insert() {                                                // Object of Database Access Layer Model
         $n=  $this->names;
         for($i=0;$i<count($n);$i++)
         {
             $this->values[$i]=  $this->__get($n[$i]);
         }
-        return $d->insertQuery($this->__get("class"),  $this->names,  $this->values);// insertQuery function of Dbal is called, parameters are tablename,
+        return $this->db->insertQuery($this->__get("class"),  $this->names,  $this->values);// insertQuery function of Dbal is called, parameters are tablename,
                                                                         //  cellnames and values to be inserted in those cellnames
     }
     /**
@@ -100,16 +105,13 @@ class baseModel implements modelInterface
      * @return array Model Array which contains all the result
      */
     public function select() {
-        $mod=new modelFactory();
         $model_array=array();
-        // Object of Database Access Layer Model
-        $d=new Dbal();
-        $res=$d->selectQuery($this->__get("class"));
+        $res=  $this->db->selectQuery($this->__get("class"));
         // Columns from database
         $name=  $this->__get("cols");
         while($row= $res->fetch())
         {
-            $m=$mod->getModel(ucfirst($this->__get("class")));
+            $m=modelFactory::getModel(ucfirst($this->__get("class")));
             foreach($name as $nam){
                 $m->__set(lcfirst($nam),$row[$nam]);      // Values are set into model
             }
@@ -120,14 +122,13 @@ class baseModel implements modelInterface
     /**
      * Calls the Database delete function
      */
-    public function del() {
-        $d=new Dbal();                                                      // Object of Database Access Layer Model
+    public function del() {                                                     // Object of Database Access Layer Model
         $n=  $this->names;
         for($i=0;$i<count($n);$i++)
         {
             $this->values[$i]=  $this->__get($n[$i]);
         }
-        return $d->deleteQuery($this->__get("class"),  $this->names,  $this->values);// deleteQuery function of Dbal is called, parameters are tablename,
+        return $this->db->deleteQuery($this->__get("class"),  $this->names,  $this->values);// deleteQuery function of Dbal is called, parameters are tablename,
                                                                         //  cellnames and values to be inserted in those cellnames
     }
     /**
@@ -136,7 +137,6 @@ class baseModel implements modelInterface
      */
     public function update($m)
     {
-        $d=new Dbal();                                  // Object of Database Access Layer Model
         $n=  $this->names;
         $i=0;
         for(;$i<count($n);$i++)
@@ -147,7 +147,7 @@ class baseModel implements modelInterface
         {
             $this->values[$i]=$m->__get($n[$j]);
         }
-        return $d->updateQuery($this->__get("class"),  $this->names,  $this->values);         // updateQuery function of Dbal is called, parameters are tablename,
+        return $this->db->updateQuery($this->__get("class"),  $this->names,  $this->values);         // updateQuery function of Dbal is called, parameters are tablename,
                                                         //  cellnames and values to be inserted in those cellnames
     }
 }

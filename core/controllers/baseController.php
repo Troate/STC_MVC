@@ -29,11 +29,10 @@ class baseController implements controllerInterface
     public $count;
     /**
      * Its a construtor, which initialases $model with appropriate object
-     * @param string $attribute It is passed to modelfactory, which gives appropriate object of Model i.e.(Course, Teacher, Student)
+     * @param string $entity It is passed to modelfactory, which gives appropriate object of Model i.e.(Course, Teacher, Student)
      */
-    public function __construct($attribute) {
-        $modelFactory=new modelFactory();
-        self::$model=$modelFactory->getModel($attribute);
+    public function __construct($entity) {
+        self::$model=modelFactory::getModel($entity);
         if(self::$model!=false)
         {
             $this->name=self::$model->__get("cols");
@@ -166,8 +165,7 @@ class baseController implements controllerInterface
             $this->checkEmpty($parameter);
             
             self::$model=$this->setModelValues(self::$model, $parameter);
-            $mod=new modelFactory();
-            $m=$mod->getModel(ucfirst(self::$model->__get("class")));
+            $m=  modelFactory::getModel(ucfirst(self::$model->__get("class")));
             for($j=0,$i= $this->count;$i<($this->count*2)-1;$i++,$j++)
             {
                 $values[$j]=$parameter[$i-1];             // New values to be inserted in column

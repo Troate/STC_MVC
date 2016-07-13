@@ -1,6 +1,6 @@
 <?php
 /**
- * It is the Database Access Layer
+ * It is the Database Abstract Layer
  */
 
 /**
@@ -9,67 +9,21 @@
 namespace core\models\database;
 
 /**
- * It is the DBAL to connect to Database, and get the values from and into the Database
+ * It is the abstract DBAL to connect to Database, and get the values from and into the Database
  */
-class Dbal {
-    /**
-     * @var PDO_object $pdo It is the object of PDO
-     */
-    private $pdo;
-    /**
-     * Constructor gets the PDO object to access Database
-     */
-    function __construct() {
-        $this->pdo=DbConnection::getConnection();
-    }
+interface Dbal {
     /**
      * Run query to insert the values in table
      * @param string $tableName Name of the Table to send or recieve data from
      * @param string/int_array $cell_values Contains the values that are to be inserted in Table
      */
-    function insertQuery($tableName, $cell_names, $cell_values) {
-        $count=count($cell_values);                     // $count has count of columns
-        $string="insert into $tableName (";             // query is being constructed and tablename is given to it
-        for ($i=0;$i<$count;$i++) {                     // This loop is iterated to append column names in which 
-                                                        //  values will be inserted
-            $string= $string. "$cell_names[$i],";
-        }
-        $string=rtrim($string,",");                     // Trim the last comma from loop
-        $string=$string." ) values (";                  // Now values is concatenated
-        for ($i=0;$i<$count;$i++) {                     // This loop is iterated to put ? according to the count of columns
-            $string= $string. "?,";
-        }
-        $string=rtrim($string,",");                     // Trim the last comma from loop
-        $string=$string." )";                           // query is now ready
-        try{
-        $stmt=  $this->pdo->prepare($string);           // query is prepared
-        $stmt->execute($cell_values);                   // prepared query is now executed
-        return true;
-        }
-        catch(\PDOException $e)                         // returns false if there is any error
-        {
-            return false;
-        }
-    }
-    
+    function insertQuery($tableName, $cell_names, $cell_values);
     /**
      * Runs the select * Query
      * @param string $tableName Name of the Table to send or recieve data from
      * @return PDO_Object Result of PDO_Query function
      */
-    function selectQuery($tableName)
-    {
-        $string="select * from  $tableName ";           // select query is given tableName
-        try{
-        $res= $this->pdo->query($string);               // query is executed
-        return $res;                                    // The result is returned
-        }
-        catch(\PDOException $e)                         // returns false if there is any error
-        {
-            return false;
-        }
-    }
-    
+    function selectQuery($tableName);
     /**
      * Runs Delete Query
      * @param string $tableName Name of the Table to send or recieve data from
@@ -77,28 +31,7 @@ class Dbal {
      * @param string/int_array $cell_values Values of those Columns
      * @throws Exception If there are no resultant rows
      */
-    function deleteQuery($tableName, $cell_name, $cell_values) {
-        $count=count($cell_values);                     // $count has count of columns
-        $string="delete from $tableName where ";        // query is being constructed and tablename is given to it
-        for ($i=0;$i<$count;$i++)
-        {
-            $string=$string.$cell_name[$i]."=? and ";   // appends cell name and ?
-        }
-        $string=  rtrim($string," and ");               // Trim the last 'and' from the loop 
-        try{
-        $stmt=  $this->pdo->prepare($string);           // prepare query
-        $stmt->execute($cell_values);                   // execute prepared query
-        if($stmt->rowCount()<=0)                        // If no column is deleted throws exception
-        {    
-            throw new \Exception;
-        }
-        return true;
-        }
-        catch(\PDOException $e)                         // returns false
-        {
-            return false;
-        }
-    }
+    function deleteQuery($tableName, $cell_name, $cell_values);
     /**
      * Run Update Query
      * @param string $tableName Name of the Table to send or recieve data from
@@ -106,32 +39,5 @@ class Dbal {
      * @param string/int_array $cell_values Value of the Columns
      * @throws Exception If there are no resultant rows
      */
-    function updateQuery($tableName,$cell_name,$cell_values) {
-        $count=count($cell_name);                       // $count has count of columns
-        $string="update $tableName set ";               // query is being constructed and tablename is given to it
-        for ($i=0;$i<$count;$i++)
-        {
-            $string=$string.$cell_name[$i]."=?, ";      // appends cell name and ?
-        }
-        $string=  rtrim($string,", ");                  // Trim the last comma from the query
-        $string=$string." where ";                      // concatenate where in the string to match with old values
-        for ($i=0;$i<$count;$i++)
-        {
-            $string=$string.$cell_name[$i]."=? and ";   // appends cell name and ?
-        }
-        $string=  rtrim($string," and ");               // Trim the last 'and' from the query
-        try{
-        $stmt=  $this->pdo->prepare($string);           // prepare query
-        $stmt->execute($cell_values);                   // execute prepared query
-        if($stmt->rowCount()<=0)                        // If no column is updated throws exception
-        {    
-            throw new \Exception;
-        }
-        return true;
-        }
-        catch(\PDOException $e)                         // return false
-        {
-            return false;
-        }
-    }
+    function updateQuery($tableName,$cell_name,$cell_values);
 }
