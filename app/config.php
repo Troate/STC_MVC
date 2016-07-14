@@ -3,7 +3,7 @@
  * Configuration of Database
  */
 namespace app;
-class config{
+
 /**
  * DB_TYPE has type of database like mysql or mysqli or sqlite.
  *
@@ -15,5 +15,5 @@ class config{
  * 
  * DB_NAME of the Server.
  */
-    static public $DB=array('DB_TYPE'=>'mysql','DB_HOST'=>'localhost','DB_NAME'=>'stc','DB_USER'=>'testUser','DB_PASSWORD'=>'testpass','db'=>'pdo');
-}
+global $DB;
+$DB=array('DB_TYPE'=>'mysql','DB_HOST'=>'localhost','DB_NAME'=>'stc','DB_USER'=>'testUser','DB_PASSWORD'=>'testpass','db'=>'pdo');

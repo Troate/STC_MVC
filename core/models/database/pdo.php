@@ -15,6 +15,11 @@ use core\models\database\Dbal;
  */
 class pdo implements Dbal{
     /**
+     *
+     * @var array Contains last Id of Tables
+     */
+    static public $id=array();
+    /**
      * Run query to insert the values in table
      * @param string $tableName Name of the Table to send or recieve data from
      * @param string/int_array $cell_values Contains the values that are to be inserted in Table
@@ -35,10 +40,17 @@ class pdo implements Dbal{
         $string=$string." )";                           // query is now ready
         try{
         pdoDrivers::execute($string, $cell_values);
+        $string="select max(Id) as max from ".$tableName;
+        $r=  pdoDrivers::query($string);
+        $res=$r->fetch();
+        $_GLOBALS["id.$tableName"]=$res['max'];
+        echo self::$id[$tableName];
         return true;
         }
         catch(\PDOException $e)                         // returns false if there is any error
         {
+            global $error;
+            $error='Could Not Insert Given Data';
             return false;
         }
     }
@@ -57,6 +69,8 @@ class pdo implements Dbal{
         }
         catch(\PDOException $e)                         // returns false if there is any error
         {
+            global $error;
+            $error='Could Not Find Given Data';
             return false;
         }
     }
@@ -80,12 +94,14 @@ class pdo implements Dbal{
         $stmt=  pdoDrivers::execute($string, $cell_values);
         if($stmt->rowCount()<=0)                        // If no column is deleted throws exception
         {    
-            throw new \Exception;
+            throw new \PDOException;
         }
         return true;
         }
         catch(\PDOException $e)                         // returns false
         {
+            global $error;
+            $error='Could Not Find Given Data';
             return false;
         }
     }
@@ -120,7 +136,13 @@ class pdo implements Dbal{
         }
         catch(\PDOException $e)                         // return false
         {
+            global $error;
+            $error='Could Not Find Given Data';
             return false;
         }
+    }
+    
+    public function lastinsert($tableName) {
+        echo $_GLOBALS["id.$tableName"];
     }
 }

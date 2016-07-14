@@ -5,8 +5,7 @@
 // Namespace
 use core\utils\req;
 use core\controllers\controllerFactory;
-use core\controllers\homeController;
-use core\controllers\defaultController;
+
 
 $attribute=null;
 $operation=null;
@@ -20,6 +19,7 @@ define("ROOT", dirname(__DIR__));
  */
 define('DS', DIRECTORY_SEPARATOR);
 
+require_once ROOT.DS.'app'.DS.'config.php';
 
 /**
  * Autoloader function
@@ -38,10 +38,8 @@ function __autoload($class){
     }
 }
     $request = new req();     // Makes object of wrapper class
-    /**
-     * These values are set when index.php is post of views
-     */
-        $controller=controllerFactory::getController($request->__get("entity"));
-        $controller->_action($request);
+    
+    $controller=controllerFactory::getController($request);
+    $controller->_action($request);
 
     

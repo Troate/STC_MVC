@@ -14,14 +14,14 @@ namespace core\controllers;
 class controllerFactory {
     /**
      * Takes the parameter and according to it gives the appropriate object
-     * @param string $attribute Name of the attribute like Teacher, Student or Teacher
+     * @param string $request Request object  like Teacher, Student or Teacher
      */
-    static public function getController($attribute)
+    static public function getController($request)
     {
-        if(isset($attribute)){
-        $className=  lcfirst($attribute);
+        if($request->__get("entity")!=null){
+        $className=  lcfirst($request->__get("entity"));
         $className='app'.DS.'controllers'.DS.$className.'Controller';
-        return new $className($attribute);
+        return new $className($request->__get("entity"));
         }
         else{
             return false;

@@ -16,7 +16,7 @@ class pdoDrivers {
      * @var PHPPlatform Private Static, so no one can access it, and its available through out the project once initialized
      */
     private static $connection=null;
-    
+    public static $lastid=0;
     /**
      * Conctructor made private so no one can access it
      */
@@ -36,11 +36,19 @@ class pdoDrivers {
      * @return PDO_object Resource
      */
     public static function getConnection() {
-      if (!isset(self::$connection)) {
-        $pdo_options[\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
-        self::$connection = new \PDO(config::$DB["DB_TYPE"].":host=".config::$DB["DB_HOST"].";dbname=".config::$DB["DB_NAME"]."", config::$DB["DB_USER"], config::$DB["DB_PASSWORD"], $pdo_options)or die("PDO object not created");
-      }
-      return self::$connection;
+        global $DB;
+        try{
+            if (!isset(self::$connection)) {
+            $pdo_options[\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
+            self::$connection = new \PDO($DB["DB_TYPE"].":host=".$DB["DB_HOST"].";dbname=".$DB["DB_NAME"]."", $DB["DB_USER"], $DB["DB_PASSWORD"], $pdo_options)or die("PDO object not created");
+            }
+            return self::$connection;
+        }
+        catch (\PDOException $e){
+            global $error;
+            $error='Could Not Establish Connection';
+            self::errorCall();
+        }
     }
     
     /**
@@ -50,10 +58,18 @@ class pdoDrivers {
      * @return Object PDO statement object which executes the prepared statement
      */
     public function execute($string, $cell_values) {
+        try{
         $pdo=  self::getConnection();
         $stmt=  $pdo->prepare($string);           // query is prepared
-        $stmt->execute($cell_values); 
+        $stmt->execute($cell_values);
         return $stmt;
+        }
+        catch(\PDOException $e)
+        {
+            global $error;
+            $error='Could Not Prepare and Execute Query';
+            self::errorCall();
+        }
     }
     /**
      * Run the simple query
@@ -61,9 +77,24 @@ class pdoDrivers {
      * @return Object Object of result of query
      */
     public function query($string) {
+        try{
         $pdo=self::getConnection();
         $res=$pdo->query($string);
         return $res;
+        }
+        catch(\PDOException $e)
+        {
+            global $error;
+            $error='Could Not Run Query';
+            self::errorCall();
+        }
     }
 
+    public function closeConnection() {
+        self::$connection=null;
+    }
+    
+    public function errorCall() {
+        require_once ROOT.DS.'core'.DS.'views'.DS.'error.php';
+    }
 }

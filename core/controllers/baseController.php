@@ -9,7 +9,7 @@
 namespace core\controllers;
 use core\controllers\controllerInterface;
 use core\models\modelFactory;
-
+use core\views\viewManager;
 /**
  * Parent Class of the Student, Teacher and Course Controller
  */
@@ -27,6 +27,10 @@ class baseController implements controllerInterface
      * @var int $count $count has count of columns
      */
     public $count;
+    /**
+     * Layout can be default or ajax
+     */
+    public $layout;
     /**
      * Its a construtor, which initialases $model with appropriate object
      * @param string $entity It is passed to modelfactory, which gives appropriate object of Model i.e.(Course, Teacher, Student)
@@ -56,18 +60,14 @@ class baseController implements controllerInterface
                 $this->read();
             }
             else{
-                $this->callOp($obj->__get("action"),$obj->__get("entity"));
+                $this->layout='default';
+                $parameter['layout']=  $this->layout;
+                $parameter['model']=  self::$model;
+                $parameter['action']=  $obj->__get('action');
+                $parameter['entity']=  $obj->__get('entity');
+                viewManager::display($parameter);
             }
         }
-    }
-    /**
-     * According to the value of $op, and according to the controller, it will require its view
-     * @param string $action It contains operation type; read, delete or update
-     * @param string $entity This attribute will call the $op of specific $attribute
-     */
-    public function CallOp($action, $entity) {
-        $model=  self::$model;
-        require_once ROOT.DS.'core'.DS.'views'.DS.'viewManager.php';
     }
     /**
      * Check for Empty values and throws exception
@@ -80,6 +80,8 @@ class baseController implements controllerInterface
         {
             if(gettype($param)=='string'&&strlen($param)==0)
             {
+                global $error;
+                $error='Fields are Empty';
                 throw new \Exception();
             }
         }
@@ -110,7 +112,10 @@ class baseController implements controllerInterface
             
             self::$model=  $this->setModelValues(self::$model, $parameter);
             
-            self::$model->insert();
+            if(self::$model->insert()==false)
+            {
+                throw new \Exception;
+            }
             
             require_once ROOT.DS.'core'.DS.'views'.DS.'success.php';
             
@@ -126,12 +131,27 @@ class baseController implements controllerInterface
      * @return array Populated with the result of select query
      */
     public function read() {
+        try{
         $model_array=self::$model->select();
+        if($model_array==false){
+            throw new \Exception;
+        }
         $model=  self::$model;
         $action='list';
         $entity=  self::$model->__get("class");
-        require_once ROOT.DS.'core'.DS.'views'.DS.'viewManager.php';
+        $this->layout='default';
+        $parameter['layout']=  $this->layout;
+        $parameter['modelarray']=  $model_array;
+        $parameter['model']=  $model;
+        $parameter['action']=  $action;
+        $parameter['entity']=  $entity;
+        viewManager::display($parameter);
         return $model_array;
+        }
+        catch(\Exception $e){
+            require_once ROOT.DS.'core'.DS.'views'.DS.'error.php';
+            return false;
+        }
     }
     /**
      * Makes object and initalise it with values and sends it to the database layer
@@ -144,7 +164,10 @@ class baseController implements controllerInterface
             
             self::$model=$this->setModelValues(self::$model, $parameter);
             
-            self::$model->del();
+            if(self::$model->del()==false)
+            {
+                throw new \Exception;
+            }
             
             require_once ROOT.DS.'core'.DS.'views'.DS.'success.php';
             
@@ -171,7 +194,10 @@ class baseController implements controllerInterface
                 $values[$j]=$parameter[$i-1];             // New values to be inserted in column
             }
             $m=  $this->setModelValues($m, $values);
-            self::$model->update($m);
+            if(self::$model->update($m)==false)
+            {
+                throw new \Exception;
+            }
             
             require_once ROOT.DS.'core'.DS.'views'.DS.'success.php';
             

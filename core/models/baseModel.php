@@ -69,7 +69,8 @@ class baseModel implements modelInterface
         $cols=$func();
         $this->__set('cols',$cols[0]);
         $this->__set('numeric',$cols[3]);
-        $db="core\models\database\\".config::$DB['db'];
+        global $DB;
+        $db="core\models\database\\".$DB['db'];
         $this->db=new $db();
     }
     /**
@@ -92,6 +93,7 @@ class baseModel implements modelInterface
      * Calls the Database insert function
      */
     public function insert() {                                                // Object of Database Access Layer Model
+        try{
         $n=  $this->names;
         for($i=0;$i<count($n);$i++)
         {
@@ -99,14 +101,26 @@ class baseModel implements modelInterface
         }
         return $this->db->insertQuery($this->__get("class"),  $this->names,  $this->values);// insertQuery function of Dbal is called, parameters are tablename,
                                                                         //  cellnames and values to be inserted in those cellnames
+        }
+        catch(\Exception $e)
+        {
+            global $error;
+            $error='Could Not Insert Data';
+            return false;
+        }
     }
     /**
      * Calls select function of Database
      * @return array Model Array which contains all the result
      */
     public function select() {
+        try{
+        $this->db->lastinsert($this->__get("class"));
         $model_array=array();
         $res=  $this->db->selectQuery($this->__get("class"));
+        if($res==false){
+            throw new \Exception;
+        }
         // Columns from database
         $name=  $this->__get("cols");
         while($row= $res->fetch())
@@ -118,11 +132,19 @@ class baseModel implements modelInterface
             array_push($model_array, $m);       // Object is pushed into array of Models
         }
         return $model_array;
+        }
+        catch(\Exception $e)
+        {
+            global $error;
+            $error='Could Not Display Data';
+            return false;
+        }
     }
     /**
      * Calls the Database delete function
      */
     public function del() {                                                     // Object of Database Access Layer Model
+        try{
         $n=  $this->names;
         for($i=0;$i<count($n);$i++)
         {
@@ -130,6 +152,13 @@ class baseModel implements modelInterface
         }
         return $this->db->deleteQuery($this->__get("class"),  $this->names,  $this->values);// deleteQuery function of Dbal is called, parameters are tablename,
                                                                         //  cellnames and values to be inserted in those cellnames
+        }
+        catch(\Exception $e)
+        {
+            global $error;
+            $error='Could Not Delete Data';
+            return false;
+        }
     }
     /**
      * Calls update function on Database
@@ -137,6 +166,7 @@ class baseModel implements modelInterface
      */
     public function update($m)
     {
+        try{
         $n=  $this->names;
         $i=0;
         for(;$i<count($n);$i++)
@@ -149,5 +179,12 @@ class baseModel implements modelInterface
         }
         return $this->db->updateQuery($this->__get("class"),  $this->names,  $this->values);         // updateQuery function of Dbal is called, parameters are tablename,
                                                         //  cellnames and values to be inserted in those cellnames
+        }
+        catch(\Exception $e)
+        {
+            global $error;
+            $error='Could Not Update Data';
+            return false;
+        }
     }
 }
