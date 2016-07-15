@@ -38,7 +38,7 @@ function metaStudent()
        // The columns that have numeric data types
        array(
            'Id', 'Age'
-       ),
+       )
 
    );
 }

@@ -15,10 +15,13 @@ use core\models\database\Dbal;
  */
 class pdo implements Dbal{
     /**
-     *
      * @var array Contains last Id of Tables
      */
-    static public $id=array();
+    public $string;
+    /**
+     * @var array Array of values to be inserted 
+     */
+    public $val=array();
     /**
      * Run query to insert the values in table
      * @param string $tableName Name of the Table to send or recieve data from
@@ -40,11 +43,6 @@ class pdo implements Dbal{
         $string=$string." )";                           // query is now ready
         try{
         pdoDrivers::execute($string, $cell_values);
-        $string="select max(Id) as max from ".$tableName;
-        $r=  pdoDrivers::query($string);
-        $res=$r->fetch();
-        $_GLOBALS["id.$tableName"]=$res['max'];
-        echo self::$id[$tableName];
         return true;
         }
         catch(\PDOException $e)                         // returns false if there is any error
@@ -56,15 +54,64 @@ class pdo implements Dbal{
     }
     
     /**
-     * Runs the select * Query
-     * @param string $tableName Name of the Table to send or recieve data from
-     * @return PDO_Object Result of PDO_Query function
+     * Concatenate the Columns one want to print
+     * @param string $col Columns one want to print
+     * @return object $this
      */
-    function selectQuery($tableName)
+    function select($col) {
+        $this->string='select ';
+        foreach ($col as $c){
+            $this->string=$this->string.$c.', ';
+        }
+        $this->string=  rtrim($this->string, ', ');
+        $this->string=$this->string.' ';
+        return $this;
+    }
+    /**
+     * Concatenate Tablename in string
+     * @param string $tableName
+     * @return object $this
+     */
+    function from($tableName){
+        $this->string=$this->string.'from '.$tableName.' ';
+        return $this;
+    }
+    /**
+     * Concatenate where clause in string
+     * @param array $col Column names
+     * @param array $val Values of the columns
+     * @return object $this
+     */
+    function where($col,$val){
+        $this->string=$this->string.'where ';
+        for ($i=0;$i<count($col);$i++) {
+            if($val[$col[$i]]!=0 ||  strlen($val[$col[$i]])!=0)
+            {
+                $this->string=  $this->string.$col[$i].'=? and ';
+                array_push($this->val, $val[$col[$i]]);
+            }
+        }
+        $this->string=  rtrim($this->string, ' and ');
+        return $this;
+    }
+    /**
+     * Execute query
+     * @global string $error
+     * @return object $this
+     */
+    function executeQuery()
     {
-        $string="select * from  $tableName ";           // select query is given tableName
         try{
-        $res= pdoDrivers::query($string);               // query is executed
+        if(isset($this->val))
+        {
+            $res= pdoDrivers::execute($this->string,  $this->val);
+        }
+        else{
+            $res= pdoDrivers::query($this->string);               // query is executed
+        }
+        if($res->rowCount()<=0){
+            throw new \PDOException;
+        }
         return $res;                                    // The result is returned
         }
         catch(\PDOException $e)                         // returns false if there is any error
@@ -74,7 +121,6 @@ class pdo implements Dbal{
             return false;
         }
     }
-    
     /**
      * Runs Delete Query
      * @param string $tableName Name of the Table to send or recieve data from
@@ -141,8 +187,16 @@ class pdo implements Dbal{
             return false;
         }
     }
-    
+    /**
+     * Takes in table name and returns id of last inserted item
+     * @param string $tableName Table of which last inserted value is to be known
+     * @return int Id of last inserted Item
+     */
     public function lastinsert($tableName) {
-        echo $_GLOBALS["id.$tableName"];
+        $string="SELECT  `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME =  '$tableName'";
+        $r=  pdoDrivers::query($string);
+        $res=$r->fetch();
+        $id=$res['AUTO_INCREMENT']-1;
+        return $id;
     }
 }

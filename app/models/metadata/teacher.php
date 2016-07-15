@@ -38,7 +38,7 @@ function metaTeacher()
         // The columns that have numeric data types
         array(
             'Id', 'Age'
-        ),
+        )
 
     );
 }

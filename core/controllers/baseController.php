@@ -56,17 +56,17 @@ class baseController implements controllerInterface
         }
         else                                // if parameters are not set then render views
         {
-            if($obj->__get("action")=="list"){
-                $this->read();
-            }
-            else{
+//            if($obj->__get("action")=="list"){
+//                $this->read();
+//            }
+//            else{
                 $this->layout='default';
                 $parameter['layout']=  $this->layout;
                 $parameter['model']=  self::$model;
                 $parameter['action']=  $obj->__get('action');
                 $parameter['entity']=  $obj->__get('entity');
                 viewManager::display($parameter);
-            }
+//            }
         }
     }
     /**
@@ -128,15 +128,19 @@ class baseController implements controllerInterface
     }
     /**
      * The result of select query is assigned to a object and the that objest is pushed in array of the same object, whish is returned
+     * @param array $parameter It has values for select and where clause
      * @return array Populated with the result of select query
      */
-    public function read() {
+    public function read($parameter) {
         try{
-        $model_array=self::$model->select();
+        $model_array=self::$model->select($parameter);
         if($model_array==false){
             throw new \Exception;
         }
         $model=  self::$model;
+        if(isset($parameter['select'])){
+            $model->__set('cols',$parameter['select']);
+        }
         $action='list';
         $entity=  self::$model->__get("class");
         $this->layout='default';

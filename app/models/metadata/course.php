@@ -37,8 +37,8 @@ function metaCourse()
 
         // The columns that have numeric data types
         array(
-            'Id',
-        ),
+            'Id'
+        )
 
 
     );

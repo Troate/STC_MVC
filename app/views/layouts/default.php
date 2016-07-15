@@ -5,7 +5,7 @@
             <input name="entity" type="radio" value="Teacher">Teacher</input>
             <input name="entity" type="radio" value="Course">Course</input><br><br>
             <button name="action" type="submit" value="create">Add</button>
-            <button name="action" type="submit" value="list">Read</button>
+            <button name="action" type="submit" value="read">Read</button>
             <button name="action" type="submit" value="update">Update</button>
             <button name="action" type="submit" value="delete">Delete</button><br>
             </form>

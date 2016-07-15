@@ -110,19 +110,43 @@ class baseModel implements modelInterface
         }
     }
     /**
+     * Checks if nothing is given in where clause
+     * @param array $param 2D Array of where clause
+     */
+    public function checkEmpty($param) {
+        foreach ($param as $p)
+        {
+            if(strlen($p)!=0){
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
      * Calls select function of Database
+     * @param array $parameter Array of parameters from REQUEST
      * @return array Model Array which contains all the result
      */
-    public function select() {
+    public function select($parameter) {
         try{
-        $this->db->lastinsert($this->__get("class"));
+        $lastId=$this->db->lastinsert($this->__get("class"));
         $model_array=array();
-        $res=  $this->db->selectQuery($this->__get("class"));
+        if(isset($parameter['select'])){
+            $attr=$parameter['select'];
+        }
+        else{
+            $attr=$this->__get('cols');
+        }
+        $chain=$this->db->select($attr)->from($this->__get("class"));
+        if(self::checkEmpty($parameter['where'])){
+            $chain->where($this->__get('cols'),$parameter['where']);
+        }
+        $res=  $chain->executeQuery();
         if($res==false){
             throw new \Exception;
         }
         // Columns from database
-        $name=  $this->__get("cols");
+        $name=  $attr;
         while($row= $res->fetch())
         {
             $m=modelFactory::getModel(ucfirst($this->__get("class")));

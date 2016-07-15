@@ -19,11 +19,30 @@ interface Dbal {
      */
     function insertQuery($tableName, $cell_names, $cell_values);
     /**
-     * Runs the select * Query
-     * @param string $tableName Name of the Table to send or recieve data from
-     * @return PDO_Object Result of PDO_Query function
+     * Concatenate the Columns one want to print
+     * @param string $col Columns one want to print
+     * @return object $this
      */
-    function selectQuery($tableName);
+    function select($col);
+    /**
+     * Concatenate Tablename in string
+     * @param string $tableName
+     * @return object $this
+     */
+    function from($tableName);
+    /**
+     * Concatenate where clause in string
+     * @param array $col Column names
+     * @param array $val Values of the columns
+     * @return object $this
+     */
+    function where($col,$val);
+    /**
+     * Execute query
+     * @global string $error
+     * @return object $this
+     */
+    function executeQuery();
     /**
      * Runs Delete Query
      * @param string $tableName Name of the Table to send or recieve data from
