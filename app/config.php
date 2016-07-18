@@ -2,7 +2,6 @@
 /**
  * Configuration of Database
  */
-namespace app;
 
 /**
  * DB_TYPE has type of database like mysql or mysqli or sqlite.

@@ -129,19 +129,22 @@ class baseModel implements modelInterface
      */
     public function select($parameter) {
         try{
-        $lastId=$this->db->lastinsert($this->__get("class"));
+        $lastId=$this->db->lastinsert($this->__get("class"));   // Id of the last Insert Item
+        
         $model_array=array();
-        if(isset($parameter['select'])){
+        if(isset($parameter['select'])){                        // Parsing                       
             $attr=$parameter['select'];
         }
         else{
             $attr=$this->__get('cols');
         }
+        // Calling functions in chain
         $chain=$this->db->select($attr)->from($this->__get("class"));
-        if(self::checkEmpty($parameter['where'])){
+        
+        if(self::checkEmpty($parameter['where'])){              // If where is set then call it otherwise dont call
             $chain->where($this->__get('cols'),$parameter['where']);
         }
-        $res=  $chain->executeQuery();
+        $res=  $chain->executeQuery();                          // Execute the finalized query
         if($res==false){
             throw new \Exception;
         }

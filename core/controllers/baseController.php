@@ -28,9 +28,14 @@ class baseController implements controllerInterface
      */
     public $count;
     /**
-     * Layout can be default or ajax
+     * @var object Layout can be default or ajax
      */
     public $layout;
+    /**
+     *
+     * @var Object Object of viewManager class
+     */
+    public $view;
     /**
      * Its a construtor, which initialases $model with appropriate object
      * @param string $entity It is passed to modelfactory, which gives appropriate object of Model i.e.(Course, Teacher, Student)
@@ -42,6 +47,9 @@ class baseController implements controllerInterface
             $this->name=self::$model->__get("cols");
             $this->count=  count($this->name);
         }
+        $this->view=new viewManager();
+        $this->layout='default';
+        $this->view->layout=  $this->layout;
     }
     /**
      * It calls either view or appropriate action functions of class
@@ -56,17 +64,10 @@ class baseController implements controllerInterface
         }
         else                                // if parameters are not set then render views
         {
-//            if($obj->__get("action")=="list"){
-//                $this->read();
-//            }
-//            else{
-                $this->layout='default';
-                $parameter['layout']=  $this->layout;
-                $parameter['model']=  self::$model;
-                $parameter['action']=  $obj->__get('action');
-                $parameter['entity']=  $obj->__get('entity');
-                viewManager::display($parameter);
-//            }
+                $this->view->model=  self::$model;
+                $this->view->action=  $obj->__get('action');
+                $this->view->entity=  $obj->__get('entity');
+                $this->view->display();
         }
     }
     /**
@@ -117,12 +118,14 @@ class baseController implements controllerInterface
                 throw new \Exception;
             }
             
-            require_once ROOT.DS.'core'.DS.'views'.DS.'success.php';
+            $this->view->action='success';
+            $this->view->display();
             
             return true;
             }
             catch (\Exception $e){                      // Sends to error.php in case of error
-                require_once ROOT.DS.'core'.DS.'views'.DS.'error.php';
+                $this->view->action='error';
+                $this->view->display();
                 return false;
             }
     }
@@ -143,17 +146,16 @@ class baseController implements controllerInterface
         }
         $action='list';
         $entity=  self::$model->__get("class");
-        $this->layout='default';
-        $parameter['layout']=  $this->layout;
-        $parameter['modelarray']=  $model_array;
-        $parameter['model']=  $model;
-        $parameter['action']=  $action;
-        $parameter['entity']=  $entity;
-        viewManager::display($parameter);
+        $this->view->model_array=  $model_array;
+        $this->view->model=  $model;
+        $this->view->action=  $action;
+        $this->view->entity=  $entity;
+        $this->view->display();
         return $model_array;
         }
         catch(\Exception $e){
-            require_once ROOT.DS.'core'.DS.'views'.DS.'error.php';
+            $this->view->action='error';
+            $this->view->display();
             return false;
         }
     }
@@ -173,12 +175,14 @@ class baseController implements controllerInterface
                 throw new \Exception;
             }
             
-            require_once ROOT.DS.'core'.DS.'views'.DS.'success.php';
+            $this->view->action='success';
+            $this->view->display();
             
             return true;
         }
         catch (\Exception $e){                               // Sends to error.php in case of error
-            require_once ROOT.DS.'core'.DS.'views'.DS.'error.php';
+            $this->view->action='error';
+            $this->view->display();
             return false;
         }
     }
@@ -203,12 +207,14 @@ class baseController implements controllerInterface
                 throw new \Exception;
             }
             
-            require_once ROOT.DS.'core'.DS.'views'.DS.'success.php';
+            $this->view->action='success';
+            $this->view->display();
             
             return true;
         }
         catch (\Exception $e){                               // Sends to error.php in case of error
-            require_once ROOT.DS.'core'.DS.'views'.DS.'error.php';
+            $this->view->action='error';
+            $this->view->display();
             return false;
         }
     }

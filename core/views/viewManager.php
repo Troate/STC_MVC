@@ -7,33 +7,40 @@ namespace core\views;
  * viewManager class displays views
  */
 class viewManager{
-    static public function display($parameter) {
-        $model=$parameter['model'];
-        if(isset($parameter['modelarray']))
+    /**
+     * @var Object Object of Model
+     */
+    public $model;
+    /**
+     * @var array Array of Models in case of list the output
+     */
+    public $model_array;
+    /**
+     * @var string Contains name of class
+     */
+    public $entity;
+    /**
+     * @var string Contains name of action
+     */
+    public $action;
+    /**
+     * @var string Contains type of layout
+     */
+    public $layout;
+    /**
+     * Calls view according to layout
+     */
+    public function display() {
+        $model=  $this->model;
+        if(isset($this->model_array))
         {
-            $model_array=$parameter['modelarray'];
+            $model_array=  $this->model_array;
         }
-        $entity=$parameter['entity'];
-        $action=$parameter['action'];
-        if($parameter['layout']=='default'){
-            require_once ROOT.DS.'app'.DS.'views'.DS.'layouts'.DS.'header.php';
+        $entity=  $this->entity;
+        $action=  $this->action;
+        if(file_exists(ROOT.DS.'app'.DS.'views'.DS.'layouts'.DS.$this->layout.'.php')){
+            require_once ROOT.DS.'app'.DS.'views'.DS.'layouts'.DS.$this->layout.'.php';
         }
-        if($parameter['entity']=="default")
-        {
-            require_once ROOT.DS.'app'.DS.'views'.DS.'layouts'.DS.'default.php';
-        }
-        else{
-            require_once ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.$parameter['action'].'.php';
 
-            if(file_exists(ROOT.DS.'app'.DS.'views'.DS.$parameter['entity'].DS.$parameter['action'].'.php')){
-                require_once ROOT.DS.'app'.DS.'views'.DS.$parameter['entity'].DS.$parameter['action'].'.php';
-            }
-            else{
-                return false;
-        }
-        }
-        if($parameter['layout']=='default'){
-            require_once ROOT.DS.'app'.DS.'views'.DS.'layouts'.DS.'footer.php';
-        }
     }
 }
