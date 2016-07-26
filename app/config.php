@@ -16,3 +16,6 @@
  */
 global $DB;
 $DB=array('DB_TYPE'=>'mysql','DB_HOST'=>'localhost','DB_NAME'=>'stc','DB_USER'=>'testUser','DB_PASSWORD'=>'testpass','db'=>'pdo');
+
+global $config;
+$config=array('entity'=>'default','action'=>'index');

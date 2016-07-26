@@ -49,8 +49,11 @@ class req
      * @param string $op Operation like Create, Read
      */
     public function __construct() {
-        $this->entity=(isset($_REQUEST['entity']) ? $_REQUEST['entity'] : 'default'); 
-        $this->action=(isset($_REQUEST['action']) ? $_REQUEST['action'] : null);
-        $this->parameter=(isset($_REQUEST['parameter']) ? $_REQUEST['parameter'] : null);
+        global $config;
+        $this->entity=(isset($_REQUEST['entity']) ? $_REQUEST['entity'] : $config['entity']); 
+        $this->action=(isset($_REQUEST['action']) ? $_REQUEST['action'] : $config['action']);
+        unset($_REQUEST['entity']);
+        unset($_REQUEST['action']);
+        $this->parameter=(isset($_REQUEST['parameter']) ? $_REQUEST['parameter'] : array());
     }
 }

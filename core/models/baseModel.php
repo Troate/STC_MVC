@@ -140,10 +140,10 @@ class baseModel implements modelInterface
         }
         // Calling functions in chain
         $chain=$this->db->select($attr)->from($this->__get("class"));
-        
+        if(isset($parameter['where'])){
         if(self::checkEmpty($parameter['where'])){              // If where is set then call it otherwise dont call
             $chain->where($this->__get('cols'),$parameter['where']);
-        }
+        }}
         $res=  $chain->executeQuery();                          // Execute the finalized query
         if($res==false){
             throw new \Exception;
