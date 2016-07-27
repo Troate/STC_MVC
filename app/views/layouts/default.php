@@ -16,8 +16,8 @@ and open the template in the editor.
  */
  //$attribute is used for setting attribute like student, teacher or course
 
-if(file_exists($path)){
-    include $path;
+if(file_exists($parameter['viewPath'])){
+    include $parameter['viewPath'];
 }
 else{
     return false;

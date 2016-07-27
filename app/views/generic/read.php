@@ -3,15 +3,15 @@
 /**
  * General List View
  */
-echo '<h3>'.  ucfirst($model->__get("class")).'</h3>';
-$attr=$mod;
+echo '<h3>'.  ucfirst($parameter['model']->__get("class")).'</h3>';
+$attr=$parameter['cols'];
 
 echo 'Select Columns:<br>';
 for($i=0;$i<count($attr);$i++)
 {
     echo '<input type="checkbox" name="parameter[select][]" value="'.$attr[$i].'">'.$attr[$i].'<br>';
 }
-$num=$model->__get("numeric");
+$num=$parameter['model']->__get("numeric");
 echo '<br>Where :<br>';
 for($i=0;$i<count($attr);$i++)
 {
@@ -28,7 +28,7 @@ for($i=0;$i<count($attr);$i++)
     echo 'name="parameter[where]['.$attr[$i].']" ><br><br>';
 }
 ?>
-    <input type="text" name="entity" value="<?php echo $entity; ?>" style="display: none;"/>
+    <input type="text" name="entity" value="<?php echo $parameter['entity']; ?>" style="display: none;"/>
     <input type="text" name="action" value="read" style="display: none;"/>
     <button type="submit" value="select" name="select">Read</button>
     <br>
@@ -37,14 +37,14 @@ for($i=0;$i<count($attr);$i++)
 /**
  * General List View
  */
-$attr=$model->__get("cols");
+$attr=$parameter['model']->__get("cols");
 echo '<table><tr>';
 for($i=0;$i<count($attr);$i++)
 {
     echo'<th style="min-width:100px ">'.$attr[$i].'</th>';
 }
 echo '</tr>';
-foreach($model_array as $m)
+foreach($parameter['model_array'] as $m)
 {
     echo '<tr>';
     for($i=0;$i<count($attr);$i++)

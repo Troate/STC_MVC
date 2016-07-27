@@ -3,9 +3,9 @@
 /**
  * General Update View
  */
-echo '<h3>'.  ucfirst($model->__get("class")).'</h3>';
-$attr=$model->__get("cols");
-$num=$model->__get("numeric");
+echo '<h3>'.  ucfirst($parameter['model']->__get("class")).'</h3>';
+$attr=$parameter['model']->__get("cols");
+$num=$parameter['model']->__get("numeric");
 echo '<h3>Enter Old Data</h3>';
 for($j=count($attr),$i=1;$i<count($attr);$j++,$i++)
 {
@@ -20,7 +20,7 @@ for($j=count($attr),$i=1;$i<count($attr);$j++,$i++)
         echo 'type="text" ';
     }
 
-    echo 'name="parameter['.($j-1).']" placeholder="Old '.$attr[$i].' of '.ucfirst($model->__get("class")).'"/><br>';
+    echo 'name="parameter['.($j-1).']" placeholder="Old '.$attr[$i].' of '.ucfirst($parameter['model']->__get("class")).'"/><br>';
 }
 
 echo '<h3>Enter New Data</h3>';
@@ -38,14 +38,14 @@ for($i=1;$i<count($attr);$i++)
         echo 'type="text" ';
     }
 
-    echo 'name="parameter['.($i-1).']" placeholder="New '.$attr[$i].' of '.ucfirst($model->__get("class")).'"/><br>';
+    echo 'name="parameter['.($i-1).']" placeholder="New '.$attr[$i].' of '.ucfirst($parameter['model']->__get("class")).'"/><br>';
 }
 
     
 ?>
 <br>
-<input type="text" name="action" value="<?php echo  $action;?>" style="display: none;"/>
-<input type="text" name="entity" value="<?php echo $entity;?>" style="display: none;"/>
+<input type="text" name="action" value="<?php echo  $parameter['action'];?>" style="display: none;"/>
+<input type="text" name="entity" value="<?php echo $parameter['entity'];?>" style="display: none;"/>
 
-<button name="<?php echo  $action;?>" type="submit" value="<?php echo  $action;?>" ><?php echo ucfirst($action);?></button>
+<button name="<?php echo  $parameter['action'];?>" type="submit" value="<?php echo  $parameter['action'];?>" ><?php echo ucfirst($parameter['action']);?></button>
 </form>

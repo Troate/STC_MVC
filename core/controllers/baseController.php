@@ -51,7 +51,7 @@ class baseController implements controllerInterface
             $this->count=  count($this->name);
         }
         $this->view=new viewManager();
-        $this->view->layout=  $this->layout;
+        $this->view->parameters['layout']=  $this->layout;
     }
     /**
      * It calls either view or appropriate action functions of class
@@ -59,11 +59,11 @@ class baseController implements controllerInterface
      */
     public function _action($req){
         $func=$req->__get("action");
-        $this->view->model=  self::$model;
+        $this->view->parameters['model']=  self::$model;
         $bool=$this->$func($req);
         if($this->render){
-            $this->view->action=  $req->__get('action');
-            $this->view->entity=  $req->__get('entity');
+            $this->view->parameters['action']=  $req->__get('action');
+            $this->view->parameters['entity']=  $req->__get('entity');
             $this->view->display();
         }
     }
@@ -74,7 +74,7 @@ class baseController implements controllerInterface
     {
         $req->__set('action','read');
         if($req->__get('entity')=='default'){
-            $this->view->viewPath= ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.'welcome.php';
+            $this->view->parameters['viewPath']= ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.'welcome.php';
          }
         $this->_action($req);
         exit();
@@ -129,15 +129,17 @@ class baseController implements controllerInterface
                 throw new \Exception;
             }
             
-            $this->view->action='success';
+            $this->view->parameters['action']='success';
             }
             catch (\Exception $e){                      // Sends to error.php in case of error
-                $this->view->action='error';
+                $this->view->parameters['action']='error';
             }
-            $this->view->viewPath=ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.$this->view->action.'.php';
-            return;
         }
-            $this->view->viewPath=ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.$req->__get('action').'.php';
+        else{
+            $this->view->parameters['action']=$req->__get('action');
+        }
+        $this->view->parameters['entity']=$req->__get('entity');
+        $this->view->setViewPath();
     }
     /**
      * The result of select query is assigned to a object and the that objest is pushed in array of the same object, whish is returned
@@ -153,24 +155,25 @@ class baseController implements controllerInterface
             throw new \Exception;
         }
         $model=  self::$model;
-        $this->view->cols= $this->name;
+        $this->view->parameters['cols']= $this->name;
         if(isset($parameter['select'])){
             $model->__set('cols',$parameter['select']);
         }
         $entity=  self::$model->__get("class");
-        $this->view->model_array=  $model_array;
-        $this->view->model=  $model;
-        $this->view->action=  $req->action;
-        $this->view->entity=  $entity;
+        $this->view->parameters['model_array']=  $model_array;
+        $this->view->parameters['model']=  $model;
+        $this->view->parameters['action']=  $req->action;
+        $this->view->parameters['entity']=  $entity;
         }
         catch(\Exception $e){
-            $this->view->action='error';
+            $this->view->parameters['action']='error';
         }
         }
         if($req->entity=='default'){
-            $this->view->action='welcome';
+            $this->view->parameters['action']='welcome';
+            $this->view->parameters['entity']=$req->__get('entity');
         }
-        $this->view->viewPath=ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.$this->view->action.'.php';
+        $this->view->setViewPath();
     }
     /**
      * Makes object and initalise it with values and sends it to the database layer
@@ -190,15 +193,17 @@ class baseController implements controllerInterface
                 throw new \Exception;
             }
             
-            $this->view->action='success';
+            $this->view->parameters['action']='success';
         }
         catch (\Exception $e){                               // Sends to error.php in case of error
-            $this->view->action='error';
+            $this->view->parameters['action']='error';
         }
-            $this->view->viewPath=ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.$this->view->action.'.php';
-            return;
         }
-        $this->view->viewPath=ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.$req->__get('action').'.php';
+        else{
+            $this->view->parameters['action']=$req->__get('action');
+        }
+        $this->view->parameters['entity']=$req->__get('entity');
+        $this->view->setViewPath();
     }
     /**
      * Creates object, initialize with old values and then set new Values
@@ -222,16 +227,17 @@ class baseController implements controllerInterface
             {
                 throw new \Exception;
             }
-            
-            $this->view->action='success';
+            $this->view->parameters['action']='success';
         }
         catch (\Exception $e){                               // Sends to error.php in case of error
-            $this->view->action='error';
+            $this->view->parameters['action']='error';
         }
-            $this->view->viewPath=ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.$this->view->action.'.php';
-            return;
         }
-        $this->view->viewPath=ROOT.DS.'app'.DS.'views'.DS.'generic'.DS.$req->__get('action').'.php';
+        else{
+            $this->view->parameters['action']=$req->__get('action');
+        }
+        $this->view->parameters['entity']=$req->__get('entity');
+        $this->view->setViewPath();
     }
 }
 

@@ -2,13 +2,13 @@
 /**
  * General Create View
  */
-echo ucfirst($entity);
+echo ucfirst($parameter['entity']);
 ?></h3>
 <form action="index.php" method="post">
     <?php
     echo '<h3>Enter Data</h3>';
-    $attr=$model->__get("cols");
-    $num=$model->__get("numeric");
+    $attr=$parameter['model']->__get("cols");
+    $num=$parameter['model']->__get("numeric");
     for($i=0;$i<count($attr)-1;$i++)
     {
         echo $attr[$i+1];
@@ -22,11 +22,11 @@ echo ucfirst($entity);
             echo 'type="text" ';
         }
 
-        echo 'name="parameter['.($i).']" placeholder="'.$attr[$i+1].' of '.ucfirst($entity).'"/><br>';
+        echo 'name="parameter['.($i).']" placeholder="'.$attr[$i+1].' of '.ucfirst($parameter['entity']).'"/><br>';
     }
     ?>
-    <input type="text" name="entity" value="<?php echo $entity; ?>" style="display: none;"/>
-    <input type="text" name="action" value="<?php echo $action; ?>" style="display: none;"/><br>
+    <input type="text" name="entity" value="<?php echo $parameter['entity']; ?>" style="display: none;"/>
+    <input type="text" name="action" value="<?php echo $parameter['action']; ?>" style="display: none;"/><br>
     <button name="add" type="submit" value="create">Create</button>
 </form>
     <?php
